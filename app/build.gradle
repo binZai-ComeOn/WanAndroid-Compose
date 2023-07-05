@@ -1,18 +1,21 @@
 plugins {
     id 'com.android.application'
+    id "kotlin-kapt"
     id 'org.jetbrains.kotlin.android'
+    id "kotlin-parcelize"
+    id 'dagger.hilt.android.plugin'
 }
 
 android {
-    namespace applicationId
-    compileSdk compileSdk
+    namespace project.applicationId
+    compileSdk project.compileSdk
 
     defaultConfig {
-        applicationId applicationId
-        minSdk minSdk
-        targetSdk targetSdk
-        versionCode versionCode
-        versionName versionName
+        applicationId project.applicationId
+        minSdk project.minSdk
+        targetSdk project.targetSdk
+        versionCode project.versionCode
+        versionName project.versionName
 
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
         vectorDrawables {
@@ -33,14 +36,14 @@ android {
     kotlinOptions {
         jvmTarget = jvmTarget
         // Enable Coroutines and Flow APIs
-        freeCompilerArgs = freeCompilerArgs + "-Xopt-in=kotlinx.coroutines.ExperimentalCoroutinesApi"
-        freeCompilerArgs = freeCompilerArgs + "-Xopt-in=kotlinx.coroutines.FlowPreview"
+        freeCompilerArgs += "-Xopt-in=kotlinx.coroutines.ExperimentalCoroutinesApi"
+        freeCompilerArgs += "-Xopt-in=kotlinx.coroutines.FlowPreview"
     }
     buildFeatures {
         compose true
     }
     composeOptions {
-        kotlinCompilerExtensionVersion kotlinCompilerExtensionVersion
+        kotlinCompilerExtensionVersion project.kotlinCompilerExtensionVersion
     }
     packagingOptions {
         resources {
@@ -51,12 +54,34 @@ android {
 
 dependencies {
 
-    implementation core_ktx
-    implementation lifecycle_runtime_ktx
-    implementation activity_compose
-    implementation compose_ui
-    implementation compose_ui_tooling_preview
-    implementation material3
-    debugImplementation compose_ui_tooling
-    debugImplementation compose_ui_test_manifest
+    implementation project(":lib_common")
+    implementation project.core_ktx
+    implementation project.lifecycle_runtime_ktx
+    implementation project.activity_compose
+    implementation project.compose_ui
+    implementation project.compose_ui_tooling_preview
+    implementation project.material
+    implementation project.navigation
+    implementation project.accompanist_coil
+    implementation project.accompanist_insets
+    implementation project.accompanist_pager
+    implementation project.accompanist_pager_indicators
+
+    //hilt inject
+    implementation project.dagger_hilt_android
+    kapt project.dagger_hilt_compiler
+    implementation project.hilt_navigation_compose
+    implementation project.hilt_lifecycle_viewmodel
+    kapt project.hilt_compiler
+    // coroutines
+    implementation project.coroutines_core
+    implementation project.coroutines_android
+    implementation project.coroutines_adapter
+    // gson
+    implementation project.gson
+    // retrofit2
+    implementation project.retrofit2
+    implementation project.retrofit2_converter_gson
+    // logger
+    implementation project.orhanobut_logger
 }

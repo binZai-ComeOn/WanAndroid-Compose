@@ -16,3 +16,4 @@ dependencyResolutionManagement {
 }
 rootProject.name = "WanAndroid-Compose"
 include ':app'
+include ':lib_common'
