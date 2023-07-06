@@ -1,6 +1,5 @@
 # WanAndroid-Compose
 
-# 要在此界面标记上用到的所有库，给出库链接并说明这个库有什么作用以及主要用在哪里
 
 # 依赖
  - [Core](https://developer.android.google.cn/jetpack/androidx/releases/core?hl=zh-cn)：针对最新的平台功能和 API 调整应用，同时还支持旧设备.
