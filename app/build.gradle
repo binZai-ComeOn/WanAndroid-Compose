@@ -50,6 +50,9 @@ android {
             excludes += '/META-INF/{AL2.0,LGPL2.1}'
         }
     }
+    kapt {
+        correctErrorTypes true
+    }
 }
 
 dependencies {
@@ -69,10 +72,12 @@ dependencies {
 
     //hilt inject
     implementation project.dagger_hilt_android
-    kapt project.dagger_hilt_compiler
+    kapt project.kapt_dagger_hilt_compiler
     implementation project.hilt_navigation_compose
-    implementation project.hilt_lifecycle_viewmodel
-    kapt project.hilt_compiler
+    // implementation project.hilt_lifecycle_viewmodel
+    // kapt project.kapt_hilt_compiler
+    // lifecycle
+    implementation project.lifecycle_viewmodel_ktx
     // coroutines
     implementation project.coroutines_core
     implementation project.coroutines_android

@@ -15,7 +15,9 @@ import com.binyouwei.wanandroid_compose.ui.page.home.HomePage
 import com.binyouwei.wanandroid_compose.ui.route.RouteName
 import com.google.accompanist.insets.navigationBarsPadding
 import com.google.accompanist.insets.statusBarsPadding
+import dagger.hilt.android.AndroidEntryPoint
 
+@AndroidEntryPoint
 class MainPage : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)

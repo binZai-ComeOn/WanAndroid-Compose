@@ -1,6 +1,5 @@
 package com.binyouwei.wanandroid_compose
 
-import android.app.Application
 import com.binyouwei.common.base.BaseApplication
 import dagger.hilt.android.HiltAndroidApp
 
