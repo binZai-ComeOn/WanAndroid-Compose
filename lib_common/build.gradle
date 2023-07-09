@@ -55,4 +55,7 @@ dependencies {
     implementation project.retrofit2_converter_gson
     // logger
     implementation project.orhanobut_logger
+    // datastore
+    implementation project.datastore_core
+    implementation project.datastore_preferences
 }
