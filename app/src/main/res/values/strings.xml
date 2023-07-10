@@ -2,7 +2,8 @@
     <string name="app_name">WanAndroid-Compose</string>
 
     <string name="home">首页</string>
-    <string name="knowledge_system">知识体系</string>
-    <string name="classification">分类</string>
-    <string name="my">我的</string>
+    <string name="square">广场</string>
+    <string name="wechat">公众号</string>
+    <string name="system">体系</string>
+    <string name="projects">项目</string>
 </resources>

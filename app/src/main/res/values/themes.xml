@@ -1,5 +1,22 @@
 <?xml version="1.0" encoding="utf-8"?>
-<resources>
+<resources xmlns:tools="http://schemas.android.com/tools">
 
-    <style name="Theme.WanAndroidCompose" parent="android:Theme.Material.Light.NoActionBar" />
+    <!-- Base application theme. -->
+    <style name="BaseAppTheme" parent="@style/Theme.AppCompat.DayNight">
+        <item name="colorPrimary">@color/colorPrimary</item>
+        <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
+        <item name="colorAccent">@color/colorAccent</item>
+        <item name="textColorPrimary">@color/textColorPrimary</item>
+        <item name="viewBackground">@color/viewBackground</item>
+        <!--关闭启动窗口-->
+        <item name="android:windowDisablePreview">true</item>
+        <item name="android:listDivider">@drawable/bg_divider</item>
+    </style>
+
+    <style name="Theme.WanAndroidCompose" parent="BaseAppTheme.NoActionBar"></style>
+
+    <style name="BaseAppTheme.NoActionBar">
+        <item name="windowActionBar">false</item>
+        <item name="windowNoTitle">true</item>
+    </style>
 </resources>

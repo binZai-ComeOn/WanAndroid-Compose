@@ -3,10 +3,16 @@ package com.binyouwei.wanandroid_compose.ui.page
 import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
+import androidx.compose.foundation.background
+import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.size
 import androidx.compose.material.*
 import androidx.compose.runtime.*
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
+import androidx.compose.ui.unit.dp
 import androidx.navigation.NavDestination.Companion.hierarchy
 import androidx.navigation.NavGraph.Companion.findStartDestination
 import androidx.navigation.NavHostController
@@ -25,9 +31,10 @@ import dagger.hilt.android.AndroidEntryPoint
 class MainPage : ComponentActivity() {
     val bns = listOf(
         BottomNavRoute.Home,
-        BottomNavRoute.KnowledgeSystem,
-        BottomNavRoute.Classification,
-        BottomNavRoute.My
+        BottomNavRoute.Square,
+        BottomNavRoute.WeChat,
+        BottomNavRoute.System,
+        BottomNavRoute.Projects
     )
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -42,8 +49,6 @@ class MainPage : ComponentActivity() {
     @Composable
     fun BottomNav() {
         val navCtrl = rememberNavController()
-        val navBackStackEntry by navCtrl.currentBackStackEntryAsState()
-        val currentDestination = navBackStackEntry?.destination
         val scaffoldState = rememberScaffoldState()
 
         Scaffold(
@@ -53,12 +58,7 @@ class MainPage : ComponentActivity() {
             bottomBar = {
                 // 设置底部导航栏
                 BottomNavigation {
-                    when (currentDestination?.route) {
-                        RouteName.HOME -> BottomNavBarView(navCtrl = navCtrl)
-                        RouteName.KNOWLEDGE_SYSTEM -> BottomNavBarView(navCtrl = navCtrl)
-                        RouteName.CLASSIFICATION -> BottomNavBarView(navCtrl = navCtrl)
-                        RouteName.MY -> BottomNavBarView(navCtrl = navCtrl)
-                    }
+                    BottomNavBarView(navCtrl = navCtrl)
                 }
             }, content = {
                 var homeIndex = remember { 0 }
@@ -73,18 +73,23 @@ class MainPage : ComponentActivity() {
                         HomePage(navCtrl, scaffoldState, homeIndex) { homeIndex = it }
                     }
 
-                    // 知识体系
-                    composable(route = RouteName.KNOWLEDGE_SYSTEM) {
+                    // 广场
+                    composable(route = RouteName.SQUARE) {
                         KnowledgeSystemPage(navCtrl, categoryIndex) { categoryIndex = it }
                     }
 
-                    // 分类
-                    composable(route = RouteName.CLASSIFICATION) {
+                    // 公众号
+                    composable(route = RouteName.WeChat) {
                         ClassificationPage(navCtrl) { categoryIndex = it }
                     }
 
-                    // 我的
-                    composable(route = RouteName.MY) {
+                    // 体系
+                    composable(route = RouteName.SYSTEM) {
+                        MyPage(navCtrl) { categoryIndex = it }
+                    }
+
+                    // 项目
+                    composable(route = RouteName.PROJECTS) {
                         MyPage(navCtrl) { categoryIndex = it }
                     }
                 }
@@ -105,19 +110,28 @@ class MainPage : ComponentActivity() {
     fun BottomNavBarView(navCtrl: NavHostController) {
         val navBackStackEntry by navCtrl.currentBackStackEntryAsState()
         val currentDestination = navBackStackEntry?.destination
-        BottomNavigation {
+        BottomNavigation(backgroundColor = Color(0xffffffff)) {
             bns.forEach { screen ->
                 BottomNavigationItem(
                     icon = {
                         Icon(
-                            imageVector = screen.icon,
+                            modifier = Modifier
+                                .size(24.dp)
+                                .padding(2.dp),
+                            painter = painterResource(screen.icon),
                             contentDescription = null
                         )
                     },
-                    label = { Text(text = stringResource(screen.stringId)) },
+                    label = {
+                        Text(
+                            color = Color(0xFF888888),
+                            text = stringResource(screen.stringId)
+                        )
+                    },
                     selected = currentDestination?.hierarchy?.any { it.route == screen.routeName } == true,
                     onClick = {
                         if (currentDestination?.route != screen.routeName) {
+                            // 点击指定导航栏切换到指定页面
                             navCtrl.navigate(screen.routeName) {
                                 popUpTo(navCtrl.graph.findStartDestination().id) {
                                     saveState = true

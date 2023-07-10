@@ -16,7 +16,8 @@ buildscript {
         compose_ui_tooling_preview = "androidx.compose.ui:ui-tooling-preview:1.3.3"
         core_ktx = "androidx.core:core-ktx:1.7.0"
         activity_compose = "androidx.activity:activity-compose:1.6.1"
-        material = "androidx.compose.material:material:1.3.1"
+        compose_material = "androidx.compose.material:material:1.3.1"
+        android_material = "com.google.android.material:material:1.4.0"
         navigation = "androidx.navigation:navigation-compose:2.5.3"
         // accompanist辅助插件
         accompanist_insets = "com.google.accompanist:accompanist-insets:0.18.0"

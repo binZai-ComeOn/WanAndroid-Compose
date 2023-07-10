@@ -7,16 +7,19 @@ import androidx.compose.material.icons.twotone.DateRange
 import androidx.compose.material.icons.twotone.LocationOn
 import androidx.compose.material.icons.twotone.Menu
 import androidx.compose.material.icons.twotone.Place
+import androidx.compose.ui.graphics.painter.Painter
 import androidx.compose.ui.graphics.vector.ImageVector
+import androidx.compose.ui.res.painterResource
 import com.binyouwei.wanandroid_compose.R
 
 sealed class BottomNavRoute(
     var routeName: String,
     @StringRes var stringId: Int,
-    var icon: ImageVector
+    var icon: Int
 ) {
-    object Home: BottomNavRoute(RouteName.HOME, R.string.home, Icons.Default.Home)
-    object KnowledgeSystem: BottomNavRoute(RouteName.KNOWLEDGE_SYSTEM, R.string.knowledge_system, Icons.TwoTone.Place)
-    object Classification: BottomNavRoute(RouteName.CLASSIFICATION, R.string.classification, Icons.Default.Menu)
-    object My: BottomNavRoute(RouteName.MY, R.string.my, Icons.Default.Person)
+    object Home: BottomNavRoute(RouteName.HOME, R.string.home, R.drawable.ic_home_black_24dp)
+    object Square: BottomNavRoute(RouteName.SQUARE, R.string.square, R.drawable.ic_square_black_24dp)
+    object WeChat: BottomNavRoute(RouteName.WeChat, R.string.wechat, R.drawable.ic_wechat_black_24dp)
+    object System: BottomNavRoute(RouteName.SYSTEM, R.string.system, R.drawable.ic_apps_black_24dp)
+    object Projects: BottomNavRoute(RouteName.PROJECTS, R.string.projects, R.drawable.ic_project_black_24dp)
 }
