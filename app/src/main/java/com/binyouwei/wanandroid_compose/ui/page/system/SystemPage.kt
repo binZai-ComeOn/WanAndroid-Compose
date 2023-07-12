@@ -1,8 +1,7 @@
-package com.binyouwei.wanandroid_compose.ui.page.knowledge_system
+package com.binyouwei.wanandroid_compose.ui.page.system
 
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Column
-import androidx.compose.material.ScaffoldState
 import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
@@ -12,7 +11,7 @@ import androidx.navigation.NavHostController
 import com.binyouwei.wanandroid_compose.ui.page.home.HomeViewModel
 
 @Composable
-fun  KnowledgeSystemPage(
+fun  SystemPage(
     navCtrl: NavHostController,
     homeIndex: Int = 0,
     viewModel: HomeViewModel = hiltViewModel(),

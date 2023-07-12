@@ -3,6 +3,8 @@
 # 代码解释
  - by remember
     
+# 组件替代方案
+ModalDrawer 可使用 NavigationDrawer 替代，后者可用于适配响应式设备
 
 # 依赖
  - [Core](https://developer.android.google.cn/jetpack/androidx/releases/core?hl=zh-cn)：针对最新的平台功能和 API 调整应用，同时还支持旧设备.
@@ -16,3 +18,6 @@
  - [Gson](https://github.com/google/gson)：一个 Java 序列化/反序列化库，用于将 Java 对象转换为 JSON 并返回.
  - [Retrofit](https://github.com/square/retrofit)：适用于 Android 和 JVM 的类型安全 HTTP 客户端.
  - [Logger](https://github.com/orhanobut/logger)：简单、漂亮且功能强大的 Android 记录器.
+
+# 参考网址
+ - [Material Design](https://m3.material.io/)：Material 3是谷歌开源设计系统的最新版本，这里有着Material 3组件的相关使用教程。 

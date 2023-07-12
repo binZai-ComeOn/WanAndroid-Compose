@@ -49,6 +49,8 @@ buildscript {
         // datastore
         datastore_core = "androidx.datastore:datastore-core:1.0.0"
         datastore_preferences = "androidx.datastore:datastore-preferences:1.0.0"
+        // constraintlayout
+        constraintlayout = "androidx.constraintlayout:constraintlayout-compose:1.0.1"
     }
 
     dependencies {

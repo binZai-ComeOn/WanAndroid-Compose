@@ -3,7 +3,6 @@ package com.binyouwei.wanandroid_compose.ui.page
 import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
-import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.material.*
@@ -17,10 +16,11 @@ import androidx.navigation.NavDestination.Companion.hierarchy
 import androidx.navigation.NavGraph.Companion.findStartDestination
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.*
-import com.binyouwei.wanandroid_compose.ui.page.classification.ClassificationPage
+import com.binyouwei.wanandroid_compose.ui.page.classification.WeChatPage
 import com.binyouwei.wanandroid_compose.ui.page.home.HomePage
-import com.binyouwei.wanandroid_compose.ui.page.knowledge_system.KnowledgeSystemPage
-import com.binyouwei.wanandroid_compose.ui.page.my.MyPage
+import com.binyouwei.wanandroid_compose.ui.page.project.ProjectPage
+import com.binyouwei.wanandroid_compose.ui.page.square.SquarePage
+import com.binyouwei.wanandroid_compose.ui.page.system.SystemPage
 import com.binyouwei.wanandroid_compose.ui.route.BottomNavRoute
 import com.binyouwei.wanandroid_compose.ui.route.RouteName
 import com.google.accompanist.insets.navigationBarsPadding
@@ -75,22 +75,22 @@ class MainPage : ComponentActivity() {
 
                     // 广场
                     composable(route = RouteName.SQUARE) {
-                        KnowledgeSystemPage(navCtrl, categoryIndex) { categoryIndex = it }
+                        SquarePage(navCtrl, categoryIndex) { categoryIndex = it }
                     }
 
                     // 公众号
                     composable(route = RouteName.WeChat) {
-                        ClassificationPage(navCtrl) { categoryIndex = it }
+                        WeChatPage(navCtrl) { categoryIndex = it }
                     }
 
                     // 体系
                     composable(route = RouteName.SYSTEM) {
-                        MyPage(navCtrl) { categoryIndex = it }
+                        SystemPage(navCtrl) { categoryIndex = it }
                     }
 
                     // 项目
                     composable(route = RouteName.PROJECTS) {
-                        MyPage(navCtrl) { categoryIndex = it }
+                        ProjectPage(navCtrl) { categoryIndex = it }
                     }
                 }
             },

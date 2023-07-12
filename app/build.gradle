@@ -94,4 +94,6 @@ dependencies {
     // datastore
     implementation project.datastore_core
     implementation project.datastore_preferences
+    // constraintlayout
+    implementation project.constraintlayout
 }

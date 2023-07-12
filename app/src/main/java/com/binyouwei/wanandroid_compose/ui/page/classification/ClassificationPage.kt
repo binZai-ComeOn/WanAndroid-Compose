@@ -11,7 +11,7 @@ import androidx.navigation.NavHostController
 import com.binyouwei.wanandroid_compose.ui.page.home.HomeViewModel
 
 @Composable
-fun ClassificationPage(
+fun WeChatPage(
     navCtrl: NavHostController,
     homeIndex: Int = 0,
     viewModel: HomeViewModel = hiltViewModel(),

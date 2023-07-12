@@ -13,10 +13,10 @@
         <item name="android:listDivider">@drawable/bg_divider</item>
     </style>
 
-    <style name="Theme.WanAndroidCompose" parent="BaseAppTheme.NoActionBar"></style>
-
-    <style name="BaseAppTheme.NoActionBar">
+    <style name="BaseAppTheme.NoActionBar" parent="BaseAppTheme">
         <item name="windowActionBar">false</item>
         <item name="windowNoTitle">true</item>
     </style>
+
+    <style name="Theme.WanAndroidCompose" parent="BaseAppTheme"></style>
 </resources>
