@@ -45,3 +45,4 @@ ModalDrawer 可使用 NavigationDrawer 替代，后者可用于适配响应式�
  - 其它
     - 上拉隐藏顶部标题栏与底部导航栏，下拉显示顶部标题栏和底部导航栏
     - 适配Android横竖屏及Desktop
+    - 代码混淆
