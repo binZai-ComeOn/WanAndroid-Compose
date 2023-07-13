@@ -6,6 +6,9 @@
 # 组件替代方案
 ModalDrawer 可使用 NavigationDrawer 替代，后者可用于适配响应式设备
 
+# 组件使用情况
+
+
 # 依赖
  - [Core](https://developer.android.google.cn/jetpack/androidx/releases/core?hl=zh-cn)：针对最新的平台功能和 API 调整应用，同时还支持旧设备.
  - [Compose UI](https://developer.android.google.cn/jetpack/androidx/releases/compose-ui?hl=zh-cn)：与设备互动所需的 Compose UI 的基本组件，包括布局、绘图和输入.
@@ -21,3 +24,24 @@ ModalDrawer 可使用 NavigationDrawer 替代，后者可用于适配响应式�
 
 # 参考网址
  - [Material Design](https://m3.material.io/)：Material 3是谷歌开源设计系统的最新版本，这里有着Material 3组件的相关使用教程。 
+
+# 后期需求
+ - 首页
+    - 轮播图
+    - 文章列表
+ - 公众号
+    - 公众号列表
+    - 公众号文章列表
+ - 体系
+    - 体系与导航
+    - 体系列表与导航栏列表
+ - 广场
+    - 广场列表
+ - 项目
+    - 项目列表
+ - 设置
+    - 登录
+    - 我的收藏、系统设置、我的积分、积分排行、主题切换、我的分享等功能
+ - 其它
+    - 上拉隐藏顶部标题栏与底部导航栏，下拉显示顶部标题栏和底部导航栏
+    - 适配Android横竖屏及Desktop

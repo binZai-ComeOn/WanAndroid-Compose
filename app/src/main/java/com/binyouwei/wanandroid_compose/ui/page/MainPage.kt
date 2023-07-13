@@ -32,8 +32,8 @@ class MainPage : ComponentActivity() {
     val bns = listOf(
         BottomNavRoute.Home,
         BottomNavRoute.Square,
-        BottomNavRoute.WeChat,
         BottomNavRoute.System,
+        BottomNavRoute.WeChat,
         BottomNavRoute.Projects
     )
 
@@ -78,14 +78,14 @@ class MainPage : ComponentActivity() {
                         SquarePage(navCtrl, categoryIndex) { categoryIndex = it }
                     }
 
-                    // 公众号
-                    composable(route = RouteName.WeChat) {
-                        WeChatPage(navCtrl) { categoryIndex = it }
-                    }
-
                     // 体系
                     composable(route = RouteName.SYSTEM) {
                         SystemPage(navCtrl) { categoryIndex = it }
+                    }
+
+                    // 公众号
+                    composable(route = RouteName.WeChat) {
+                        WeChatPage(navCtrl) { categoryIndex = it }
                     }
 
                     // 项目
