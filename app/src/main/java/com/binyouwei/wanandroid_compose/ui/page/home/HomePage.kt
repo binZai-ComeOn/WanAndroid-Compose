@@ -28,6 +28,8 @@ import androidx.navigation.NavHostController
 import coil.compose.ImagePainter.State.Empty.painter
 import com.binyouwei.wanandroid_compose.R
 import com.binyouwei.wanandroid_compose.data.bean.MenuBean
+import com.binyouwei.wanandroid_compose.ui.route.RouteName
+import com.binyouwei.wanandroid_compose.ui.widget.Banner
 import com.google.android.material.navigation.NavigationView
 import kotlinx.coroutines.launch
 
@@ -41,7 +43,7 @@ fun HomePage(
 ) {
 
     val scopeState = rememberCoroutineScope()
-
+    // navCtrl.navigate(RouteName.INTEGRAL)
     Column {
         val drawerState = rememberDrawerState(DrawerValue.Closed)
         val currentScreen = remember { mutableStateOf(DrawerAppScreen.Home) }
@@ -55,6 +57,7 @@ fun HomePage(
             },
             content = {
                 BodyContentComponent(
+                    navCtrl = navCtrl,
                     currentScreen = currentScreen.value,
                     openDrawer = {
                         coroutineScope.launch { drawerState.open() }
@@ -194,18 +197,15 @@ fun DrawerContentComponent(
     }
 }
 
-/**
- * Passed the corresponding screen composable based on the current screen that's active.
- */
 @Composable
 fun BodyContentComponent(
+    navCtrl: NavHostController,
     currentScreen: DrawerAppScreen,
     openDrawer: () -> Unit,
 ) {
     when (currentScreen) {
-        DrawerAppScreen.Home -> Screen1Component(
-            openDrawer
-        )
+        DrawerAppScreen.Home ->
+            Test(navCtrl = navCtrl)
 
         DrawerAppScreen.Integral -> Screen1Component(
             openDrawer
@@ -230,6 +230,16 @@ fun BodyContentComponent(
         DrawerAppScreen.Logout -> Screen1Component(
             openDrawer
         )
+    }
+}
+
+@Composable
+fun Test(navCtrl: NavHostController) {
+    Text(text = "城市")
+    Column(modifier = Modifier.fillMaxSize()) {
+        Banner(navCtrl = navCtrl, onPageSelected = {
+
+        })
     }
 }
 

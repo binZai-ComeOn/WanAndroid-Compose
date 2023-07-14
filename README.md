@@ -7,7 +7,8 @@
 ModalDrawer 可使用 NavigationDrawer 替代，后者可用于适配响应式设备
 
 # 组件使用情况
-
+ - ModalDrawer：用于实现侧边栏等功能。
+ - HorizontalPager：用于实现轮播图等功能。
 
 # 依赖
  - [Core](https://developer.android.google.cn/jetpack/androidx/releases/core?hl=zh-cn)：针对最新的平台功能和 API 调整应用，同时还支持旧设备.
@@ -45,4 +46,3 @@ ModalDrawer 可使用 NavigationDrawer 替代，后者可用于适配响应式�
  - 其它
     - 上拉隐藏顶部标题栏与底部导航栏，下拉显示顶部标题栏和底部导航栏
     - 适配Android横竖屏及Desktop
-    - 代码混淆

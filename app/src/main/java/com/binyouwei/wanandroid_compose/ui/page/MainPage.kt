@@ -20,7 +20,7 @@ import com.binyouwei.wanandroid_compose.ui.page.classification.WeChatPage
 import com.binyouwei.wanandroid_compose.ui.page.home.HomePage
 import com.binyouwei.wanandroid_compose.ui.page.project.ProjectPage
 import com.binyouwei.wanandroid_compose.ui.page.square.SquarePage
-import com.binyouwei.wanandroid_compose.ui.page.system.SystemPage
+import com.binyouwei.wanandroid_compose.ui.page.system.KnowledgeSystemPage
 import com.binyouwei.wanandroid_compose.ui.route.BottomNavRoute
 import com.binyouwei.wanandroid_compose.ui.route.RouteName
 import com.google.accompanist.insets.navigationBarsPadding
@@ -80,7 +80,7 @@ class MainPage : ComponentActivity() {
 
                     // 体系
                     composable(route = RouteName.SYSTEM) {
-                        SystemPage(navCtrl) { categoryIndex = it }
+                        KnowledgeSystemPage(navCtrl) { categoryIndex = it }
                     }
 
                     // 公众号
