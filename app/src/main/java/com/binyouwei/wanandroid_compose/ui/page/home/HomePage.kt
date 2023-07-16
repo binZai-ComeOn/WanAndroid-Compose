@@ -24,6 +24,7 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.constraintlayout.compose.ConstraintLayout
 import androidx.hilt.navigation.compose.hiltViewModel
+import androidx.navigation.NavGraph.Companion.findStartDestination
 import androidx.navigation.NavHostController
 import coil.compose.ImagePainter.State.Empty.painter
 import com.binyouwei.wanandroid_compose.R
@@ -53,7 +54,8 @@ fun HomePage(
             gesturesEnabled = drawerState.isOpen,
             drawerContent = {
                 DrawerHeadComponent()
-                DrawerContentComponent { coroutineScope.launch { drawerState.close() } }
+                DrawerContentComponent(navCtrl) { coroutineScope.launch { drawerState.close() } }
+                // 链接：https://cloud.tencent.com/developer/article/1998526?areaSource=102001.8&traceId=J1JaKsmJGffTBPnYVMnAj
             },
             content = {
                 BodyContentComponent(
@@ -140,7 +142,7 @@ fun DrawerHeadComponent() {
                 color = colorResource(
                     id = R.color.Grey100
                 ),
-                modifier = Modifier.padding(8.dp,0.dp,0.dp,0.dp)
+                modifier = Modifier.padding(8.dp, 0.dp, 0.dp, 0.dp)
             )
             Text(
                 text = stringResource(id = R.string.nav_line_2),
@@ -155,6 +157,7 @@ fun DrawerHeadComponent() {
 
 @Composable
 fun DrawerContentComponent(
+    navCtrl: NavHostController,
     closeDrawer: () -> Unit,
 ) {
     Column(modifier = Modifier.fillMaxSize()) {
@@ -163,7 +166,13 @@ fun DrawerContentComponent(
             if (index != 0) {
                 val menu = getScreenBasedOnIndex(index)
                 Column(Modifier.clickable(onClick = {
-                    menu.menuName
+                    navCtrl.navigate(menu.route) {
+                        popUpTo(navCtrl.graph.findStartDestination().id) {
+                            saveState = true
+                        }
+                        launchSingleTop = true
+                        restoreState = true
+                    }
                     closeDrawer()
                 }), content = {
                     Surface(modifier = Modifier.fillMaxWidth()) {
@@ -175,7 +184,7 @@ fun DrawerContentComponent(
                                 modifier = Modifier
                                     .size(18.dp)
                                     .weight(1f),
-                                painter = painterResource(menu.id),
+                                painter = painterResource(menu.iconId),
                                 contentDescription = menu.menuName
                             )
                             Text(
@@ -205,7 +214,9 @@ fun BodyContentComponent(
 ) {
     when (currentScreen) {
         DrawerAppScreen.Home ->
-            Test(navCtrl = navCtrl)
+            Screen1Component(
+                openDrawer
+            )
 
         DrawerAppScreen.Integral -> Screen1Component(
             openDrawer
@@ -276,21 +287,26 @@ fun getScreenBasedOnIndex(index: Int) = when (index) {
     1 -> MenuBean(
         DrawerAppScreen.Integral,
         stringResource(R.string.integral),
-        R.drawable.ic_score_white_24dp, "80"
+        R.drawable.ic_score_white_24dp, RouteName.INTEGRAL, "80"
     )
 
-    2 -> MenuBean(DrawerAppScreen.Collect, stringResource(R.string.collect), R.drawable.ic_like_not)
+    2 -> MenuBean(
+        DrawerAppScreen.Collect,
+        stringResource(R.string.collect),
+        R.drawable.ic_like_not,
+        RouteName.COLLECT
+    )
     3 -> MenuBean(
         DrawerAppScreen.Share,
         stringResource(R.string.share),
-        R.drawable.ic_share_white_24dp
+        R.drawable.ic_share_white_24dp, RouteName.SHARE
     )
 
     4 -> MenuBean(DrawerAppScreen.Theme, stringResource(R.string.theme), R.drawable.ic_night_24dp)
     5 -> MenuBean(
         DrawerAppScreen.Settings,
         stringResource(R.string.settings),
-        R.drawable.ic_setting_24dp
+        R.drawable.ic_setting_24dp, RouteName.SETTINGS
     )
 
     else -> MenuBean(

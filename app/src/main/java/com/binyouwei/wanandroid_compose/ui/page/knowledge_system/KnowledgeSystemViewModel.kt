@@ -1,4 +1,4 @@
-package com.binyouwei.wanandroid_compose.ui.page.system
+package com.binyouwei.wanandroid_compose.ui.page.knowledge_system
 
 import com.binyouwei.common.base.BaseViewModel
 import dagger.hilt.android.lifecycle.HiltViewModel

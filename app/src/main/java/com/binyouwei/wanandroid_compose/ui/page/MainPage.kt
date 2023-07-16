@@ -20,7 +20,8 @@ import com.binyouwei.wanandroid_compose.ui.page.classification.WeChatPage
 import com.binyouwei.wanandroid_compose.ui.page.home.HomePage
 import com.binyouwei.wanandroid_compose.ui.page.project.ProjectPage
 import com.binyouwei.wanandroid_compose.ui.page.square.SquarePage
-import com.binyouwei.wanandroid_compose.ui.page.system.KnowledgeSystemPage
+import com.binyouwei.wanandroid_compose.ui.page.knowledge_system.KnowledgeSystemPage
+import com.binyouwei.wanandroid_compose.ui.page.seting.SetingPage
 import com.binyouwei.wanandroid_compose.ui.route.BottomNavRoute
 import com.binyouwei.wanandroid_compose.ui.route.RouteName
 import com.google.accompanist.insets.navigationBarsPadding
@@ -91,6 +92,31 @@ class MainPage : ComponentActivity() {
                     // 项目
                     composable(route = RouteName.PROJECTS) {
                         ProjectPage(navCtrl) { categoryIndex = it }
+                    }
+
+                    // 积分排行榜
+                    composable(route = RouteName.RANKING_LIST){
+                        RankingListPage(navCtrl) { categoryIndex = it }
+                    }
+
+                    // 积分
+                    composable(route = RouteName.INTEGRAL){
+                        IntegralPage(navCtrl) { categoryIndex = it }
+                    }
+
+                    // 收藏
+                    composable(route = RouteName.COLLECT){
+                        CollectPage(navCtrl) { categoryIndex = it }
+                    }
+
+                    // 分享
+                    composable(route = RouteName.SHARE){
+                        SharePage(navCtrl) { categoryIndex = it }
+                    }
+
+                    // 设置
+                    composable(route = RouteName.SETTINGS){
+                        SetingPage(navCtrl) { categoryIndex = it }
                     }
                 }
             },
