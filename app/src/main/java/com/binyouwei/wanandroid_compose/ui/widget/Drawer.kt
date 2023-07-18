@@ -1,11 +1,14 @@
 package com.binyouwei.wanandroid_compose.ui.widget
 
+import android.content.Intent
+import androidx.activity.ComponentActivity
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.Icon
+import androidx.compose.material.IconButton
 import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
@@ -20,24 +23,19 @@ import androidx.constraintlayout.compose.ConstraintLayout
 import androidx.navigation.NavGraph.Companion.findStartDestination
 import androidx.navigation.NavHostController
 import com.binyouwei.wanandroid_compose.R
+import com.binyouwei.wanandroid_compose.ui.page.RankingListPage
 
 @Composable
 fun Drawer(
-    navCtrl: NavHostController,
+    activity: ComponentActivity,
     closeDrawer: () -> Unit,
 ) {
-    DrawerHeadComponent()
+    DrawerHeadComponent(activity)
     Column(modifier = Modifier.fillMaxSize()) {
         // 遍历生成菜单
         menuList.forEach {
             Column(Modifier.clickable(onClick = {
-                navCtrl.navigate(it.route) {
-                    popUpTo(navCtrl.graph.findStartDestination().id) {
-                        saveState = true
-                    }
-                    launchSingleTop = true
-                    restoreState = true
-                }
+                activity.startActivity(Intent(activity, it.route))
                 closeDrawer()
             }), content = {
                 MenuListItem(it)
@@ -48,7 +46,7 @@ fun Drawer(
 
 
 @Composable
-fun DrawerHeadComponent() {
+fun DrawerHeadComponent(activity: ComponentActivity) {
     ConstraintLayout(
         modifier = Modifier
             .fillMaxWidth()
@@ -60,15 +58,23 @@ fun DrawerHeadComponent() {
             .padding(16.dp, 36.dp, 16.dp, 10.dp)
     ) {
         val (pointsRanking, avatar, name, row) = createRefs()
-        Icon(
-            painter = painterResource(R.drawable.ic_rank_white_24dp),
-            contentDescription = stringResource(R.string.points_ranking),
-            modifier = Modifier
-                .constrainAs(pointsRanking) {
-                    top.linkTo(parent.top)
-                    end.linkTo(parent.end, margin = 16.dp)
-                }
-        )
+        IconButton(onClick = {
+            activity.startActivity(
+                Intent(
+                    activity,
+                    RankingListPage::class.java
+                )
+            )
+        }, modifier = Modifier
+            .constrainAs(pointsRanking) {
+                top.linkTo(parent.top)
+                end.linkTo(parent.end, margin = 16.dp)
+            }) {
+            Icon(
+                painter = painterResource(R.drawable.ic_rank_white_24dp),
+                contentDescription = stringResource(R.string.points_ranking),
+            )
+        }
         Image(
             painter = painterResource(id = R.mipmap.ic_default_avatar),
             contentDescription = stringResource(

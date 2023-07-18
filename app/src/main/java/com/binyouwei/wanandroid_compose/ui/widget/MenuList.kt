@@ -16,31 +16,33 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import com.binyouwei.wanandroid_compose.R
 import com.binyouwei.wanandroid_compose.data.bean.MenuBean
-import com.binyouwei.wanandroid_compose.ui.route.RouteName
-
+import com.binyouwei.wanandroid_compose.ui.page.CollectPage
+import com.binyouwei.wanandroid_compose.ui.page.SharePage
+import com.binyouwei.wanandroid_compose.ui.page.seting.SetingPage
 
 var menuList = listOf(
     MenuBean(
         R.string.integral,
-        R.drawable.ic_score_white_24dp, RouteName.INTEGRAL, "80"
+        R.drawable.ic_score_white_24dp, CollectPage::class.java, "80"
     ),
     MenuBean(
         R.string.collect,
         R.drawable.ic_like_not,
-        RouteName.COLLECT
+        CollectPage::class.java
     ),
     MenuBean(
         R.string.share,
-        R.drawable.ic_share_white_24dp, RouteName.SHARE
+        R.drawable.ic_share_white_24dp, SharePage::class.java
     ),
-    MenuBean(R.string.theme, R.drawable.ic_night_24dp),
+    MenuBean(R.string.theme, R.drawable.ic_night_24dp, null),
     MenuBean(
         R.string.settings,
-        R.drawable.ic_setting_24dp, RouteName.SETTINGS
+        R.drawable.ic_setting_24dp, SetingPage::class.java
     ),
     MenuBean(
         R.string.logout,
-        R.drawable.ic_logout_white_24dp
+        R.drawable.ic_logout_white_24dp,
+        null
     )
 )
 

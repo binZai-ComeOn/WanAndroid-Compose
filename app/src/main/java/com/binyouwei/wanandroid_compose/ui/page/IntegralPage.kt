@@ -8,12 +8,12 @@ import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.material.Text
 import androidx.compose.ui.Modifier
 
-class RankingListPage : ComponentActivity(){
+class IntegralPage : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContent {
             Column(Modifier.fillMaxSize()) {
-                Text(text = "积分排行榜")
+                Text(text = "积分")
             }
         }
     }

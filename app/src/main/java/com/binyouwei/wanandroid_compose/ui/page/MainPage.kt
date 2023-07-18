@@ -43,8 +43,10 @@ class MainPage : ComponentActivity() {
         val navCtrl = rememberNavController()
         val scaffoldState = rememberScaffoldState()
         val coroutineScope = rememberCoroutineScope()
+        val drawerState = scaffoldState.drawerState
 
         Scaffold(
+            scaffoldState = scaffoldState,
             modifier = Modifier
                 .statusBarsPadding()
                 .navigationBarsPadding(),
@@ -58,7 +60,7 @@ class MainPage : ComponentActivity() {
                     backgroundColor = MaterialTheme.colors.primarySurface,
                     navigationIcon = {
                         IconButton(onClick = {
-                            coroutineScope.launch { scaffoldState.drawerState.open() }
+                            coroutineScope.launch { if (drawerState.isClosed) drawerState.open() else drawerState.close() }
                         }) {
                             Icon(
                                 imageVector = Icons.Filled.Menu,
@@ -69,7 +71,7 @@ class MainPage : ComponentActivity() {
                 )
             },
             drawerContent = {
-                Drawer(navCtrl) { coroutineScope.launch { scaffoldState.drawerState.close() }  }
+                Drawer(this@MainPage) { coroutineScope.launch { drawerState.close() } }
             },
             content = {
                 var homeIndex = remember { 0 }
@@ -102,31 +104,6 @@ class MainPage : ComponentActivity() {
                     // 项目
                     composable(route = RouteName.PROJECTS) {
                         ProjectPage(navCtrl) { categoryIndex = it }
-                    }
-
-                    // 积分排行榜
-                    composable(route = RouteName.RANKING_LIST) {
-                        RankingListPage(navCtrl) { categoryIndex = it }
-                    }
-
-                    // 积分
-                    composable(route = RouteName.INTEGRAL) {
-                        IntegralPage(navCtrl) { categoryIndex = it }
-                    }
-
-                    // 收藏
-                    composable(route = RouteName.COLLECT) {
-                        CollectPage(navCtrl) { categoryIndex = it }
-                    }
-
-                    // 分享
-                    composable(route = RouteName.SHARE) {
-                        SharePage(navCtrl) { categoryIndex = it }
-                    }
-
-                    // 设置
-                    composable(route = RouteName.SETTINGS) {
-                        SetingPage(navCtrl) { categoryIndex = it }
                     }
                 }
             },

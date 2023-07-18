@@ -6,10 +6,4 @@ object RouteName {
     const val WeChat = "WeChat"
     const val SYSTEM = "SYSTEM"
     const val PROJECTS = "PROJECTS"
-
-    const val RANKING_LIST = "RankingList"
-    const val INTEGRAL = "INTEGRAL"
-    const val COLLECT = "COLLECT"
-    const val SHARE = "SHARE"
-    const val SETTINGS = "SETTINGS"
 }

@@ -1,22 +1,19 @@
 package com.binyouwei.wanandroid_compose.ui.page
 
+import android.os.Bundle
+import androidx.activity.ComponentActivity
+import androidx.activity.compose.setContent
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
-import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.material.Text
-import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
-import androidx.hilt.navigation.compose.hiltViewModel
-import androidx.navigation.NavHostController
-import com.binyouwei.wanandroid_compose.ui.page.home.HomeViewModel
-
-@Composable
-fun SharePage(
-    navCtrl: NavHostController,
-    homeIndex: Int = 0,
-    viewModel: HomeViewModel = hiltViewModel(),
-    onPageSelected: (position: Int) -> Unit) {
-    Column(Modifier.fillMaxSize()) {
-        Text(text = "分享")
+class SharePage : ComponentActivity(){
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        setContent {
+            Column(Modifier.fillMaxSize()) {
+                Text(text = "分享")
+            }
+        }
     }
 }
