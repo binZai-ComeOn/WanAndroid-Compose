@@ -66,7 +66,7 @@ class MainPage : ComponentActivity() {
                 ) {
                     // 首页
                     composable(route = RouteName.HOME) {
-                        HomePage(navCtrl, scaffoldState) { categoryIndex = it }
+                        HomePage(this@MainPage, scaffoldState) { categoryIndex = it }
                     }
 
                     // 广场

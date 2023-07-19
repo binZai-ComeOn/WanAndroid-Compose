@@ -39,6 +39,9 @@
         <activity
             android:name=".ui.page.IntegralPage"
             android:exported="true" />
+        <activity
+            android:name=".ui.page.SearchPage"
+            android:exported="true" />
     </application>
 
 </manifest>

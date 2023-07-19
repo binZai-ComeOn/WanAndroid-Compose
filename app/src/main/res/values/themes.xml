@@ -18,5 +18,5 @@
         <item name="windowNoTitle">true</item>
     </style>
 
-    <style name="Theme.WanAndroidCompose" parent="BaseAppTheme"></style>
+    <style name="Theme.WanAndroidCompose" parent="BaseAppTheme.NoActionBar"></style>
 </resources>
