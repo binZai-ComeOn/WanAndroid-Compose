@@ -18,6 +18,7 @@
     <string name="theme">夜间模式</string>
     <string name="settings">系统设置</string>
     <string name="logout">退出登录</string>
+    <string name="is_logout">确定要退出登录吗？</string>
 
     <string name="nav_grade">等级:</string>
     <string name="nav_rank">排名:</string>

@@ -54,27 +54,10 @@ class MainPage : ComponentActivity() {
                 // 设置底部导航栏
                 BottomNavigationBar(navCtrl = navCtrl, bnbsMain)
             },
-            topBar = {
-                TopAppBar(
-                    title = { Text(stringResource(id = R.string.wan_android)) },
-                    backgroundColor = MaterialTheme.colors.primarySurface,
-                    navigationIcon = {
-                        IconButton(onClick = {
-                            coroutineScope.launch { if (drawerState.isClosed) drawerState.open() else drawerState.close() }
-                        }) {
-                            Icon(
-                                imageVector = Icons.Filled.Menu,
-                                contentDescription = stringResource(id = R.string.menu)
-                            )
-                        }
-                    }
-                )
-            },
             drawerContent = {
                 Drawer(this@MainPage) { coroutineScope.launch { drawerState.close() } }
             },
             content = {
-                var homeIndex = remember { 0 }
                 var categoryIndex = remember { 0 }
                 it.calculateBottomPadding()
                 NavHost(
@@ -83,7 +66,7 @@ class MainPage : ComponentActivity() {
                 ) {
                     // 首页
                     composable(route = RouteName.HOME) {
-                        HomePage(navCtrl, scaffoldState, homeIndex) { homeIndex = it }
+                        HomePage(navCtrl, scaffoldState) { categoryIndex = it }
                     }
 
                     // 广场
