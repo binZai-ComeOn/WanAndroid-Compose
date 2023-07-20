@@ -22,6 +22,27 @@ import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.launch
 
 @Composable
+fun TopBar(
+    activity: ComponentActivity,
+    title: String,
+) {
+    TopAppBar(
+        title = { Text(title) },
+        backgroundColor = colorResource(id = R.color.colorPrimary),
+        navigationIcon = {
+            IconButton(onClick = {
+                activity.finish()
+            }) {
+                Icon(
+                    imageVector = Icons.Filled.Menu,
+                    contentDescription = stringResource(id = R.string.back)
+                )
+            }
+        },
+    )
+}
+
+@Composable
 fun TopSearchMenuBar(
     title: String,
     coroutineScope: CoroutineScope,

@@ -36,7 +36,7 @@ var menuList = listOf(
     ),
     MenuBean(R.string.theme, R.drawable.ic_night_24dp, null),
     MenuBean(
-        R.string.settings,
+        R.string.seting,
         R.drawable.ic_setting_24dp, SetingPage::class.java
     ),
     MenuBean(

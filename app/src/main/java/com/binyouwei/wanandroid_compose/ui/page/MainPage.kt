@@ -11,7 +11,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
 import androidx.navigation.compose.*
 import com.binyouwei.wanandroid_compose.R
-import com.binyouwei.wanandroid_compose.ui.page.classification.WeChatPage
+import com.binyouwei.wanandroid_compose.ui.page.wechat.WeChatPage
 import com.binyouwei.wanandroid_compose.ui.page.home.HomePage
 import com.binyouwei.wanandroid_compose.ui.page.project.ProjectPage
 import com.binyouwei.wanandroid_compose.ui.page.square.SquarePage
@@ -71,22 +71,22 @@ class MainPage : ComponentActivity() {
 
                     // 广场
                     composable(route = RouteName.SQUARE) {
-                        SquarePage(navCtrl, categoryIndex) { categoryIndex = it }
+                        SquarePage(this@MainPage,scaffoldState) { categoryIndex = it }
                     }
 
                     // 体系
                     composable(route = RouteName.SYSTEM) {
-                        KnowledgeSystemPage(navCtrl) { categoryIndex = it }
+                        KnowledgeSystemPage(this@MainPage,scaffoldState) { categoryIndex = it }
                     }
 
                     // 公众号
                     composable(route = RouteName.WeChat) {
-                        WeChatPage(navCtrl) { categoryIndex = it }
+                        WeChatPage(this@MainPage,scaffoldState) { categoryIndex = it }
                     }
 
                     // 项目
                     composable(route = RouteName.PROJECTS) {
-                        ProjectPage(navCtrl) { categoryIndex = it }
+                        ProjectPage(this@MainPage,scaffoldState) { categoryIndex = it }
                     }
                 }
             },

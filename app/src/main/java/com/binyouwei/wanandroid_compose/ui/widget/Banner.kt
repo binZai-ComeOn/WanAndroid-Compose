@@ -28,8 +28,8 @@ fun Banner(
     HorizontalPager(state = pagerState, dragEnabled = false) { page ->
         onPageSelected(0)
         when (page) {
-            0 -> SquarePage(navCtrl = navCtrl) { }
-            1 -> ProjectPage(navCtrl = navCtrl) { }
+//            0 -> SquarePage(navCtrl = navCtrl) { }
+//            1 -> ProjectPage(navCtrl = navCtrl) { }
         }
     }
 }
