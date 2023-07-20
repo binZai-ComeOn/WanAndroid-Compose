@@ -15,15 +15,19 @@ fun HomePage(
     activity: ComponentActivity,
     scaffoldState: ScaffoldState,
     viewModel: HomeViewModel = hiltViewModel(),
-    onPageSelected: (position: Int) -> Unit
+    onPageSelected: (position: Int) -> Unit,
 ) {
     val coroutineScope = rememberCoroutineScope()
     val drawerState = scaffoldState.drawerState
-    TopSearchMenuBar(
-        title = stringResource(id = R.string.wan_android),
-        drawerState = drawerState,
-        onClickSearch = { activity.startActivity(Intent(activity, SearchPage::class.java)) }
-    ) {
-
+    Scaffold(topBar = {
+        TopSearchMenuBar(
+            title = stringResource(id = R.string.wan_android),
+            coroutineScope = coroutineScope,
+            drawerState = drawerState,
+            onClickSearch = { activity.startActivity(Intent(activity, SearchPage::class.java)) }
+        )
+    }) {
+        it.calculateBottomPadding()
     }
+
 }
