@@ -66,7 +66,7 @@ fun DrawerHeadComponent(activity: ComponentActivity) {
                     id = R.color.colorPrimary
                 )
             )
-            .padding(16.dp, 36.dp, 16.dp, 10.dp)
+            .padding(8.dp, 18.dp, 8.dp, 6.dp)
     ) {
         val (pointsRanking, avatar, name, row) = createRefs()
         IconButton(onClick = {
@@ -79,7 +79,7 @@ fun DrawerHeadComponent(activity: ComponentActivity) {
         }, modifier = Modifier
             .constrainAs(pointsRanking) {
                 top.linkTo(parent.top)
-                end.linkTo(parent.end, margin = 16.dp)
+                end.linkTo(parent.end)
             }) {
             Icon(
                 painter = painterResource(R.drawable.ic_rank_white_24dp),

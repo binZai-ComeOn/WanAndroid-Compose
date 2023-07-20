@@ -1,11 +1,13 @@
 package com.binyouwei.wanandroid_compose.ui.widget
 
 import androidx.activity.ComponentActivity
+import androidx.compose.foundation.layout.RowScope
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.text.KeyboardActions
 import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.material.*
 import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.ArrowBack
 import androidx.compose.material.icons.filled.Clear
 import androidx.compose.material.icons.filled.Menu
 import androidx.compose.runtime.Composable
@@ -25,6 +27,7 @@ import kotlinx.coroutines.launch
 fun TopBar(
     activity: ComponentActivity,
     title: String,
+    actions: @Composable RowScope.() -> Unit = {},
 ) {
     TopAppBar(
         title = { Text(title) },
@@ -34,11 +37,12 @@ fun TopBar(
                 activity.finish()
             }) {
                 Icon(
-                    imageVector = Icons.Filled.Menu,
+                    imageVector = Icons.Filled.ArrowBack,
                     contentDescription = stringResource(id = R.string.back)
                 )
             }
         },
+        actions = actions
     )
 }
 
@@ -119,7 +123,7 @@ fun TopSearchBar(
                 activity.finish()
             }) {
                 Icon(
-                    imageVector = Icons.Filled.Menu,
+                    imageVector = Icons.Filled.ArrowBack,
                     contentDescription = stringResource(id = R.string.back)
                 )
             }

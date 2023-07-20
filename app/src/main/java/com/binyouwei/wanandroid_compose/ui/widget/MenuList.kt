@@ -17,13 +17,14 @@ import androidx.compose.ui.unit.dp
 import com.binyouwei.wanandroid_compose.R
 import com.binyouwei.wanandroid_compose.data.bean.MenuBean
 import com.binyouwei.wanandroid_compose.ui.page.CollectPage
+import com.binyouwei.wanandroid_compose.ui.page.IntegralPage
 import com.binyouwei.wanandroid_compose.ui.page.SharePage
 import com.binyouwei.wanandroid_compose.ui.page.seting.SetingPage
 
 var menuList = listOf(
     MenuBean(
         R.string.integral,
-        R.drawable.ic_score_white_24dp, CollectPage::class.java, "80"
+        R.drawable.ic_score_white_24dp, IntegralPage::class.java, "80"
     ),
     MenuBean(
         R.string.collect,

@@ -6,20 +6,30 @@ import androidx.activity.compose.setContent
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.lazy.LazyColumn
+import androidx.compose.material.Icon
+import androidx.compose.material.IconButton
+import androidx.compose.material.Scaffold
 import androidx.compose.material.Text
+import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.Add
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.res.stringResource
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavHostController
+import com.binyouwei.wanandroid_compose.R
 import com.binyouwei.wanandroid_compose.ui.page.home.HomeViewModel
+import com.binyouwei.wanandroid_compose.ui.widget.TopBar
 
 class CollectPage : ComponentActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContent {
-            Column(Modifier.fillMaxSize()) {
-                Text(text = "收藏")
+            Scaffold(topBar = {
+                TopBar(this, title = stringResource(id = R.string.collect))
+            }) {
+                it.calculateBottomPadding()
             }
         }
     }
