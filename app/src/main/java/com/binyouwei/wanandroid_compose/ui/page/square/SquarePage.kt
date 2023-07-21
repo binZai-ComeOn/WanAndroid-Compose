@@ -24,8 +24,7 @@ import kotlinx.coroutines.launch
 fun SquarePage(
     activity: ComponentActivity,
     scaffoldState: ScaffoldState,
-    viewModel: HomeViewModel = hiltViewModel(),
-    onPageSelected: (position: Int) -> Unit,
+    viewModel: HomeViewModel = hiltViewModel()
 ) {
     val coroutineScope = rememberCoroutineScope()
     val drawerState = scaffoldState.drawerState

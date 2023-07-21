@@ -58,7 +58,6 @@ class MainPage : ComponentActivity() {
                 Drawer(this@MainPage) { coroutineScope.launch { drawerState.close() } }
             },
             content = {
-                var categoryIndex = remember { 0 }
                 it.calculateBottomPadding()
                 NavHost(
                     navController = navCtrl,
@@ -66,27 +65,27 @@ class MainPage : ComponentActivity() {
                 ) {
                     // 首页
                     composable(route = RouteName.HOME) {
-                        HomePage(this@MainPage, scaffoldState) { categoryIndex = it }
+                        HomePage(this@MainPage, scaffoldState)
                     }
 
                     // 广场
                     composable(route = RouteName.SQUARE) {
-                        SquarePage(this@MainPage,scaffoldState) { categoryIndex = it }
+                        SquarePage(this@MainPage,scaffoldState)
                     }
 
                     // 体系
                     composable(route = RouteName.SYSTEM) {
-                        KnowledgeSystemPage(this@MainPage,scaffoldState) { categoryIndex = it }
+                        KnowledgeSystemPage(this@MainPage,scaffoldState)
                     }
 
                     // 公众号
                     composable(route = RouteName.WeChat) {
-                        WeChatPage(this@MainPage,scaffoldState) { categoryIndex = it }
+                        WeChatPage(this@MainPage,scaffoldState)
                     }
 
                     // 项目
                     composable(route = RouteName.PROJECTS) {
-                        ProjectPage(this@MainPage,scaffoldState) { categoryIndex = it }
+                        ProjectPage(this@MainPage,scaffoldState)
                     }
                 }
             },

@@ -8,13 +8,20 @@ import androidx.compose.foundation.layout.fillMaxHeight
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.size
+import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.layout.wrapContentHeight
 import androidx.compose.foundation.layout.wrapContentWidth
 import androidx.compose.foundation.lazy.LazyRow
 import androidx.compose.material.Scaffold
 import androidx.compose.material.ScaffoldState
+import androidx.compose.material.ScrollableTabRow
+import androidx.compose.material.Tab
+import androidx.compose.material.TabRow
 import androidx.compose.material.Text
+import androidx.compose.material.TextButton
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
 import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
@@ -34,8 +41,7 @@ import com.binyouwei.wanandroid_compose.ui.widget.TopSearchMenuBar
 fun KnowledgeSystemPage(
     activity: ComponentActivity,
     scaffoldState: ScaffoldState,
-    viewModel: HomeViewModel = hiltViewModel(),
-    onPageSelected: (position: Int) -> Unit,
+    viewModel: HomeViewModel = hiltViewModel()
 ) {
     val coroutineScope = rememberCoroutineScope()
     val drawerState = scaffoldState.drawerState
@@ -43,6 +49,7 @@ fun KnowledgeSystemPage(
         stringResource(id = R.string.system),
         stringResource(id = R.string.navigation)
     )
+    var rowIndex = remember { mutableStateOf(0) }
 
     Scaffold(
         scaffoldState = scaffoldState,
@@ -56,20 +63,16 @@ fun KnowledgeSystemPage(
             )
         }) { pv ->
         pv.calculateBottomPadding()
-        LazyRow(
-            modifier = Modifier
-                .fillMaxWidth()
-                .background(color = colorResource(id = R.color.colorPrimary))
+        ScrollableTabRow(
+            edgePadding = 0.dp,
+            selectedTabIndex = rowIndex.value,
+            backgroundColor = colorResource(id = R.color.colorPrimary)
         ) {
-            items(rowMenu.size) {
-                Text(
-                    text = rowMenu[it],
-                    fontSize = 14.sp,
-                    modifier = Modifier
-                        .size(width = 60.dp, height = 50.dp)
-                        .wrapContentHeight()
-                        .wrapContentWidth()
-                )
+            rowMenu.forEachIndexed { index: Int, text: String ->
+                Tab(
+                    text = { Text(text = text) },
+                    selected = rowIndex.value == index,
+                    onClick = { rowIndex.value = index })
             }
         }
     }

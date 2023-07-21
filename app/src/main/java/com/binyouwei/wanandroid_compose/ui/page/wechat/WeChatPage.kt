@@ -17,8 +17,7 @@ import com.binyouwei.wanandroid_compose.ui.widget.TopSearchMenuBar
 fun WeChatPage(
     activity: ComponentActivity,
     scaffoldState: ScaffoldState,
-    viewModel: HomeViewModel = hiltViewModel(),
-    onPageSelected: (position: Int) -> Unit,
+    viewModel: HomeViewModel = hiltViewModel()
 ) {
     val coroutineScope = rememberCoroutineScope()
     val drawerState = scaffoldState.drawerState
