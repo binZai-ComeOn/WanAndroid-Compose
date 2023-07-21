@@ -14,11 +14,13 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.draw.shadow
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.colorResource
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.input.ImeAction
+import androidx.compose.ui.unit.dp
 import com.binyouwei.wanandroid_compose.R
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.launch
@@ -51,6 +53,7 @@ fun TopSearchMenuBar(
     title: String,
     coroutineScope: CoroutineScope,
     drawerState: DrawerState,
+    elevation: Boolean = true,
     onClickSearch: () -> Unit = {},
 ) {
     TopAppBar(
@@ -73,7 +76,10 @@ fun TopSearchMenuBar(
                     contentDescription = stringResource(R.string.search)
                 )
             }
-        }
+        },
+        modifier = Modifier.shadow(0.dp),
+        // 是否显示TopAppBar底部阴影
+        elevation = if (elevation) AppBarDefaults.TopAppBarElevation else 0.dp
     )
 }
 
