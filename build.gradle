@@ -51,6 +51,8 @@ buildscript {
         datastore_preferences = "androidx.datastore:datastore-preferences:1.0.0"
         // constraintlayout
         constraintlayout = "androidx.constraintlayout:constraintlayout-compose:1.0.1"
+        // flowlayout谷歌已弃用，详情请看:https://github.com/google/accompanist/tree/main/flowlayout
+        flowlayout = "com.google.accompanist:accompanist-flowlayout:0.28.0"
     }
 
     dependencies {

@@ -16,6 +16,8 @@
     <string name="clear_up">清除</string>
     <string name="help">帮助</string>
 
+    <string name="hot_search">热门搜索</string>
+
     <string name="points_ranking">积分排行榜</string>
     <string name="go_login">去登录</string>
     <string name="integral">我的积分</string>

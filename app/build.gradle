@@ -96,4 +96,6 @@ dependencies {
     implementation project.datastore_preferences
     // constraintlayout
     implementation project.constraintlayout
+    // flowlayout
+    implementation project.flowlayout
 }
