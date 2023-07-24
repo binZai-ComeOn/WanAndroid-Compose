@@ -35,10 +35,10 @@ import java.io.IOException
  * 描述：DataStore 工具类
  *
  */
-object DataStoreUtils {
 
-    private const val preferenceName = "WanAndroidDataStore"
-    private val Context.dataStore: DataStore<Preferences> by preferencesDataStore(preferenceName)
+val Context.dataStore: DataStore<Preferences> by preferencesDataStore(name = "PlayAndroidDataStore")
+
+object DataStoreUtils {
 
     private lateinit var dataStore: DataStore<Preferences>
 
@@ -46,8 +46,9 @@ object DataStoreUtils {
      * init Context
      * @param context Context
      */
-    fun init(context: Context) {
+    fun init(context: Context): DataStoreUtils {
         dataStore = context.dataStore
+        return this
     }
 
     @Suppress("UNCHECKED_CAST")
@@ -65,7 +66,7 @@ object DataStoreUtils {
 
     @Suppress("UNCHECKED_CAST")
     fun <U> getData(key: String, default: U): Flow<U> {
-        val data =  when (default) {
+        val data = when (default) {
             is Long -> readLongFlow(key, default)
             is String -> readStringFlow(key, default)
             is Int -> readIntFlow(key, default)

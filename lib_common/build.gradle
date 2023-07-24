@@ -53,9 +53,15 @@ dependencies {
     // retrofit2
     implementation project.retrofit2
     implementation project.retrofit2_converter_gson
-    // logger
-    implementation project.orhanobut_logger
+    // utilcodex
+    implementation project.utilcodex
     // datastore
     implementation project.datastore_core
     implementation project.datastore_preferences
+    // toaster
+    implementation project.toaster
+    // okhttp3
+    implementation project.logging_interceptor
+
+    implementation project.multidex
 }

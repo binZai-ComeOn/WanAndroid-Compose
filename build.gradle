@@ -44,8 +44,10 @@ buildscript {
         // retrofit2
         retrofit2 = "com.squareup.retrofit2:retrofit:2.9.0"
         retrofit2_converter_gson = "com.squareup.retrofit2:converter-gson:2.9.0"
-        // logger
-        orhanobut_logger = 'com.orhanobut:logger:2.2.0'
+        // okhttp3
+        logging_interceptor = "com.squareup.okhttp3:logging-interceptor:3.11.0"
+        // utilcodex
+        utilcodex = 'com.blankj:utilcodex:1.30.1'
         // datastore
         datastore_core = "androidx.datastore:datastore-core:1.0.0"
         datastore_preferences = "androidx.datastore:datastore-preferences:1.0.0"
@@ -53,10 +55,15 @@ buildscript {
         constraintlayout = "androidx.constraintlayout:constraintlayout-compose:1.0.1"
         // flowlayout谷歌已弃用，详情请看:https://github.com/google/accompanist/tree/main/flowlayout
         flowlayout = "com.google.accompanist:accompanist-flowlayout:0.28.0"
+        coil = "io.coil-kt:coil:2.4.0"
+        // toaster
+        toaster = "com.github.getActivity:Toaster:12.2"
+
+        multidex = "androidx.multidex:multidex:2.0.1"
     }
 
     dependencies {
-         classpath 'com.google.dagger:hilt-android-gradle-plugin:2.46.1'
+        classpath 'com.google.dagger:hilt-android-gradle-plugin:2.46.1'
     }
 }
 // Top-level build file where you can add configuration options common to all sub-projects/modules.

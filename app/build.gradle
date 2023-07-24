@@ -89,8 +89,8 @@ dependencies {
     // retrofit2
     implementation project.retrofit2
     implementation project.retrofit2_converter_gson
-    // logger
-    implementation project.orhanobut_logger
+    // utilcodex
+    implementation project.utilcodex
     // datastore
     implementation project.datastore_core
     implementation project.datastore_preferences
@@ -98,4 +98,6 @@ dependencies {
     implementation project.constraintlayout
     // flowlayout
     implementation project.flowlayout
+    // coil
+    implementation project.coil
 }

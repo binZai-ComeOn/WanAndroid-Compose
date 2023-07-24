@@ -1,69 +1,85 @@
 package com.binyouwei.common.base
 
+import android.app.Activity
 import android.app.Application
+import android.content.Context
+import android.os.Bundle
+import androidx.multidex.MultiDex
+import com.binyouwei.common.helper.AppHelper
+import com.binyouwei.common.manager.ActivityManager
+import com.binyouwei.common.manager.AppFrontBack
+import com.binyouwei.common.manager.AppFrontBackListener
 import com.binyouwei.common.utils.DataStoreUtils
-import com.orhanobut.logger.Logger
-
-/*
- * Copyright (c) 2022, smuyyh@gmail.com All Rights Reserved.
- * #                                                   #
- * #                       _oo0oo_                     #
- * #                      o8888888o                    #
- * #                      88" . "88                    #
- * #                      (| -_- |)                    #
- * #                      0\  =  /0                    #
- * #                    ___/`---'\___                  #
- * #                  .' \\|     |# '.                 #
- * #                 / \\|||  :  |||# \                #
- * #                / _||||| -:- |||||- \              #
- * #               |   | \\\  -  #/ |   |              #
- * #               | \_|  ''\---/''  |_/ |             #
- * #               \  .-\__  '-'  ___/-. /             #
- * #             ___'. .'  /--.--\  `. .'___           #
- * #          ."" '<  `.___\_<|>_/___.' >' "".         #
- * #         | | :  `- \`.;`\ _ /`;.`/ - ` : | |       #
- * #         \  \ `_.   \_ __\ /__ _/   .-` /  /       #
- * #     =====`-.____`.___ \_____/___.-`___.-'=====    #
- * #                       `=---='                     #
- * #     ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~   #
- * #                                                   #
- * #               佛祖保佑         永无BUG            #
- * #                                                   #
- */
+import com.binyouwei.lib_common.BuildConfig
+import com.blankj.utilcode.util.LogUtils
+import com.hjq.toast.Toaster
 
 /**
- * @author 宾有为
- * 创建时间：2023/7/2 8:08
- * CSDN：https://blog.csdn.net/baidu_41616022?spm=1000.2115.3001.5343
- * 项目名称：WanAndroid-Compose
- * 项目源码：https://gitcode.net/baidu_41616022/wanandroid-compose
- * 文件包名：com.binyouwei
- */
+ * @author binjx
+ * @date 2023/5/19 11:51
+ * @purpose：
+ **/
 open class BaseApplication : Application() {
+
+    override fun attachBaseContext(base: Context?) {
+        super.attachBaseContext(base)
+        MultiDex.install(base)
+    }
 
     override fun onCreate() {
         super.onCreate()
-        Logger.i(" ......................阿弥陀佛......................\n"+
-                            "                       _oo0oo_                      \n"+
-                            "                      o8888888o                     \n"+
-                            "                      88\" . \"88                     \n"+
-                            "                      (| -_- |)                     \n"+
-                            "                      0\\  =  /0                     \n"+
-                            "                   ___/‘---’\\___                   \n"+
-                            "                  .' \\|       |/ '.                 \n"+
-                            "                 / \\\\|||  :  |||// \\                \n"+
-                            "                / _||||| -卍-|||||_ \\               \n"+
-                            "               |   | \\\\\\  -  /// |   |              \n"+
-                            "               | \\_|  ''\\---/''  |_/ |              \n"+
-                            "               \\  .-\\__  '-'  ___/-. /              \n"+
-                            "             ___'. .'  /--.--\\  '. .'___            \n"+
-                            "         .\"\" ‘<  ‘.___\\_<|>_/___.’>’ \"\".          \n"+
-                            "       | | :  ‘- \\‘.;‘\\ _ /’;.’/ - ’ : | |        \n"+
-                            "         \\  \\ ‘_.   \\_ __\\ /__ _/   .-’ /  /        \n"+
-                            "    =====‘-.____‘.___ \\_____/___.-’___.-’=====     \n"+
-                            "                       ‘=---=’                      \n"+
-                            "                                                    \n"+
-                            "....................佛祖保佑 ,永无BUG...................")
+        AppHelper.init(this, BuildConfig.DEBUG)
         DataStoreUtils.init(this)
+
+        //注册APP前后台切换监听
+        appFrontBackRegister()
+        // App启动立即注册监听
+        registerActivityLifecycle()
+        Toaster.init(this)
+    }
+
+    /**
+     * 注册APP前后台切换监听
+     */
+    private fun appFrontBackRegister() {
+        AppFrontBack.register(this, object : AppFrontBackListener {
+            override fun onBack(activity: Activity?) {
+                LogUtils.d("onBack")
+            }
+
+            override fun onFront(activity: Activity?) {
+                LogUtils.d("onFront")
+            }
+        })
+    }
+
+    /**
+     * 注册Activity生命周期监听
+     */
+    private fun registerActivityLifecycle() {
+        registerActivityLifecycleCallbacks(object : ActivityLifecycleCallbacks {
+            override fun onActivityPaused(activity: Activity) {
+            }
+
+            override fun onActivityStarted(activity: Activity) {
+            }
+
+            override fun onActivityDestroyed(activity: Activity) {
+                ActivityManager.pop(activity)
+            }
+
+            override fun onActivitySaveInstanceState(activity: Activity, p1: Bundle) {
+            }
+
+            override fun onActivityStopped(activity: Activity) {
+            }
+
+            override fun onActivityCreated(activity: Activity, p1: Bundle?) {
+                ActivityManager.push(activity)
+            }
+
+            override fun onActivityResumed(activity: Activity) {
+            }
+        })
     }
 }

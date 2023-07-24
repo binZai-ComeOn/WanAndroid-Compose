@@ -9,7 +9,7 @@ import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.ui.res.stringResource
 import androidx.hilt.navigation.compose.hiltViewModel
 import com.binyouwei.wanandroid_compose.R
-import com.binyouwei.wanandroid_compose.ui.page.SearchPage
+import com.binyouwei.wanandroid_compose.ui.page.viewmodel.SearchPage
 import com.binyouwei.wanandroid_compose.ui.page.home.HomeViewModel
 import com.binyouwei.wanandroid_compose.ui.widget.TopSearchMenuBar
 

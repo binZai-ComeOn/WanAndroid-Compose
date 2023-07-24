@@ -2,7 +2,7 @@ package com.binyouwei.common.network.interceptor
 
 import android.os.Build
 import androidx.annotation.RequiresApi
-import com.orhanobut.logger.Logger
+import com.blankj.utilcode.util.LogUtils
 import okhttp3.*
 import java.io.IOException
 import java.net.URLDecoder
@@ -23,11 +23,11 @@ class LogInterceptor @Inject constructor() : Interceptor {
                 if (it.isSuccessful) {
                     logResponse(it)
                 } else {
-                    Logger.e(it.message().toString())
+                    LogUtils.e(it.message().toString())
                 }
             }
             .onFailure {
-                Logger.e(it.message.toString())
+                LogUtils.e(it.message.toString())
             }
             .getOrThrow()
     }
@@ -52,7 +52,7 @@ class LogInterceptor @Inject constructor() : Interceptor {
             "<<-<<-<<-<<-<<-<<-<<-<<-<<-<<-<<-<<-<<-<<-<<-<<-<<-<<-<<-<<-<<-<<-<<-<<-<<-<<-<<-<<-<<" +
                     "-<<-<<-<<-<<-<<-<<-<<-<<-<<-<<-<<-<<-<<-<<-<<-"
         )
-        Logger.e(strb.toString())
+        LogUtils.e(strb.toString())
     }
 
     private fun logRequest(request: Request, connection: Connection?) {
@@ -63,7 +63,7 @@ class LogInterceptor @Inject constructor() : Interceptor {
         )
         logHeaders(strb, request, connection)
         strb.appendLine("RequestBody:${request.body().toString()}")
-        Logger.e(strb.toString())
+        LogUtils.e(strb.toString())
     }
 
     private fun logHeaders(strb: StringBuilder, request: Request, connection: Connection?) {
