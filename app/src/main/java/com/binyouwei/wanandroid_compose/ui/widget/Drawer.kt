@@ -24,7 +24,7 @@ import androidx.compose.ui.unit.sp
 import androidx.constraintlayout.compose.ConstraintLayout
 import com.binyouwei.wanandroid_compose.R
 import com.binyouwei.wanandroid_compose.ui.page.RankingListPage
-import com.orhanobut.logger.Logger
+import com.blankj.utilcode.util.LogUtils
 
 @Composable
 fun Drawer(
@@ -49,7 +49,7 @@ fun Drawer(
             })
         }
         MyAlertDialog(dialogState, title = R.string.logout, text = R.string.is_logout, confirm = {
-            Logger.e("点击了退出登录")
+            LogUtils.e("点击了退出登录")
         })
     }
 }

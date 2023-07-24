@@ -1,8 +1,6 @@
 package com.binyouwei.wanandroid_compose.ui.page.viewmodel
 
 import android.os.Bundle
-import androidx.activity.ComponentActivity
-import androidx.activity.compose.setContent
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.PaddingValues
@@ -18,22 +16,22 @@ import androidx.compose.ui.res.colorResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
+import com.binyouwei.common.base.BaseActivity
 import com.binyouwei.wanandroid_compose.R
 import com.binyouwei.wanandroid_compose.ui.widget.TopSearchBar
+import com.blankj.utilcode.util.LogUtils
 import com.google.accompanist.flowlayout.FlowRow
 
-class SearchPage : ComponentActivity() {
-
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        setContent {
-            content()
-        }
-    }
+class SearchPage : BaseActivity() {
 
     @Composable
-    private fun content() {
+    override fun setContentLayout() {
         val viewModel : SearchViewModel = hiltViewModel()
+        viewModel.getHotKeyList()
+        val a = remember {
+            viewModel.hotKeyList
+        }
+        LogUtils.e("测试村上春树：${a.value?.size}")
         val text = remember { mutableStateOf("") }
         Scaffold(topBar = {
             TopSearchBar(this, text) {
