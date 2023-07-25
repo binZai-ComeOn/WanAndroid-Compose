@@ -1,4 +1,4 @@
-package com.binyouwei.common.network.constant
+package com.binyouwei.common.constant
 
 /**
  * @author binjx

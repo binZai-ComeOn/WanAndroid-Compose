@@ -1,11 +1,11 @@
 package com.binyouwei.common.network.interceptor
 
 import com.binyouwei.common.manager.CookiesManager
-import com.binyouwei.common.network.constant.ARTICLE_WEBSITE
-import com.binyouwei.common.network.constant.COIN_WEBSITE
-import com.binyouwei.common.network.constant.COLLECTION_WEBSITE
-import com.binyouwei.common.network.constant.KEY_COOKIE
-import com.binyouwei.common.network.constant.NOT_COLLECTION_WEBSITE
+import com.binyouwei.common.constant.ARTICLE_WEBSITE
+import com.binyouwei.common.constant.COIN_WEBSITE
+import com.binyouwei.common.constant.COLLECTION_WEBSITE
+import com.binyouwei.common.constant.KEY_COOKIE
+import com.binyouwei.common.constant.NOT_COLLECTION_WEBSITE
 import com.blankj.utilcode.util.LogUtils
 import okhttp3.Interceptor
 import okhttp3.Response

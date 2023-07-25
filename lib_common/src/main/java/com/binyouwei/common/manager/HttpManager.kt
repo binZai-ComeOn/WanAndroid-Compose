@@ -2,7 +2,7 @@ package com.binyouwei.common.manager
 
 import android.util.Log
 import com.binyouwei.common.helper.AppHelper
-import com.binyouwei.common.network.constant.BASE_URL
+import com.binyouwei.common.constant.BASE_URL
 import com.binyouwei.common.network.error.ERROR
 import com.binyouwei.common.network.error.NoNetWorkException
 import com.binyouwei.common.network.interceptor.CookiesInterceptor

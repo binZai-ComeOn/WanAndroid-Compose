@@ -60,6 +60,10 @@ buildscript {
         toaster = "com.github.getActivity:Toaster:12.2"
 
         multidex = "androidx.multidex:multidex:2.0.1"
+        // paging分页库
+        paging_runtime = "androidx.paging:paging-runtime:3.0.0-beta02"
+        paging_common = "androidx.paging:paging-common:3.0.0-beta02"
+        paging_compose = "androidx.paging:paging-compose:1.0.0-alpha11"
     }
 
     dependencies {

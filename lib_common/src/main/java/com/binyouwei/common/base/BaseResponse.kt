@@ -1,4 +1,4 @@
-package com.binyouwei.common.network.response
+package com.binyouwei.common.base
 
 /**
  * @desc   通用数据类

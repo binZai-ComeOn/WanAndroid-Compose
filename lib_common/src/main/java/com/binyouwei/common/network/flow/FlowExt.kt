@@ -2,7 +2,7 @@ package com.binyouwei.common.network.flow
 
 import com.binyouwei.common.network.error.ApiException
 import com.binyouwei.common.network.error.ExceptionHandler
-import com.binyouwei.common.network.response.BaseResponse
+import com.binyouwei.common.base.BaseResponse
 import com.blankj.utilcode.util.LogUtils
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.Flow

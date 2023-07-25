@@ -13,6 +13,7 @@ import com.binyouwei.common.utils.DataStoreUtils
 import com.binyouwei.lib_common.BuildConfig
 import com.blankj.utilcode.util.LogUtils
 import com.hjq.toast.Toaster
+import dagger.hilt.android.HiltAndroidApp
 
 /**
  * @author binjx

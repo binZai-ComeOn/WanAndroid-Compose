@@ -1,7 +1,7 @@
 package com.binyouwei.common.network.api
 
-import com.binyouwei.common.network.bean.HotKeyBean
-import com.binyouwei.common.network.response.BaseResponse
+import com.binyouwei.common.bean.HotKeyBean
+import com.binyouwei.common.base.BaseResponse
 import retrofit2.http.GET
 
 

@@ -3,6 +3,7 @@ plugins {
     id 'org.jetbrains.kotlin.android'
     id 'kotlin-parcelize'
     id 'kotlin-kapt'
+    id 'dagger.hilt.android.plugin'
 }
 
 android {
@@ -64,4 +65,8 @@ dependencies {
     implementation project.logging_interceptor
 
     implementation project.multidex
+    // paging分页库
+    implementation project.paging_runtime
+    testImplementation project.paging_common
+    implementation project.paging_compose
 }

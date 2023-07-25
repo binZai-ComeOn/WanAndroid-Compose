@@ -1,4 +1,4 @@
-package com.binyouwei.common.network.bean
+package com.binyouwei.common.bean
 
 import android.os.Parcelable
 import kotlinx.parcelize.Parcelize

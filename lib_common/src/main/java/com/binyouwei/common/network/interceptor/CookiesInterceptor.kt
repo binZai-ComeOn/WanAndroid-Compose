@@ -1,9 +1,9 @@
 package com.binyouwei.common.network.interceptor
 
 import com.binyouwei.common.manager.CookiesManager
-import com.binyouwei.common.network.constant.KEY_SAVE_USER_LOGIN
-import com.binyouwei.common.network.constant.KEY_SAVE_USER_REGISTER
-import com.binyouwei.common.network.constant.KEY_SET_COOKIE
+import com.binyouwei.common.constant.KEY_SAVE_USER_LOGIN
+import com.binyouwei.common.constant.KEY_SAVE_USER_REGISTER
+import com.binyouwei.common.constant.KEY_SET_COOKIE
 import com.blankj.utilcode.util.LogUtils
 import okhttp3.Interceptor
 import okhttp3.Response
