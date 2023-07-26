@@ -9,9 +9,10 @@ import com.google.accompanist.pager.HorizontalPager
 import com.google.accompanist.pager.rememberPagerState
 
 /**
- * @author binjx
- * @date 2023/7/14 15:35
- * @purpose：
+ * @author 宾有为
+ * Created on 2023/7/14 15:35
+ * Social homepage: https://blog.csdn.net/baidu_41616022
+ * @desc
  **/
 @OptIn(ExperimentalPagerApi::class)
 @Composable

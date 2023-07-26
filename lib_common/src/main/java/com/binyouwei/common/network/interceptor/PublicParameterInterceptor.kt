@@ -2,7 +2,7 @@ package com.binyouwei.common.network.interceptor
 
 import com.binyouwei.common.helper.AppHelper
 import com.binyouwei.common.manager.AppManager
-import com.binyouwei.common.utils.DeviceInfoUtils
+import com.binyouwei.common.utils.DeviceInfoUtil
 import okhttp3.Interceptor
 import okhttp3.Response
 import java.net.URLEncoder
@@ -16,7 +16,7 @@ class PublicParameterInterceptor : Interceptor {
         val newBuilder = request.newBuilder().apply {
             addHeader("device-type", "android")
             addHeader("app-version", AppManager.getAppVersionName(AppHelper.getApplication()))
-            addHeader("device-id", DeviceInfoUtils.androidId)
+            addHeader("device-id", DeviceInfoUtil.androidId)
             addHeader("device-os-version", AppManager.getDeviceBuildRelease())//获取手机系统版本号
             val deviceNameStr = AppManager.getDeviceBuildBrand().plus("_")
                     .plus(AppManager.getDeviceBuildModel())

@@ -10,11 +10,11 @@ import androidx.compose.ui.res.stringResource
 import com.binyouwei.wanandroid_compose.R
 
 /**
- * @author binjx
- * @date 2023/7/19 10:31
- * @purpose：对话框相关组件
+ * @author 宾有为
+ * Created on 2023/7/19 10:31
+ * Social homepage: https://blog.csdn.net/baidu_41616022
+ * @desc
  **/
-
 @Composable
 fun MyAlertDialog(
     isShowDialog: MutableState<Boolean>,

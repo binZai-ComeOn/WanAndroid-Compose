@@ -15,6 +15,8 @@
     <string name="back">返回</string>
     <string name="clear_up">清除</string>
     <string name="help">帮助</string>
+    <string name="topping">置顶</string>
+    <string name="xin">新</string>
 
     <string name="hot_search">热门搜索</string>
     <string name="search_history">搜索历史</string>

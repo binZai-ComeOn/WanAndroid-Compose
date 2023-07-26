@@ -2,13 +2,15 @@ package com.binyouwei.common.network
 
 import com.binyouwei.common.bean.HotKeyBean
 import com.binyouwei.common.base.BaseResponse
+import com.binyouwei.common.bean.ArticleBean
 import retrofit2.http.*
 
 /**
- * 网络请求接口
- * 注意：接口前无需加斜杠
- * create by 宾有为 at 7/25
- */
+ * @author 宾有为
+ * Created on 2023/7/26 22:27
+ * Social homepage: https://blog.csdn.net/baidu_41616022
+ * @desc
+ **/
 interface HttpService {
 
     companion object {
@@ -18,4 +20,8 @@ interface HttpService {
     // 搜索热词
     @GET("/hotkey/json")
     suspend fun getHotkeys(): BaseResponse<MutableList<HotKeyBean>>
+
+    // 获取置顶文章
+    @GET("/article/top/json")
+    suspend fun getTopArticles(): BaseResponse<MutableList<ArticleBean>>
 }

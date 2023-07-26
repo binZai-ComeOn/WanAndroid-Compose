@@ -2,18 +2,10 @@ package com.binyouwei.wanandroid_compose.ui.page.home
 
 import android.content.Intent
 import androidx.activity.ComponentActivity
-import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.layout.fillMaxWidth
-import androidx.compose.foundation.layout.padding
 import androidx.compose.material.*
 import androidx.compose.runtime.*
-import androidx.compose.ui.Modifier
-import androidx.compose.ui.res.colorResource
 import androidx.compose.ui.res.stringResource
-import androidx.compose.ui.unit.dp
-import androidx.compose.ui.unit.sp
-import androidx.constraintlayout.compose.ConstraintLayout
 import androidx.hilt.navigation.compose.hiltViewModel
 import com.binyouwei.wanandroid_compose.R
 import com.binyouwei.wanandroid_compose.ui.page.search.SearchPage
@@ -28,6 +20,10 @@ fun HomePage(
 ) {
     val coroutineScope = rememberCoroutineScope()
     val drawerState = scaffoldState.drawerState
+    viewModel.getTopArticles()
+    val topArticles by remember {
+        viewModel.topArticles
+    }
     Scaffold(topBar = {
         TopSearchMenuBar(
             title = stringResource(id = R.string.wan_android),
@@ -37,13 +33,13 @@ fun HomePage(
         )
     }) {
         it.calculateBottomPadding()
-
         Column() {
-            ArticleItem()
-            ArticleItem()
-            ArticleItem()
-            ArticleItem()
-            ArticleItem()
+            if (topArticles.isNotEmpty()){
+                topArticles.forEach {
+                    it.top = "1"
+                    ArticleItem(it)
+                }
+            }
         }
     }
 

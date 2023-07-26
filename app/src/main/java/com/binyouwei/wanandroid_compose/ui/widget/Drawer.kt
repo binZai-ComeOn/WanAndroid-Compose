@@ -26,6 +26,12 @@ import com.binyouwei.wanandroid_compose.R
 import com.binyouwei.wanandroid_compose.ui.page.RankingListPage
 import com.blankj.utilcode.util.LogUtils
 
+/**
+ * @author 宾有为
+ * Created on 2023/7/26 22:27
+ * Social homepage: https://blog.csdn.net/baidu_41616022
+ * @desc
+ **/
 @Composable
 fun Drawer(
     activity: ComponentActivity,
@@ -37,7 +43,7 @@ fun Drawer(
         // 遍历生成菜单
         menuList.forEach {
             Column(Modifier.clickable(onClick = {
-                if(it.menuName == R.string.logout){
+                if (it.menuName == R.string.logout) {
                     // 点击退出登录
                     dialogState.value = true
                 } else {
@@ -53,7 +59,6 @@ fun Drawer(
         })
     }
 }
-
 
 
 @Composable

@@ -21,6 +21,12 @@ import com.binyouwei.wanandroid_compose.R
 import com.binyouwei.wanandroid_compose.ui.page.home.HomeViewModel
 import com.binyouwei.wanandroid_compose.ui.widget.TopBar
 
+/**
+ * @author 宾有为
+ * Created on 2023/7/26 22:27
+ * Social homepage: https://blog.csdn.net/baidu_41616022
+ * @desc
+ **/
 class CollectPage : ComponentActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {

@@ -9,7 +9,7 @@ import android.provider.Settings
 import android.util.DisplayMetrics
 import android.util.Log
 import android.view.WindowManager
-import com.binyouwei.common.utils.DeviceInfoUtils
+import com.binyouwei.common.utils.DeviceInfoUtil
 import com.blankj.utilcode.util.LogUtils
 import kotlin.math.max
 import kotlin.math.min
@@ -107,7 +107,7 @@ object AppManager {
     }
 
     private fun genProductType(): String? {
-        val model = DeviceInfoUtils.phoneModel
+        val model = DeviceInfoUtil.phoneModel
         return model.replace("[:{} \\[\\]\"']*".toRegex(), "")
     }
 
@@ -193,7 +193,7 @@ object AppManager {
      * 获取手机型号
      */
     fun getDeviceBuildModel(): String {
-        return DeviceInfoUtils.phoneModel
+        return DeviceInfoUtil.phoneModel
     }
 
     /**

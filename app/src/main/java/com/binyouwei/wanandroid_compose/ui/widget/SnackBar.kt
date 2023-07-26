@@ -8,9 +8,10 @@ import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.launch
 
 /**
- * @author binjx
- * @date 2023/7/26 11:04
- * @purpose：
+ * @author 宾有为
+ * Created on 2023/7/26 11:04
+ * Social homepage: https://blog.csdn.net/baidu_41616022
+ * @desc
  **/
 fun snackBar(
     snackbarHostState: SnackbarHostState,

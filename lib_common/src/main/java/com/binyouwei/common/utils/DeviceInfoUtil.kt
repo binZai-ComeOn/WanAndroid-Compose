@@ -14,7 +14,7 @@ import java.net.NetworkInterface
 /**
  * 设备信息的单例工具类
  */
-object DeviceInfoUtils {
+object DeviceInfoUtil {
     private lateinit var appContext: Context
 
     // 设备imei号

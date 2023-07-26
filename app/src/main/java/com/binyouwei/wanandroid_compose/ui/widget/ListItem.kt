@@ -10,7 +10,6 @@ import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
-import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.Icon
 import androidx.compose.material.Surface
@@ -25,12 +24,15 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.constraintlayout.compose.ConstraintLayout
+import com.binyouwei.common.bean.ArticleBean
+import com.binyouwei.common.utils.TimeUtil
 import com.binyouwei.wanandroid_compose.R
 import com.binyouwei.wanandroid_compose.data.bean.MenuBean
 import com.binyouwei.wanandroid_compose.ui.page.CollectPage
 import com.binyouwei.wanandroid_compose.ui.page.IntegralPage
 import com.binyouwei.wanandroid_compose.ui.page.SharePage
 import com.binyouwei.wanandroid_compose.ui.page.seting.SetingPage
+import com.blankj.utilcode.util.TimeUtils
 
 var menuList = listOf(
     MenuBean(
@@ -87,107 +89,90 @@ fun MenuListItem(data: MenuBean) {
     }
 }
 
-@Preview
 @Composable
-fun ArticleItem() {
-    Column() {
-        ConstraintLayout(
-            modifier = Modifier
-                .background(color = colorResource(id = R.color.White))
-                .padding(8.dp)
-                .fillMaxWidth()
-        ) {
-            val (tv_author, tv_topping, tv_new, tv_tag, tv_date, tv_content, tv_source) = createRefs()
+fun ArticleItem(article: ArticleBean) {
+    Column(
+        modifier = Modifier
+            .padding(start = 8.dp, top = 8.dp, end = 8.dp)
+            .background(color = colorResource(id = R.color.White))
+            .fillMaxWidth()
+    ) {
+        Row() {
+            if (article.top == "1") {
+                Text(
+                    text = stringResource(id = R.string.topping), modifier = Modifier
+                        .padding(end = 10.dp)
+                        .border(
+                            border = BorderStroke(0.5.dp, colorResource(id = R.color.Red)),
+                            shape = RoundedCornerShape(2.dp)
+                        )
+                        .padding(4.dp, 2.dp),
+                    fontSize = 10.sp,
+                    color = colorResource(id = R.color.Red)
+                )
+            }
             Text(
-                text = "置顶", modifier = Modifier
+                text = stringResource(id = R.string.xin), modifier = Modifier
                     .padding(end = 10.dp)
                     .border(
                         border = BorderStroke(0.5.dp, colorResource(id = R.color.Red)),
                         shape = RoundedCornerShape(2.dp)
                     )
-                    .padding(4.dp, 2.dp)
-                    .constrainAs(tv_topping) {
-                        top.linkTo(parent.top)
-                        start.linkTo(parent.start)
-                    },
+                    .padding(4.dp, 2.dp),
                 fontSize = 10.sp,
                 color = colorResource(id = R.color.Red)
             )
+            if (article.tags.size > 0) {
+                Text(
+                    text = article.tags[0].name, modifier = Modifier
+                        .padding(end = 10.dp)
+                        .border(
+                            border = BorderStroke(0.5.dp, colorResource(id = R.color.colorAccent)),
+                            shape = RoundedCornerShape(2.dp)
+                        )
+                        .padding(4.dp, 2.dp),
+                    fontSize = 10.sp,
+                    color = colorResource(id = R.color.colorAccent)
+                )
+            }
             Text(
-                text = "新", modifier = Modifier
-                    .padding(end = 10.dp)
-                    .border(
-                        border = BorderStroke(0.5.dp, colorResource(id = R.color.Red)),
-                        shape = RoundedCornerShape(2.dp)
-                    )
-                    .padding(4.dp, 2.dp)
-                    .constrainAs(tv_new) {
-                        top.linkTo(tv_topping.top)
-                        start.linkTo(tv_topping.end)
-                        bottom.linkTo(tv_topping.bottom)
-                    },
-                fontSize = 10.sp,
-                color = colorResource(id = R.color.Red)
-            )
-            Text(
-                text = "标签", modifier = Modifier
-                    .padding(end = 10.dp)
-                    .border(
-                        border = BorderStroke(0.5.dp, colorResource(id = R.color.colorAccent)),
-                        shape = RoundedCornerShape(2.dp)
-                    )
-                    .padding(4.dp, 2.dp)
-                    .constrainAs(tv_tag) {
-                        top.linkTo(tv_new.top)
-                        start.linkTo(tv_new.end)
-                        bottom.linkTo(tv_new.bottom)
-                    },
-                fontSize = 10.sp,
-                color = colorResource(id = R.color.colorAccent)
-            )
-            Text(
-                text = "作者", modifier = Modifier.constrainAs(tv_author) {
-                    top.linkTo(tv_tag.top)
-                    start.linkTo(tv_tag.end)
-                    bottom.linkTo(tv_tag.bottom)
-                },
+                text = article.author,
                 fontSize = 12.sp,
                 color = colorResource(id = R.color.item_author)
             )
             Text(
-                text = "日期", modifier = Modifier
-                    .constrainAs(tv_date) {
-                        top.linkTo(parent.top)
-                        end.linkTo(parent.end)
-                    },
+                text = TimeUtil.timeOf(article.publishTime),
                 fontSize = 12.sp,
                 color = colorResource(id = R.color.item_date)
             )
+        }
+        Text(
+            text = article.title,
+            fontSize = 12.sp,
+            modifier = Modifier
+                .fillMaxWidth()
+                .padding(top = 8.dp),
+            color = colorResource(id = R.color.item_title),
+        )
+        if (article.tags.isNotEmpty()) {
+            var tagValue = ""
+            article.tags.forEachIndexed { index, tag ->
+                tagValue += tag.name
+                if (article.tags.size != (index + 1)) {
+                    tagValue += " / "
+                }
+            }
             Text(
-                text = "内容",
-                fontSize = 12.sp,
+                text = tagValue,
                 modifier = Modifier
-                    .fillMaxWidth()
-                    .padding(top = 8.dp)
-                    .constrainAs(tv_content) {
-                        top.linkTo(tv_author.bottom)
-                        start.linkTo(parent.start)
-                        end.linkTo(parent.end)
-                    },
-                        color = colorResource(id = R.color.item_title),)
-            Text(
-                text = "问答/官方",
-                modifier = Modifier
-                    .padding(top = 8.dp)
-                    .constrainAs(tv_source) {
-                        top.linkTo(tv_content.bottom)
-                    },
+                    .padding(top = 8.dp),
                 color = colorResource(id = R.color.item_chapter),
                 fontSize = 10.sp,
             )
         }
         Box(
             modifier = Modifier
+                .padding(top = 8.dp)
                 .fillMaxWidth()
                 .height(0.5.dp)
                 .background(color = colorResource(id = R.color.list_divider))
