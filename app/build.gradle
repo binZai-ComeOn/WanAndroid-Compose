@@ -63,6 +63,7 @@ dependencies {
     implementation project.lifecycle_runtime_ktx
     implementation project.activity_compose
     implementation project.compose_ui
+    implementation project.compose_ui_tooling
     implementation project.compose_ui_tooling_preview
     implementation project.compose_material
     implementation project.android_material

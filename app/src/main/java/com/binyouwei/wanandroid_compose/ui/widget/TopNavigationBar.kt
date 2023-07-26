@@ -1,5 +1,6 @@
 package com.binyouwei.wanandroid_compose.ui.widget
 
+import android.app.Activity
 import androidx.activity.ComponentActivity
 import androidx.compose.foundation.layout.RowScope
 import androidx.compose.foundation.layout.fillMaxWidth
@@ -14,6 +15,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.MutableState
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
+import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.shadow
 import androidx.compose.ui.graphics.Color
@@ -28,7 +30,7 @@ import kotlinx.coroutines.launch
 
 @Composable
 fun TopBar(
-    activity: ComponentActivity,
+    activity: Activity,
     title: String,
     actions: @Composable RowScope.() -> Unit = {},
 ) {
@@ -87,10 +89,12 @@ fun TopSearchMenuBar(
 @Composable
 fun TopSearchBar(
     activity: ComponentActivity,
-    text : MutableState<String>,
+    text: MutableState<String>,
     placeholder: String = stringResource(id = R.string.search),
+    scaffoldState: ScaffoldState,
     onClickSearch: (String) -> Unit,
 ) {
+    val coroutineScope = rememberCoroutineScope()
     TopAppBar(
         title = {
             TextField(
@@ -136,7 +140,18 @@ fun TopSearchBar(
             }
         },
         actions = {
-            IconButton(onClick = { onClickSearch(text.value) }) {
+            val tooltip = stringResource(id = R.string.please_input_keywords)
+            IconButton(onClick = {
+                if (text.value == "") {
+                    snackBar(
+                        snackbarHostState = scaffoldState.snackbarHostState,
+                        coroutineScope = coroutineScope,
+                        message = tooltip
+                    )
+                    return@IconButton
+                }
+                onClickSearch(text.value)
+            }) {
                 Icon(
                     painter = painterResource(id = R.drawable.ic_search_white_24dp),
                     contentDescription = stringResource(R.string.search)

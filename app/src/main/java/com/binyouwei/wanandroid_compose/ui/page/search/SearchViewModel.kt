@@ -1,14 +1,12 @@
-package com.binyouwei.wanandroid_compose.ui.page.viewmodel
+package com.binyouwei.wanandroid_compose.ui.page.search
 
-import androidx.compose.runtime.mutableStateListOf
 import androidx.compose.runtime.mutableStateOf
-import androidx.lifecycle.MutableLiveData
 import com.binyouwei.common.base.BaseViewModel
-import com.binyouwei.common.manager.ApiManager
 import com.binyouwei.common.bean.HotKeyBean
-import com.binyouwei.common.network.callback.IApiErrorCallback
+import com.binyouwei.common.network.HttpResult
 import com.binyouwei.common.network.repository.HttpRepository
 import dagger.hilt.android.lifecycle.HiltViewModel
+import kotlinx.coroutines.flow.collectLatest
 import javax.inject.Inject
 
 /**
@@ -18,11 +16,23 @@ import javax.inject.Inject
  **/
 @HiltViewModel
 class SearchViewModel @Inject constructor(
-    private val repo: HttpRepository,
+    private val repository: HttpRepository,
 ) : BaseViewModel() {
     val hotKeyList = mutableStateOf(mutableListOf<HotKeyBean>())
 
     fun getHotKeyList() {
+        async {
+            repository.getHotkeys().collectLatest {
+                when (it) {
+                    is HttpResult.Success -> {
+                        hotKeyList.value = it.result
+                    }
 
+                    is HttpResult.Error -> {
+
+                    }
+                }
+            }
+        }
     }
 }

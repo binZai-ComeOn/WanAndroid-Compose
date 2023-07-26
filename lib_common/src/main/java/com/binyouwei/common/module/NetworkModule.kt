@@ -36,13 +36,4 @@ class NetworkModule {
     fun provideRepository(apiService: HttpService): HttpRepository {
         return HttpRepositoryImpl(apiService)
     }
-
-//    @Singleton
-//    @Provides
-//    fun provideRepo(apiService: HttpService): HttpRepository {
-//        return HttpRepository(apiService)
-//    }
-
-
-
 }

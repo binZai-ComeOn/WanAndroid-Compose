@@ -40,7 +40,10 @@
             android:name=".ui.page.IntegralPage"
             android:exported="true" />
         <activity
-            android:name=".ui.page.viewmodel.SearchPage"
+            android:name=".ui.page.search.SearchPage"
+            android:exported="true" />
+        <activity
+            android:name=".ui.page.search.SearchResultPage"
             android:exported="true" />
     </application>
 
