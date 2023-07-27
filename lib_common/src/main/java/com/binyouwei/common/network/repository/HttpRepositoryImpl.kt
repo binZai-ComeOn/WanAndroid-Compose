@@ -22,4 +22,5 @@ class HttpRepositoryImpl constructor(private val apiService: HttpService) : Base
 
     override fun getArticles() = pager { page -> apiService.getArticles(page) }
     override fun getRankingList() = pager(initKey = 1) { page -> apiService.getRankingList(page) }
+    override fun queryArticles(keywords : String) = pager { page -> apiService.queryArticles(page,keywords) }
 }

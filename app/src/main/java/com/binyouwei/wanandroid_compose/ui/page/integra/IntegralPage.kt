@@ -12,8 +12,14 @@ import androidx.compose.material.Text
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
+import com.binyouwei.common.bean.WebData
+import com.binyouwei.common.utils.ActivityMessenger
 import com.binyouwei.wanandroid_compose.R
+import com.binyouwei.wanandroid_compose.data.constant.AppConstant
+import com.binyouwei.wanandroid_compose.ui.page.WebPage
 import com.binyouwei.wanandroid_compose.ui.widget.TopBar
+import dagger.hilt.android.AndroidEntryPoint
+import dagger.hilt.android.HiltAndroidApp
 
 /**
  * @author 宾有为
@@ -21,13 +27,21 @@ import com.binyouwei.wanandroid_compose.ui.widget.TopBar
  * Social homepage: https://blog.csdn.net/baidu_41616022
  * @desc
  **/
+@AndroidEntryPoint
 class IntegralPage : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContent {
             Scaffold(topBar = {
                 TopBar(this, title = stringResource(id = R.string.points_details)) {
-                    IconButton(onClick = { /*TODO*/ }) {
+                    val pointsRule = stringResource(id = R.string.points_rule)
+                    IconButton(onClick = {
+                        ActivityMessenger.startActivity<WebPage>(
+                            this@IntegralPage, AppConstant.ExtraKey to WebData(
+                                pointsRule, "https://www.wanandroid.com/blog/show/2653"
+                            )
+                        )
+                    }) {
                         Icon(
                             painter = painterResource(id = R.drawable.ic_help_white_24dp),
                             contentDescription = stringResource(id = R.string.help)

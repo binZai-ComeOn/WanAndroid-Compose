@@ -15,6 +15,7 @@ import androidx.compose.ui.res.colorResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
+import com.binyouwei.common.utils.ActivityMessenger
 import com.binyouwei.wanandroid_compose.R
 import com.binyouwei.wanandroid_compose.ui.page.search.SearchPage
 import com.binyouwei.wanandroid_compose.ui.page.home.HomeViewModel
@@ -42,7 +43,7 @@ fun KnowledgeSystemPage(
                 coroutineScope = coroutineScope,
                 drawerState = drawerState,
                 elevation = false,
-                onClickSearch = { activity.startActivity(Intent(activity, SearchPage::class.java)) }
+                onClickSearch = { ActivityMessenger.startActivity<SearchPage>(activity) }
             )
         }) { pv ->
         pv.calculateBottomPadding()

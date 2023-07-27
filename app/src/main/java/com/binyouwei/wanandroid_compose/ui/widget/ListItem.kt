@@ -1,5 +1,6 @@
 package com.binyouwei.wanandroid_compose.ui.widget
 
+import android.text.Html
 import androidx.compose.foundation.BorderStroke
 import androidx.compose.foundation.background
 import androidx.compose.foundation.border
@@ -12,7 +13,6 @@ import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
-import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.Icon
 import androidx.compose.material.Surface
@@ -24,7 +24,6 @@ import androidx.compose.ui.res.colorResource
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.style.TextAlign
-import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.constraintlayout.compose.ConstraintLayout
@@ -105,7 +104,7 @@ fun ArticleItem(article: ArticleBean, onClick: (WebData) -> Unit) {
                 onClick(WebData(article.title, article.link))
             }
     ) {
-        Row() {
+        Row {
             if (article.top == "1") {
                 Text(
                     text = stringResource(id = R.string.topping), modifier = Modifier
@@ -158,6 +157,7 @@ fun ArticleItem(article: ArticleBean, onClick: (WebData) -> Unit) {
                 )
             }
         }
+        Html.fromHtml(article.title)
         Text(
             text = article.title,
             fontSize = 14.sp,
@@ -223,9 +223,8 @@ fun IntegralRankingItem(item: RankingListBean) {
             textAlign = TextAlign.Left,
             modifier = Modifier
                 .constrainAs(tv_number) {
-                    start.linkTo(parent.start)
+                    start.linkTo(parent.start, margin = 10.dp)
                     top.linkTo(parent.top)
-                    end.linkTo(tv_name.start)
                 }, fontSize = 14.sp
         )
         Text(
@@ -233,9 +232,8 @@ fun IntegralRankingItem(item: RankingListBean) {
             color = colorResource(id = R.color.item_title),
             modifier = Modifier
                 .constrainAs(tv_name) {
-                    start.linkTo(tv_number.end)
+                    start.linkTo(tv_number.end, margin = 20.dp)
                     top.linkTo(parent.top)
-                    end.linkTo(tv_integral.start)
                 }, fontSize = 14.sp
         )
         Text(

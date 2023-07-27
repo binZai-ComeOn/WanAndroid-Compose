@@ -8,7 +8,10 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.ui.res.stringResource
 import androidx.hilt.navigation.compose.hiltViewModel
+import com.binyouwei.common.utils.ActivityMessenger
 import com.binyouwei.wanandroid_compose.R
+import com.binyouwei.wanandroid_compose.data.constant.AppConstant
+import com.binyouwei.wanandroid_compose.ui.page.WebPage
 import com.binyouwei.wanandroid_compose.ui.page.search.SearchPage
 import com.binyouwei.wanandroid_compose.ui.page.home.HomeViewModel
 import com.binyouwei.wanandroid_compose.ui.widget.TopSearchMenuBar
@@ -24,13 +27,15 @@ fun ProjectPage(
     Scaffold(
         scaffoldState = scaffoldState,
         topBar = {
-        TopSearchMenuBar(
-            title = stringResource(id = R.string.projects),
-            coroutineScope = coroutineScope,
-            drawerState = drawerState,
-            onClickSearch = { activity.startActivity(Intent(activity, SearchPage::class.java)) }
-        )
-    }) {
+            TopSearchMenuBar(
+                title = stringResource(id = R.string.projects),
+                coroutineScope = coroutineScope,
+                drawerState = drawerState,
+                onClickSearch = {
+                    ActivityMessenger.startActivity<SearchPage>(activity)
+                }
+            )
+        }) {
         it.calculateBottomPadding()
     }
 }

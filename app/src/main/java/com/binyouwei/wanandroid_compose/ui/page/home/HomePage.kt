@@ -11,7 +11,6 @@ import androidx.compose.ui.res.stringResource
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.paging.compose.collectAsLazyPagingItems
 import androidx.paging.compose.itemsIndexed
-import com.binyouwei.common.bean.ArticleBean
 import com.binyouwei.common.utils.ActivityMessenger
 import com.binyouwei.wanandroid_compose.R
 import com.binyouwei.wanandroid_compose.data.constant.AppConstant
@@ -41,7 +40,7 @@ fun HomePage(
             title = stringResource(id = R.string.wan_android),
             coroutineScope = coroutineScope,
             drawerState = drawerState,
-            onClickSearch = { activity.startActivity(Intent(activity, SearchPage::class.java)) }
+            onClickSearch = { ActivityMessenger.startActivity<SearchPage>(activity) }
         )
     }) {
         it.calculateBottomPadding()

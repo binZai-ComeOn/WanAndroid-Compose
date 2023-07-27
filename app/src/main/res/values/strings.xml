@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">WanAndroid-Compose</string>
+    <string name="app_name">Android技术社区</string>
     <string name="wan_android">玩Android</string>
 
     <string name="home">首页</string>
@@ -22,6 +22,7 @@
     <string name="search_history">搜索历史</string>
 
     <string name="points_ranking">积分排行榜</string>
+    <string name="points_rule">积分规则</string>
     <string name="go_login">去登录</string>
     <string name="integral">我的积分</string>
     <string name="points_details">积分明细</string>

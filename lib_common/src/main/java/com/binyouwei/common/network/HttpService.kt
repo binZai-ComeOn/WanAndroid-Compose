@@ -49,4 +49,9 @@ interface HttpService {
      */
     @GET("/coin/rank/{page}/json")
     suspend fun getRankingList(@Path("page") page: Int): BaseResponse<ListWrapper<RankingListBean>>
+
+    @POST("/article/query/{page}/json")
+    @FormUrlEncoded
+    suspend fun queryArticles(@Path("page") page: Int,
+                         @Field("k") key: String): BaseResponse<ListWrapper<ArticleBean>>
 }
