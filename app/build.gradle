@@ -101,4 +101,8 @@ dependencies {
     implementation project.flowlayout
     // coil
     implementation project.coil
+    // paging分页库
+    implementation project.paging_runtime
+    testImplementation project.paging_common
+    implementation project.paging_compose
 }

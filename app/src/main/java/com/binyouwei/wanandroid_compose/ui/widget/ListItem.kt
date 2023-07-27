@@ -3,6 +3,7 @@ package com.binyouwei.wanandroid_compose.ui.widget
 import androidx.compose.foundation.BorderStroke
 import androidx.compose.foundation.background
 import androidx.compose.foundation.border
+import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
@@ -20,10 +21,8 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.colorResource
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
-import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import androidx.constraintlayout.compose.ConstraintLayout
 import com.binyouwei.common.bean.ArticleBean
 import com.binyouwei.common.utils.TimeUtil
 import com.binyouwei.wanandroid_compose.R
@@ -32,7 +31,6 @@ import com.binyouwei.wanandroid_compose.ui.page.CollectPage
 import com.binyouwei.wanandroid_compose.ui.page.IntegralPage
 import com.binyouwei.wanandroid_compose.ui.page.SharePage
 import com.binyouwei.wanandroid_compose.ui.page.seting.SetingPage
-import com.blankj.utilcode.util.TimeUtils
 
 var menuList = listOf(
     MenuBean(
@@ -111,17 +109,19 @@ fun ArticleItem(article: ArticleBean) {
                     color = colorResource(id = R.color.Red)
                 )
             }
-            Text(
-                text = stringResource(id = R.string.xin), modifier = Modifier
-                    .padding(end = 10.dp)
-                    .border(
-                        border = BorderStroke(0.5.dp, colorResource(id = R.color.Red)),
-                        shape = RoundedCornerShape(2.dp)
-                    )
-                    .padding(4.dp, 2.dp),
-                fontSize = 10.sp,
-                color = colorResource(id = R.color.Red)
-            )
+            if (article.fresh) {
+                Text(
+                    text = stringResource(id = R.string.xin), modifier = Modifier
+                        .padding(end = 10.dp)
+                        .border(
+                            border = BorderStroke(0.5.dp, colorResource(id = R.color.Red)),
+                            shape = RoundedCornerShape(2.dp)
+                        )
+                        .padding(4.dp, 2.dp),
+                    fontSize = 10.sp,
+                    color = colorResource(id = R.color.Red)
+                )
+            }
             if (article.tags.size > 0) {
                 Text(
                     text = article.tags[0].name, modifier = Modifier
@@ -136,46 +136,65 @@ fun ArticleItem(article: ArticleBean) {
                 )
             }
             Text(
-                text = article.author,
+                text = article.author.ifEmpty { article.shareUser },
                 fontSize = 12.sp,
                 color = colorResource(id = R.color.item_author)
             )
-            Text(
-                text = TimeUtil.timeOf(article.publishTime),
-                fontSize = 12.sp,
-                color = colorResource(id = R.color.item_date)
-            )
+            Row(horizontalArrangement = Arrangement.End, modifier = Modifier.fillMaxWidth()) {
+                Text(
+                    text = TimeUtil.timeOf(article.publishTime),
+                    fontSize = 12.sp,
+                    color = colorResource(id = R.color.item_date),
+                )
+            }
         }
         Text(
             text = article.title,
-            fontSize = 12.sp,
+            fontSize = 14.sp,
             modifier = Modifier
                 .fillMaxWidth()
                 .padding(top = 8.dp),
             color = colorResource(id = R.color.item_title),
         )
+        var tagValue = ""
         if (article.tags.isNotEmpty()) {
-            var tagValue = ""
             article.tags.forEachIndexed { index, tag ->
                 tagValue += tag.name
                 if (article.tags.size != (index + 1)) {
                     tagValue += " / "
                 }
             }
-            Text(
-                text = tagValue,
-                modifier = Modifier
-                    .padding(top = 8.dp),
-                color = colorResource(id = R.color.item_chapter),
-                fontSize = 10.sp,
-            )
+        } else {
+            tagValue = when {
+                article.superChapterName.isNotEmpty() and article.chapterName.isNotEmpty() -> {
+                    "${article.superChapterName} / ${article.chapterName}"
+                }
+
+                article.superChapterName.isNotEmpty() -> {
+                    article.superChapterName
+                }
+
+                article.chapterName.isNotEmpty() -> {
+                    article.chapterName
+                }
+
+                else -> ""
+            }
         }
-        Box(
+
+        Text(
+            text = tagValue,
             modifier = Modifier
-                .padding(top = 8.dp)
-                .fillMaxWidth()
-                .height(0.5.dp)
-                .background(color = colorResource(id = R.color.list_divider))
+                .padding(top = 8.dp),
+            color = colorResource(id = R.color.item_chapter),
+            fontSize = 10.sp,
         )
     }
+    Box(
+        modifier = Modifier
+            .padding(top = 8.dp)
+            .fillMaxWidth()
+            .height(0.5.dp)
+            .background(color = colorResource(id = R.color.list_divider))
+    )
 }
