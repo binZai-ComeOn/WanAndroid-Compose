@@ -6,6 +6,7 @@ import com.binyouwei.common.bean.ArticleBean
 import com.binyouwei.common.network.HttpResult
 import com.binyouwei.common.bean.HotKeyBean
 import com.binyouwei.common.bean.ListWrapper
+import com.binyouwei.common.bean.RankingListBean
 import kotlinx.coroutines.flow.Flow
 
 
@@ -16,4 +17,6 @@ interface HttpRepository {
     suspend fun getTopArticles(): Flow<HttpResult<MutableList<ArticleBean>>>
 
     fun getArticles(): Flow<PagingData<ArticleBean>>
+
+    fun getRankingList(): Flow<PagingData<RankingListBean>>
 }

@@ -3,6 +3,7 @@ package com.binyouwei.wanandroid_compose.ui.widget
 import androidx.compose.foundation.BorderStroke
 import androidx.compose.foundation.background
 import androidx.compose.foundation.border
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
@@ -11,6 +12,7 @@ import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
+import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.Icon
 import androidx.compose.material.Surface
@@ -21,14 +23,19 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.colorResource
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
+import androidx.compose.ui.text.style.TextAlign
+import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.constraintlayout.compose.ConstraintLayout
 import com.binyouwei.common.bean.ArticleBean
+import com.binyouwei.common.bean.RankingListBean
+import com.binyouwei.common.bean.WebData
 import com.binyouwei.common.utils.TimeUtil
 import com.binyouwei.wanandroid_compose.R
 import com.binyouwei.wanandroid_compose.data.bean.MenuBean
 import com.binyouwei.wanandroid_compose.ui.page.CollectPage
-import com.binyouwei.wanandroid_compose.ui.page.IntegralPage
+import com.binyouwei.wanandroid_compose.ui.page.integra.IntegralPage
 import com.binyouwei.wanandroid_compose.ui.page.SharePage
 import com.binyouwei.wanandroid_compose.ui.page.seting.SetingPage
 
@@ -88,12 +95,15 @@ fun MenuListItem(data: MenuBean) {
 }
 
 @Composable
-fun ArticleItem(article: ArticleBean) {
+fun ArticleItem(article: ArticleBean, onClick: (WebData) -> Unit) {
     Column(
         modifier = Modifier
-            .padding(start = 8.dp, top = 8.dp, end = 8.dp)
             .background(color = colorResource(id = R.color.White))
+            .padding(start = 8.dp, top = 8.dp, end = 8.dp)
             .fillMaxWidth()
+            .clickable {
+                onClick(WebData(article.title, article.link))
+            }
     ) {
         Row() {
             if (article.top == "1") {
@@ -197,4 +207,45 @@ fun ArticleItem(article: ArticleBean) {
             .height(0.5.dp)
             .background(color = colorResource(id = R.color.list_divider))
     )
+}
+
+@Composable
+fun IntegralRankingItem(item: RankingListBean) {
+    ConstraintLayout(
+        modifier = Modifier
+            .fillMaxWidth()
+            .padding(16.dp)
+    ) {
+        val (tv_number, tv_name, tv_integral) = createRefs()
+        Text(
+            text = item.rank,
+            color = colorResource(id = R.color.item_author),
+            textAlign = TextAlign.Left,
+            modifier = Modifier
+                .constrainAs(tv_number) {
+                    start.linkTo(parent.start)
+                    top.linkTo(parent.top)
+                    end.linkTo(tv_name.start)
+                }, fontSize = 14.sp
+        )
+        Text(
+            text = item.username,
+            color = colorResource(id = R.color.item_title),
+            modifier = Modifier
+                .constrainAs(tv_name) {
+                    start.linkTo(tv_number.end)
+                    top.linkTo(parent.top)
+                    end.linkTo(tv_integral.start)
+                }, fontSize = 14.sp
+        )
+        Text(
+            text = item.coinCount.toString(),
+            textAlign = TextAlign.Center,
+            color = colorResource(id = R.color.colorAccent),
+            modifier = Modifier.constrainAs(tv_integral) {
+                top.linkTo(parent.top)
+                end.linkTo(parent.end)
+            }, fontSize = 14.sp
+        )
+    }
 }

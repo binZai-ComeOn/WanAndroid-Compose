@@ -1,4 +1,4 @@
-package com.binyouwei.wanandroid_compose.ui.page
+package com.binyouwei.wanandroid_compose.ui.page.integra
 
 import android.os.Bundle
 import androidx.activity.ComponentActivity

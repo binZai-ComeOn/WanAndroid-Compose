@@ -31,19 +31,22 @@
             android:name=".ui.page.CollectPage"
             android:exported="true" />
         <activity
-            android:name=".ui.page.RankingListPage"
+            android:name=".ui.page.integra.RankingListPage"
             android:exported="true" />
         <activity
             android:name=".ui.page.seting.SetingPage"
             android:exported="true" />
         <activity
-            android:name=".ui.page.IntegralPage"
+            android:name=".ui.page.integra.IntegralPage"
             android:exported="true" />
         <activity
             android:name=".ui.page.search.SearchPage"
             android:exported="true" />
         <activity
             android:name=".ui.page.search.SearchResultPage"
+            android:exported="true" />
+        <activity
+            android:name=".ui.page.WebPage"
             android:exported="true" />
     </application>
 

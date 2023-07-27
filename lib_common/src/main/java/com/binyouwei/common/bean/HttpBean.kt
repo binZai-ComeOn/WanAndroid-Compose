@@ -1,6 +1,7 @@
 package com.binyouwei.common.bean
 
 import android.os.Parcelable
+import androidx.compose.runtime.Composable
 import kotlinx.parcelize.Parcelize
 
 data class ListWrapper<T>(
@@ -66,4 +67,20 @@ data class ArticleBean(
 data class Tag(
     val name: String,
     val url: String
+) : Parcelable
+
+@Parcelize
+data class WebData(
+    var title: String,
+    var url: String
+): Parcelable
+
+@Parcelize
+data class RankingListBean(
+    val coinCount: Int,
+    val level: Int,
+    val nickname: String,
+    val rank: String,
+    val userId: Int,
+    val username: String
 ) : Parcelable

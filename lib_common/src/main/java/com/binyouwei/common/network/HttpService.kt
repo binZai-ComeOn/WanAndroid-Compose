@@ -4,6 +4,7 @@ import com.binyouwei.common.bean.HotKeyBean
 import com.binyouwei.common.base.BaseResponse
 import com.binyouwei.common.bean.ArticleBean
 import com.binyouwei.common.bean.ListWrapper
+import com.binyouwei.common.bean.RankingListBean
 import retrofit2.http.*
 
 /**
@@ -35,9 +36,17 @@ interface HttpService {
 
     /**
      * 获取文章列表
-     * http://www.wanandroid.com/article/list/0/json
+     * https://www.wanandroid.com/article/list/0/json
      * @param pageNum
      */
-    @GET("article/list/{pageNum}/json")
-    suspend fun getArticles(@Path("pageNum") pageNum: Int): BaseResponse<ListWrapper<ArticleBean>>
+    @GET("/article/list/{page}/json")
+    suspend fun getArticles(@Path("page") page: Int): BaseResponse<ListWrapper<ArticleBean>>
+
+    /**
+     * 获取积分排行榜
+     * https://www.wanandroid.com/coin/rank/1/json
+     * @param page 页码 从1开始
+     */
+    @GET("/coin/rank/{page}/json")
+    suspend fun getRankingList(@Path("page") page: Int): BaseResponse<ListWrapper<RankingListBean>>
 }

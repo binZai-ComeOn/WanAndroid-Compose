@@ -2,6 +2,7 @@ package com.binyouwei.wanandroid_compose.ui.widget
 
 import android.app.Activity
 import androidx.activity.ComponentActivity
+import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.RowScope
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.text.KeyboardActions
@@ -23,8 +24,10 @@ import androidx.compose.ui.res.colorResource
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.input.ImeAction
+import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
 import com.binyouwei.wanandroid_compose.R
+import com.blankj.utilcode.util.LogUtils
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.launch
 
@@ -38,23 +41,34 @@ import kotlinx.coroutines.launch
 fun TopBar(
     activity: Activity,
     title: String,
+    progress: MutableState<Int>? = null,
     actions: @Composable RowScope.() -> Unit = {},
 ) {
-    TopAppBar(
-        title = { Text(title) },
-        backgroundColor = colorResource(id = R.color.colorPrimary),
-        navigationIcon = {
-            IconButton(onClick = {
-                activity.finish()
-            }) {
-                Icon(
-                    imageVector = Icons.Filled.ArrowBack,
-                    contentDescription = stringResource(id = R.string.back)
-                )
-            }
-        },
-        actions = actions
-    )
+    Column() {
+        TopAppBar(
+            title = { Text(title, maxLines = 1, overflow = TextOverflow.Ellipsis) },
+            backgroundColor = colorResource(id = R.color.colorPrimary),
+            navigationIcon = {
+                IconButton(onClick = {
+                    activity.finish()
+                }) {
+                    Icon(
+                        imageVector = Icons.Filled.ArrowBack,
+                        contentDescription = stringResource(id = R.string.back)
+                    )
+                }
+            },
+            actions = actions
+        )
+        if (progress != null && progress.value < 100) {
+            LinearProgressIndicator(
+                progress = progress.value.toFloat() / 100,
+                modifier = Modifier.fillMaxWidth(),
+                color = colorResource(id = R.color.colorPrimary),
+                backgroundColor = Color.Transparent
+            )
+        }
+    }
 }
 
 @Composable

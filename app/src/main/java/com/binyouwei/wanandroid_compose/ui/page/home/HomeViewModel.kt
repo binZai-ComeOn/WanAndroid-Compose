@@ -27,7 +27,7 @@ class HomeViewModel @Inject constructor(
     private val repository: HttpRepository
 ) : BaseViewModel() {
     val topArticles = mutableStateListOf<ArticleBean>()
-    val articles = MutableLiveData<Flow<PagingData<ArticleBean>>>(null)
+    val articles = MutableLiveData<Flow<PagingData<ArticleBean>>?>(null)
 
     fun getTopArticles() {
         async {
@@ -46,6 +46,7 @@ class HomeViewModel @Inject constructor(
     }
 
     fun getHomeData(){
+        articles.value = null
         articles.value = getArticles()
     }
 

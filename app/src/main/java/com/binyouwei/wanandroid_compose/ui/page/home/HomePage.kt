@@ -12,7 +12,10 @@ import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.paging.compose.collectAsLazyPagingItems
 import androidx.paging.compose.itemsIndexed
 import com.binyouwei.common.bean.ArticleBean
+import com.binyouwei.common.utils.ActivityMessenger
 import com.binyouwei.wanandroid_compose.R
+import com.binyouwei.wanandroid_compose.data.constant.AppConstant
+import com.binyouwei.wanandroid_compose.ui.page.WebPage
 import com.binyouwei.wanandroid_compose.ui.page.search.SearchPage
 import com.binyouwei.wanandroid_compose.ui.widget.ArticleItem
 import com.binyouwei.wanandroid_compose.ui.widget.TopSearchMenuBar
@@ -47,12 +50,16 @@ fun HomePage(
                 if (topArticles.isNotEmpty()) {
                     itemsIndexed(topArticles) { _, item ->
                         item.top = "1"
-                        ArticleItem(item)
+                        ArticleItem(item) {webData ->
+                            ActivityMessenger.startActivity<WebPage>(activity,AppConstant.ExtraKey to webData)
+                        }
                     }
                 }
                 if (pagingItems != null && pagingItems.itemCount > 0) {
                     itemsIndexed(pagingItems) { _, item ->
-                        ArticleItem(item!!)
+                        ArticleItem(item!!) { webData ->
+                            ActivityMessenger.startActivity<WebPage>(activity,AppConstant.ExtraKey to webData)
+                        }
                     }
                 }
             }
