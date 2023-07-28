@@ -3,6 +3,7 @@ package com.binyouwei.common.network
 import com.binyouwei.common.bean.HotKeyBean
 import com.binyouwei.common.base.BaseResponse
 import com.binyouwei.common.bean.ArticleBean
+import com.binyouwei.common.bean.KnowledgeSystemBean
 import com.binyouwei.common.bean.ListWrapper
 import com.binyouwei.common.bean.RankingListBean
 import retrofit2.http.*
@@ -73,5 +74,12 @@ interface HttpService {
      */
     @POST("/lg/user_article/add/json")
     @FormUrlEncoded
-    fun shareArticle(@FieldMap map: MutableMap<String, Any>): HttpResult<Any>
+    suspend fun shareArticle(@FieldMap map: MutableMap<String, Any>): HttpResult<Any>
+
+    /**
+     * 获取知识体系
+     * https://www.wanandroid.com/tree/json
+     */
+    @GET("/tree/json")
+    suspend fun getKnowledgeTree(): BaseResponse<MutableList<KnowledgeSystemBean>>
 }

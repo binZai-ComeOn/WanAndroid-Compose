@@ -6,6 +6,7 @@ import com.binyouwei.common.network.HttpService
 import com.binyouwei.common.bean.HotKeyBean
 import com.binyouwei.common.base.BaseResponse
 import com.binyouwei.common.bean.ArticleBean
+import com.binyouwei.common.bean.KnowledgeSystemBean
 import com.binyouwei.common.bean.ListWrapper
 import com.binyouwei.common.bean.RankingListBean
 import com.binyouwei.common.network.HttpResult
@@ -30,5 +31,7 @@ class HttpRepositoryImpl constructor(private val apiService: HttpService) : Base
     override fun shareArticle(): Flow<PagingData<ArticleBean>> {
         TODO("Not yet implemented")
     }
+
+    override fun getKnowledgeTree(): Flow<HttpResult<MutableList<KnowledgeSystemBean>>>  = flowable { apiService.getKnowledgeTree() }
 
 }

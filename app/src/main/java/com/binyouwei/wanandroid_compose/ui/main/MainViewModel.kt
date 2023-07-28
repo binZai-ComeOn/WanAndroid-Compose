@@ -7,8 +7,10 @@ import androidx.paging.PagingData
 import androidx.paging.cachedIn
 import com.binyouwei.common.base.BaseViewModel
 import com.binyouwei.common.bean.ArticleBean
+import com.binyouwei.common.bean.KnowledgeSystemBean
 import com.binyouwei.common.network.HttpResult
 import com.binyouwei.common.network.repository.HttpRepository
+import com.blankj.utilcode.util.LogUtils
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.collectLatest
@@ -24,6 +26,7 @@ class MainViewModel @Inject constructor(val repository: HttpRepository) : BaseVi
     val squares = MutableLiveData<Flow<PagingData<ArticleBean>>>(null)
     val topArticles = mutableStateListOf<ArticleBean>()
     val articles = MutableLiveData<Flow<PagingData<ArticleBean>>?>(null)
+    val knowledgeSystems = mutableStateListOf<KnowledgeSystemBean>()
 
     fun getSquareList() {
         squares.value = repository.getSquareList().cachedIn(viewModelScope)
@@ -37,6 +40,7 @@ class MainViewModel @Inject constructor(val repository: HttpRepository) : BaseVi
                         topArticles.clear()
                         topArticles.addAll(it.result)
                     }
+
                     is HttpResult.Error -> {
                         topArticles.clear()
                     }
@@ -45,10 +49,27 @@ class MainViewModel @Inject constructor(val repository: HttpRepository) : BaseVi
         }
     }
 
-    fun getHomeData(){
+    fun getHomeData() {
         articles.value = null
         articles.value = getArticles()
     }
 
     private fun getArticles() = repository.getArticles().cachedIn(viewModelScope)
+
+    fun getKnowledgeTree() {
+        async {
+            repository.getKnowledgeTree().collectLatest {response ->
+                when (response) {
+                    is HttpResult.Success -> {
+                        knowledgeSystems.clear()
+                        knowledgeSystems.addAll(response.result)
+                    }
+
+                    is HttpResult.Error -> {
+                        LogUtils.e("网络请求异常： ${response.exception.message}")
+                    }
+                }
+            }
+        }
+    }
 }
