@@ -54,4 +54,24 @@ interface HttpService {
     @FormUrlEncoded
     suspend fun queryArticles(@Path("page") page: Int,
                          @Field("k") key: String): BaseResponse<ListWrapper<ArticleBean>>
+
+    /**
+     * 广场列表数据
+     * https://wanandroid.com/user_article/list/0/json
+     * @param page 页码拼接在url上从0开始
+     */
+    @GET("/user_article/list/{page}/json")
+    suspend fun getSquareList(@Path("page") page: Int): BaseResponse<ListWrapper<ArticleBean>>
+
+
+    /**
+     * 分享文章
+     * https://www.wanandroid.com/lg/user_article/add/json
+     * @param map
+     *      title: 文章标题
+     *      link:  文章链接
+     */
+    @POST("/lg/user_article/add/json")
+    @FormUrlEncoded
+    fun shareArticle(@FieldMap map: MutableMap<String, Any>): HttpResult<Any>
 }

@@ -17,7 +17,7 @@ import androidx.navigation.NavDestination.Companion.hierarchy
 import androidx.navigation.NavGraph.Companion.findStartDestination
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.currentBackStackEntryAsState
-import com.binyouwei.wanandroid_compose.ui.route.BottomNavRoute
+import com.binyouwei.wanandroid_compose.route.BottomNavRoute
 
 /**
  * @author 宾有为

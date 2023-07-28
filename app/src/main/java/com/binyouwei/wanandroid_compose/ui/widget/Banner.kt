@@ -2,8 +2,6 @@ package com.binyouwei.wanandroid_compose.ui.widget
 
 import androidx.compose.runtime.Composable
 import androidx.navigation.NavHostController
-import com.binyouwei.wanandroid_compose.ui.page.project.ProjectPage
-import com.binyouwei.wanandroid_compose.ui.page.square.SquarePage
 import com.google.accompanist.pager.ExperimentalPagerApi
 import com.google.accompanist.pager.HorizontalPager
 import com.google.accompanist.pager.rememberPagerState

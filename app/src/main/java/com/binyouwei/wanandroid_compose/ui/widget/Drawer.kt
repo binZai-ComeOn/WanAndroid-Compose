@@ -23,7 +23,7 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.constraintlayout.compose.ConstraintLayout
 import com.binyouwei.wanandroid_compose.R
-import com.binyouwei.wanandroid_compose.ui.page.integra.RankingListPage
+import com.binyouwei.wanandroid_compose.ui.sidebar.rank_list.RankingListPage
 import com.blankj.utilcode.util.LogUtils
 
 /**

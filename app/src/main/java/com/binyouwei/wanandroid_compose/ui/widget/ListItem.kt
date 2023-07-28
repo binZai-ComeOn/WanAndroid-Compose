@@ -33,10 +33,10 @@ import com.binyouwei.common.bean.WebData
 import com.binyouwei.common.utils.TimeUtil
 import com.binyouwei.wanandroid_compose.R
 import com.binyouwei.wanandroid_compose.data.bean.MenuBean
-import com.binyouwei.wanandroid_compose.ui.page.CollectPage
-import com.binyouwei.wanandroid_compose.ui.page.integra.IntegralPage
-import com.binyouwei.wanandroid_compose.ui.page.SharePage
-import com.binyouwei.wanandroid_compose.ui.page.seting.SetingPage
+import com.binyouwei.wanandroid_compose.ui.sidebar.CollectPage
+import com.binyouwei.wanandroid_compose.ui.sidebar.integral.IntegralPage
+import com.binyouwei.wanandroid_compose.ui.sidebar.share.MySharePage
+import com.binyouwei.wanandroid_compose.ui.sidebar.seting.SetingPage
 
 var menuList = listOf(
     MenuBean(
@@ -50,7 +50,7 @@ var menuList = listOf(
     ),
     MenuBean(
         R.string.share,
-        R.drawable.ic_share_white_24dp, SharePage::class.java
+        R.drawable.ic_share_white_24dp, MySharePage::class.java
     ),
     MenuBean(R.string.theme, R.drawable.ic_night_24dp, null),
     MenuBean(

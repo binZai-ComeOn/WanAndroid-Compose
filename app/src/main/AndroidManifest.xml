@@ -15,7 +15,7 @@
         android:theme="@style/Theme.WanAndroidCompose"
         tools:targetApi="31">
         <activity
-            android:name=".ui.page.MainPage"
+            android:name=".ui.main.MainActivity"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -25,28 +25,31 @@
         </activity>
 
         <activity
-            android:name=".ui.page.SharePage"
+            android:name=".ui.sidebar.share.MySharePage"
             android:exported="true" />
         <activity
-            android:name=".ui.page.CollectPage"
+            android:name=".ui.sidebar.CollectPage"
             android:exported="true" />
         <activity
-            android:name=".ui.page.integra.RankingListPage"
+            android:name=".ui.sidebar.rank_list.RankingListPage"
             android:exported="true" />
         <activity
-            android:name=".ui.page.seting.SetingPage"
+            android:name=".ui.sidebar.seting.SetingPage"
             android:exported="true" />
         <activity
-            android:name=".ui.page.integra.IntegralPage"
+            android:name=".ui.sidebar.integral.IntegralPage"
             android:exported="true" />
         <activity
-            android:name=".ui.page.search.SearchPage"
+            android:name=".ui.main.search.SearchPage"
             android:exported="true" />
         <activity
-            android:name=".ui.page.search.SearchResultPage"
+            android:name=".ui.main.search.SearchResultPage"
             android:exported="true" />
         <activity
-            android:name=".ui.page.WebPage"
+            android:name=".ui.WebPage"
+            android:exported="true" />
+        <activity
+            android:name=".ui.sidebar.share.ShareArticlePage"
             android:exported="true" />
     </application>
 
