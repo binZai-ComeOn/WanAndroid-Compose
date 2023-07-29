@@ -30,6 +30,7 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.constraintlayout.compose.ConstraintLayout
+import androidx.constraintlayout.compose.Dimension
 import coil.compose.ImagePainter.State.Empty.painter
 import com.binyouwei.common.bean.ArticleBean
 import com.binyouwei.common.bean.KnowledgeSystemBean
@@ -260,7 +261,6 @@ fun KnowledgeSystemItem(
 ) {
     ConstraintLayout(
         modifier = Modifier
-            .fillMaxWidth()
             .background(color = colorResource(id = R.color.viewBackground))
             .clickable {
                 onClick(data)
@@ -272,10 +272,11 @@ fun KnowledgeSystemItem(
             color = colorResource(id = R.color.item_title),
             fontSize = 16.sp,
             modifier = Modifier
-                .width(360.dp)
                 .constrainAs(tv_text) {
                     top.linkTo(parent.top, margin = 10.dp)
                     start.linkTo(parent.start, margin = 10.dp)
+                    end.linkTo(ic_arrow.start, margin = 10.dp)
+                    width = Dimension.fillToConstraints
                 }, textAlign = TextAlign.Left
         )
         var text = ""
@@ -287,10 +288,11 @@ fun KnowledgeSystemItem(
             color = colorResource(id = R.color.item_desc),
             fontSize = 10.sp,
             modifier = Modifier
-                .width(360.dp)
                 .constrainAs(tv_second) {
                     top.linkTo(tv_text.bottom, margin = 10.dp)
-                    start.linkTo(parent.start, margin = 10.dp)
+                    start.linkTo(tv_text.start)
+                    end.linkTo(ic_arrow.start, margin = 10.dp)
+                    width = Dimension.fillToConstraints
                 }, textAlign = TextAlign.Left
         )
         Icon(painter = painterResource(id = R.drawable.ic_arrow_right_24dp),

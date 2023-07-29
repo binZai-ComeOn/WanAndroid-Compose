@@ -13,7 +13,7 @@ import androidx.paging.compose.itemsIndexed
 import com.binyouwei.common.utils.ActivityMessenger
 import com.binyouwei.wanandroid_compose.R
 import com.binyouwei.wanandroid_compose.data.constant.AppConstant
-import com.binyouwei.wanandroid_compose.ui.WebPage
+import com.binyouwei.wanandroid_compose.ui.WebActivity
 import com.binyouwei.wanandroid_compose.ui.main.MainViewModel
 import com.binyouwei.wanandroid_compose.ui.main.search.SearchPage
 import com.binyouwei.wanandroid_compose.ui.widget.ArticleItem
@@ -50,14 +50,14 @@ fun HomePage(
                     itemsIndexed(topArticles) { _, item ->
                         item.top = "1"
                         ArticleItem(item) {webData ->
-                            ActivityMessenger.startActivity<WebPage>(activity,AppConstant.ExtraKey to webData)
+                            ActivityMessenger.startActivity<WebActivity>(activity,AppConstant.ExtraKey to webData)
                         }
                     }
                 }
                 if (pagingItems != null && pagingItems.itemCount > 0) {
                     itemsIndexed(pagingItems) { _, item ->
                         ArticleItem(item!!) { webData ->
-                            ActivityMessenger.startActivity<WebPage>(activity,AppConstant.ExtraKey to webData)
+                            ActivityMessenger.startActivity<WebActivity>(activity,AppConstant.ExtraKey to webData)
                         }
                     }
                 }

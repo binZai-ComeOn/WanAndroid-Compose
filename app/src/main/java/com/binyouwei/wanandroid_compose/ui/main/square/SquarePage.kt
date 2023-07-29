@@ -17,7 +17,7 @@ import androidx.paging.compose.itemsIndexed
 import com.binyouwei.common.utils.ActivityMessenger
 import com.binyouwei.wanandroid_compose.R
 import com.binyouwei.wanandroid_compose.data.constant.AppConstant
-import com.binyouwei.wanandroid_compose.ui.WebPage
+import com.binyouwei.wanandroid_compose.ui.WebActivity
 import com.binyouwei.wanandroid_compose.ui.main.MainViewModel
 import com.binyouwei.wanandroid_compose.ui.sidebar.share.ShareArticlePage
 import com.binyouwei.wanandroid_compose.ui.widget.ArticleItem
@@ -65,7 +65,7 @@ fun SquarePage(
                 if (squares != null) {
                     itemsIndexed(squares) { _, item ->
                         ArticleItem(item!!) { webData ->
-                            ActivityMessenger.startActivity<WebPage>(
+                            ActivityMessenger.startActivity<WebActivity>(
                                 activity,
                                 AppConstant.ExtraKey to webData
                             )

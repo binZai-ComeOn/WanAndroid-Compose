@@ -25,13 +25,18 @@ class HttpRepositoryImpl constructor(private val apiService: HttpService) : Base
 
     override fun getRankingList() = pager(initKey = 1) { page -> apiService.getRankingList(page) }
 
-    override fun queryArticles(keywords : String) = pager { page -> apiService.queryArticles(page,keywords) }
+    override fun queryArticles(keywords: String) =
+        pager { page -> apiService.queryArticles(page, keywords) }
 
     override fun getSquareList() = pager { page -> apiService.getSquareList(page) }
     override fun shareArticle(): Flow<PagingData<ArticleBean>> {
         TODO("Not yet implemented")
     }
 
-    override fun getKnowledgeTree(): Flow<HttpResult<MutableList<KnowledgeSystemBean>>>  = flowable { apiService.getKnowledgeTree() }
+    override fun getKnowledgeTree(): Flow<HttpResult<MutableList<KnowledgeSystemBean>>> =
+        flowable { apiService.getKnowledgeTree() }
+
+    override fun getKnowledgeList(id: Int): Flow<PagingData<ArticleBean>> =
+        pager { page -> apiService.getKnowledgeList(page, id) }
 
 }

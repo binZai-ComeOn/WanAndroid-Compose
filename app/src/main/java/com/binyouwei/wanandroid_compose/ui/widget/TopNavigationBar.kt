@@ -41,6 +41,7 @@ import kotlinx.coroutines.launch
 fun TopBar(
     activity: Activity,
     title: String,
+    elevation: Boolean = true,
     progress: MutableState<Int>? = null,
     actions: @Composable RowScope.() -> Unit = {},
 ) {
@@ -58,7 +59,9 @@ fun TopBar(
                     )
                 }
             },
-            actions = actions
+            actions = actions,
+            // 是否显示TopAppBar底部阴影
+            elevation = if (elevation) AppBarDefaults.TopAppBarElevation else 0.dp
         )
         if (progress != null && progress.value < 100) {
             LinearProgressIndicator(

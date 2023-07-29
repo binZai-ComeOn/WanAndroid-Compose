@@ -27,6 +27,7 @@ class MainViewModel @Inject constructor(val repository: HttpRepository) : BaseVi
     val topArticles = mutableStateListOf<ArticleBean>()
     val articles = MutableLiveData<Flow<PagingData<ArticleBean>>?>(null)
     val knowledgeSystems = mutableStateListOf<KnowledgeSystemBean>()
+    val knowledges = MutableLiveData<Flow<PagingData<ArticleBean>>>(null)
 
     fun getSquareList() {
         squares.value = repository.getSquareList().cachedIn(viewModelScope)
@@ -58,7 +59,7 @@ class MainViewModel @Inject constructor(val repository: HttpRepository) : BaseVi
 
     fun getKnowledgeTree() {
         async {
-            repository.getKnowledgeTree().collectLatest {response ->
+            repository.getKnowledgeTree().collectLatest { response ->
                 when (response) {
                     is HttpResult.Success -> {
                         knowledgeSystems.clear()
@@ -71,5 +72,9 @@ class MainViewModel @Inject constructor(val repository: HttpRepository) : BaseVi
                 }
             }
         }
+    }
+
+    fun getKnowledgeList(id: Int) {
+        knowledges.value = repository.getKnowledgeList(id).cachedIn(viewModelScope)
     }
 }

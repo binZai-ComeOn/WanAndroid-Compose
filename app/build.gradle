@@ -75,6 +75,7 @@ dependencies {
 
     //hilt inject
     implementation project.dagger_hilt_android
+    implementation 'androidx.appcompat:appcompat:1.4.1'
     kapt project.kapt_dagger_hilt_compiler
     implementation project.hilt_navigation_compose
     // implementation project.hilt_lifecycle_viewmodel

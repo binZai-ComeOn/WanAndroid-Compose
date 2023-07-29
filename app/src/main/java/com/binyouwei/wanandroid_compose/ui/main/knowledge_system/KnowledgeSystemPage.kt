@@ -21,6 +21,7 @@ import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
 import com.binyouwei.common.utils.ActivityMessenger
 import com.binyouwei.wanandroid_compose.R
+import com.binyouwei.wanandroid_compose.data.constant.AppConstant
 import com.binyouwei.wanandroid_compose.ui.main.MainViewModel
 import com.binyouwei.wanandroid_compose.ui.main.search.SearchPage
 import com.binyouwei.wanandroid_compose.ui.widget.KnowledgeSystemItem
@@ -76,7 +77,12 @@ fun KnowledgeSystemPage(
                     LazyColumn {
                         if (knowledgeSystems.isNotEmpty()) {
                             itemsIndexed(knowledgeSystems) { _, item ->
-                                KnowledgeSystemItem(item)
+                                KnowledgeSystemItem(item) {
+                                    ActivityMessenger.startActivity<KnowledgeSystemActivity>(
+                                        activity,
+                                        AppConstant.ExtraKey to it
+                                    )
+                                }
                             }
                         }
                     }

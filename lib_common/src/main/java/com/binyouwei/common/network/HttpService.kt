@@ -82,4 +82,13 @@ interface HttpService {
      */
     @GET("/tree/json")
     suspend fun getKnowledgeTree(): BaseResponse<MutableList<KnowledgeSystemBean>>
+
+    /**
+     * 知识体系下的文章
+     * https://www.wanandroid.com/article/list/0/json?cid=168
+     * @param page
+     * @param cid
+     */
+    @GET("/article/list/{page}/json")
+    suspend fun getKnowledgeList(@Path("page") page: Int, @Query("cid") cid: Int): BaseResponse<ListWrapper<ArticleBean>>
 }

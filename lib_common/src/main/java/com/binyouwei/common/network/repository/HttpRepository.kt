@@ -28,4 +28,6 @@ interface HttpRepository {
     fun shareArticle(): Flow<PagingData<ArticleBean>>
 
     fun getKnowledgeTree(): Flow<HttpResult<MutableList<KnowledgeSystemBean>>>
+
+    fun getKnowledgeList(id: Int): Flow<PagingData<ArticleBean>>
 }

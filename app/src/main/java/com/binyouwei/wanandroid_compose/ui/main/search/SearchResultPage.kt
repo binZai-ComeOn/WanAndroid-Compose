@@ -13,7 +13,7 @@ import androidx.paging.compose.collectAsLazyPagingItems
 import androidx.paging.compose.itemsIndexed
 import com.binyouwei.common.utils.ActivityMessenger
 import com.binyouwei.wanandroid_compose.data.constant.AppConstant
-import com.binyouwei.wanandroid_compose.ui.WebPage
+import com.binyouwei.wanandroid_compose.ui.WebActivity
 import com.binyouwei.wanandroid_compose.ui.widget.ArticleItem
 import com.binyouwei.wanandroid_compose.ui.widget.TopBar
 import com.blankj.utilcode.util.LogUtils
@@ -53,7 +53,7 @@ class SearchResultPage : ComponentActivity() {
                         itemsIndexed(searchResult) { _, item ->
                             LogUtils.e(item?.title)
                             ArticleItem(item!!) { webData ->
-                                ActivityMessenger.startActivity<WebPage>(this@SearchResultPage,AppConstant.ExtraKey to webData)
+                                ActivityMessenger.startActivity<WebActivity>(this@SearchResultPage,AppConstant.ExtraKey to webData)
                             }
                         }
                     }

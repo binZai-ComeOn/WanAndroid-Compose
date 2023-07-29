@@ -12,7 +12,7 @@ import com.binyouwei.common.bean.WebData
 import com.binyouwei.common.utils.ActivityMessenger
 import com.binyouwei.wanandroid_compose.R
 import com.binyouwei.wanandroid_compose.data.constant.AppConstant
-import com.binyouwei.wanandroid_compose.ui.WebPage
+import com.binyouwei.wanandroid_compose.ui.WebActivity
 import com.binyouwei.wanandroid_compose.ui.widget.TopBar
 import dagger.hilt.android.AndroidEntryPoint
 
@@ -31,7 +31,7 @@ class IntegralPage : ComponentActivity() {
                 TopBar(this, title = stringResource(id = R.string.points_details)) {
                     val pointsRule = stringResource(id = R.string.points_rule)
                     IconButton(onClick = {
-                        ActivityMessenger.startActivity<WebPage>(
+                        ActivityMessenger.startActivity<WebActivity>(
                             this@IntegralPage, AppConstant.ExtraKey to WebData(
                                 pointsRule, "https://www.wanandroid.com/blog/show/2653"
                             )

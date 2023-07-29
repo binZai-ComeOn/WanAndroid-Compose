@@ -26,7 +26,7 @@ import androidx.compose.runtime.*
  * @date 2023/7/27 14:15
  * @purpose：
  **/
-class WebPage : ComponentActivity() {
+class WebActivity : ComponentActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
