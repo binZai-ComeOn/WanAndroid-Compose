@@ -26,6 +26,7 @@ import com.binyouwei.wanandroid_compose.ui.main.MainViewModel
 import com.binyouwei.wanandroid_compose.ui.main.search.SearchPage
 import com.binyouwei.wanandroid_compose.ui.widget.KnowledgeSystemItem
 import com.binyouwei.wanandroid_compose.ui.widget.TopSearchMenuBar
+import com.google.accompanist.pager.VerticalPager
 
 @Composable
 fun KnowledgeSystemPage(
@@ -89,7 +90,7 @@ fun KnowledgeSystemPage(
                 }
 
                 1 -> {
-                    Text(text = "1")
+
                 }
             }
         }

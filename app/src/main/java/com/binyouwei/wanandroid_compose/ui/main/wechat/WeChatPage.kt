@@ -4,7 +4,6 @@ import androidx.activity.ComponentActivity
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.lazy.LazyColumn
-import androidx.compose.foundation.lazy.itemsIndexed
 import androidx.compose.material.*
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.mutableStateOf
@@ -17,7 +16,6 @@ import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.paging.compose.collectAsLazyPagingItems
 import androidx.paging.compose.itemsIndexed
-import com.binyouwei.common.bean.WebData
 import com.binyouwei.common.utils.ActivityMessenger
 import com.binyouwei.wanandroid_compose.R
 import com.binyouwei.wanandroid_compose.data.constant.AppConstant
@@ -26,7 +24,6 @@ import com.binyouwei.wanandroid_compose.ui.main.MainViewModel
 import com.binyouwei.wanandroid_compose.ui.main.search.SearchPage
 import com.binyouwei.wanandroid_compose.ui.widget.ArticleItem
 import com.binyouwei.wanandroid_compose.ui.widget.TopSearchMenuBar
-import com.blankj.utilcode.util.LogUtils
 
 @Composable
 fun WeChatPage(
@@ -36,7 +33,7 @@ fun WeChatPage(
 ) {
     viewModel.getWXChapters()
     val tabs = remember {
-        viewModel.wxChapters
+        viewModel.wxChapterTabs
     }
     val coroutineScope = rememberCoroutineScope()
     val drawerState = scaffoldState.drawerState

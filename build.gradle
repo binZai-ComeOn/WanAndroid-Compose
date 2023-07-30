@@ -55,7 +55,9 @@ buildscript {
         constraintlayout = "androidx.constraintlayout:constraintlayout-compose:1.0.1"
         // flowlayout谷歌已弃用，详情请看:https://github.com/google/accompanist/tree/main/flowlayout
         flowlayout = "com.google.accompanist:accompanist-flowlayout:0.28.0"
+        // coil图片加载
         coil = "io.coil-kt:coil:2.4.0"
+        coil_compose = "io.coil-kt:coil-compose:2.4.0"
         // toaster
         toaster = "com.github.getActivity:Toaster:12.2"
 

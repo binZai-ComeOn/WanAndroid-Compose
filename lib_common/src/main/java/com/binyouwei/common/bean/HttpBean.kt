@@ -100,7 +100,7 @@ data class KnowledgeSystemBean(
 ): Parcelable
 
 @Parcelize
-data class WeChatTabBean(
+data class TabBean(
     val author: String,
     val courseId: Int,
     val cover: String,

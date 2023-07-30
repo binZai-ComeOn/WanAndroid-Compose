@@ -27,7 +27,12 @@ interface HttpRepository {
 
     fun getKnowledgeList(id: Int): Flow<PagingData<ArticleBean>>
 
-    suspend fun getWXChapters(): Flow<HttpResult<MutableList<WeChatTabBean>>>
+    suspend fun getWXChapters(): Flow<HttpResult<MutableList<TabBean>>>
 
     fun getWXChapterArticles(id:Int): Flow<PagingData<ArticleBean>>
+
+
+    suspend fun getProjectTabs(): Flow<HttpResult<MutableList<TabBean>>>
+
+    fun getProjectTabArticles(id:Int): Flow<PagingData<ArticleBean>>
 }

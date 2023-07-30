@@ -8,7 +8,7 @@ import androidx.paging.cachedIn
 import com.binyouwei.common.base.BaseViewModel
 import com.binyouwei.common.bean.ArticleBean
 import com.binyouwei.common.bean.KnowledgeSystemBean
-import com.binyouwei.common.bean.WeChatTabBean
+import com.binyouwei.common.bean.TabBean
 import com.binyouwei.common.network.HttpResult
 import com.binyouwei.common.network.repository.HttpRepository
 import com.blankj.utilcode.util.LogUtils
@@ -29,8 +29,10 @@ class MainViewModel @Inject constructor(val repository: HttpRepository) : BaseVi
     val articles = MutableLiveData<Flow<PagingData<ArticleBean>>?>(null)
     val knowledgeSystems = mutableStateListOf<KnowledgeSystemBean>()
     val knowledges = MutableLiveData<Flow<PagingData<ArticleBean>>>(null)
-    val wxChapters = MutableLiveData<MutableList<WeChatTabBean>>()
+    val wxChapterTabs = MutableLiveData<MutableList<TabBean>>()
     val wxChapterArticles = MutableLiveData<Flow<PagingData<ArticleBean>>?>(null)
+    val projectTabs = MutableLiveData<MutableList<TabBean>>()
+    val projectTabArticles = MutableLiveData<Flow<PagingData<ArticleBean>>?>(null)
 
     fun getSquareList() {
         squares.value = repository.getSquareList().cachedIn(viewModelScope)
@@ -86,7 +88,7 @@ class MainViewModel @Inject constructor(val repository: HttpRepository) : BaseVi
             repository.getWXChapters().collectLatest { response ->
                 when (response) {
                     is HttpResult.Success -> {
-                        wxChapters.value = response.result!!
+                        wxChapterTabs.value = response.result!!
                     }
 
                     is HttpResult.Error -> {
@@ -99,5 +101,25 @@ class MainViewModel @Inject constructor(val repository: HttpRepository) : BaseVi
 
     fun getWXChapterArticles(id: Int) {
         wxChapterArticles.value = repository.getWXChapterArticles(id).cachedIn(viewModelScope)
+    }
+
+    fun getProjectTabs() {
+        async {
+            repository.getProjectTabs().collectLatest { response ->
+                when (response) {
+                    is HttpResult.Success -> {
+                        projectTabs.value = response.result!!
+                    }
+
+                    is HttpResult.Error -> {
+                        LogUtils.e("网络请求异常： ${response.exception.message}")
+                    }
+                }
+            }
+        }
+    }
+
+    fun getProjectTabArticles(id: Int) {
+        projectTabArticles.value = repository.getWXChapterArticles(id).cachedIn(viewModelScope)
     }
 }

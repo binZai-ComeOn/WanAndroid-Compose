@@ -1,10 +1,7 @@
 package com.binyouwei.wanandroid_compose.ui.widget
 
 import android.text.Html
-import androidx.compose.foundation.BorderStroke
-import androidx.compose.foundation.background
-import androidx.compose.foundation.border
-import androidx.compose.foundation.clickable
+import androidx.compose.foundation.*
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
@@ -14,7 +11,6 @@ import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
-import androidx.compose.foundation.layout.wrapContentWidth
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.Icon
 import androidx.compose.material.Surface
@@ -26,12 +22,13 @@ import androidx.compose.ui.res.colorResource
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.style.TextAlign
-import androidx.compose.ui.tooling.preview.Preview
+import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.constraintlayout.compose.ConstraintLayout
 import androidx.constraintlayout.compose.Dimension
-import coil.compose.ImagePainter.State.Empty.painter
+import coil.compose.AsyncImage
+import coil.compose.rememberImagePainter
 import com.binyouwei.common.bean.ArticleBean
 import com.binyouwei.common.bean.KnowledgeSystemBean
 import com.binyouwei.common.bean.RankingListBean
@@ -43,6 +40,7 @@ import com.binyouwei.wanandroid_compose.ui.sidebar.CollectPage
 import com.binyouwei.wanandroid_compose.ui.sidebar.integral.IntegralPage
 import com.binyouwei.wanandroid_compose.ui.sidebar.share.MySharePage
 import com.binyouwei.wanandroid_compose.ui.sidebar.seting.SetingPage
+import com.blankj.utilcode.util.LogUtils
 
 var menuList = listOf(
     MenuBean(
@@ -315,6 +313,80 @@ fun KnowledgeSystemItem(
                     start.linkTo(parent.start)
                     end.linkTo(parent.end)
                     top.linkTo(tv_second.bottom, margin = 10.dp)
+                }
+        )
+    }
+}
+
+@Composable
+fun ProjectItem(bean: ArticleBean, onClick: (WebData) -> Unit) {
+    ConstraintLayout(
+        modifier = Modifier
+            .fillMaxWidth()
+            .padding(10.dp)
+            .height(180.dp)
+            .clickable { onClick(WebData(bean.title, bean.link)) }
+    ) {
+        val (tv_image, tv_title, tv_desc, tv_date, tv_author, divider) = createRefs()
+        AsyncImage(
+            model = bean.envelopePic,
+            contentDescription = "",
+            modifier = Modifier
+                .constrainAs(tv_image) {
+                    top.linkTo(parent.top)
+                    start.linkTo(parent.start)
+                    bottom.linkTo(parent.bottom)
+                    height = Dimension.fillToConstraints
+                }
+                .width(110.dp)
+        )
+        Text(
+            text = bean.title,
+            fontSize = 16.sp,
+            color = colorResource(id = R.color.item_title),
+            modifier = Modifier.constrainAs(tv_title) {
+                start.linkTo(tv_image.end, margin = 8.dp)
+                top.linkTo(parent.top)
+                end.linkTo(parent.end)
+                width = Dimension.fillToConstraints
+            })
+        Text(text = bean.desc,
+            fontSize = 10.sp,
+            color = colorResource(id = R.color.item_desc),
+            modifier = Modifier.constrainAs(tv_desc) {
+                start.linkTo(tv_image.end, margin = 8.dp)
+                top.linkTo(tv_title.bottom, margin = 10.dp)
+                end.linkTo(parent.end)
+                bottom.linkTo(tv_author.top, 10.dp)
+                width = Dimension.fillToConstraints
+                height = Dimension.fillToConstraints
+            }, overflow = TextOverflow.Ellipsis
+        )
+        Text(
+            text = bean.author,
+            fontSize = 12.sp,
+            color = colorResource(id = R.color.item_author),
+            modifier = Modifier.constrainAs(tv_author) {
+                bottom.linkTo(parent.bottom)
+                start.linkTo(tv_image.end, margin = 8.dp)
+            })
+        Text(
+            text = TimeUtil.timeOf(bean.publishTime),
+            fontSize = 12.sp,
+            color = colorResource(id = R.color.item_date),
+            modifier = Modifier.constrainAs(tv_date) {
+                bottom.linkTo(parent.bottom)
+                end.linkTo(parent.end)
+            })
+        Box(
+            modifier = Modifier
+                .fillMaxWidth()
+                .height(0.5.dp)
+                .background(color = colorResource(id = R.color.list_divider))
+                .constrainAs(divider) {
+                    start.linkTo(parent.start)
+                    end.linkTo(parent.end)
+                    top.linkTo(parent.bottom, margin = 10.dp)
                 }
         )
     }

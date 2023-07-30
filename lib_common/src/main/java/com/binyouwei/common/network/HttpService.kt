@@ -98,7 +98,7 @@ interface HttpService {
      * https://wanandroid.com/wxarticle/chapters/json
      */
     @GET("/wxarticle/chapters/json")
-    suspend fun getWXChapters(): BaseResponse<MutableList<WeChatTabBean>>
+    suspend fun getWXChapters(): BaseResponse<MutableList<TabBean>>
 
     /**
      * 获取公众号列表
@@ -108,5 +108,22 @@ interface HttpService {
     suspend fun getWXChapterArticles(
         @Path("page") page: Int,
         @Path("id") id: Int
+    ): BaseResponse<ListWrapper<ArticleBean>>
+
+    /**
+     * 获取公众号列表
+     * https://www.wanandroid.com/project/tree/json
+     */
+    @GET("/project/tree/json")
+    suspend fun getProjectTabs(): BaseResponse<MutableList<TabBean>>
+
+    /**
+     * 获取公众号列表
+     * https://www.wanandroid.com/project/list/1/json?cid=294
+     */
+    @GET("/project/list/1/json")
+    suspend fun getProjectTabArticles(
+        @Path("page") page: Int,
+        @Query("cid") cid: Int
     ): BaseResponse<ListWrapper<ArticleBean>>
 }

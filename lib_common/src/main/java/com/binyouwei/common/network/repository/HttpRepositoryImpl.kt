@@ -35,12 +35,20 @@ class HttpRepositoryImpl constructor(private val apiService: HttpService) : Base
     override fun getKnowledgeList(id: Int): Flow<PagingData<ArticleBean>> =
         pager { page -> apiService.getKnowledgeList(page, id) }
 
-    override suspend fun getWXChapters(): Flow<HttpResult<MutableList<WeChatTabBean>>> = flowable {
+    override suspend fun getWXChapters(): Flow<HttpResult<MutableList<TabBean>>> = flowable {
         apiService.getWXChapters()
     }
 
-    override fun getWXChapterArticles(id: Int): Flow<PagingData<ArticleBean>> = pager(initKey = 1) {page ->
-        apiService.getWXChapterArticles(page,id)
+    override fun getWXChapterArticles(id: Int): Flow<PagingData<ArticleBean>> =
+        pager(initKey = 1) { page ->
+            apiService.getWXChapterArticles(page, id)
+        }
+
+    override suspend fun getProjectTabs(): Flow<HttpResult<MutableList<TabBean>>> = flowable {
+        apiService.getProjectTabs()
     }
+
+    override fun getProjectTabArticles(id: Int): Flow<PagingData<ArticleBean>> =
+        pager { page -> apiService.getProjectTabArticles(page, id) }
 
 }
