@@ -1,11 +1,7 @@
 package com.binyouwei.common.network
 
-import com.binyouwei.common.bean.HotKeyBean
 import com.binyouwei.common.base.BaseResponse
-import com.binyouwei.common.bean.ArticleBean
-import com.binyouwei.common.bean.KnowledgeSystemBean
-import com.binyouwei.common.bean.ListWrapper
-import com.binyouwei.common.bean.RankingListBean
+import com.binyouwei.common.bean.*
 import retrofit2.http.*
 
 /**
@@ -53,8 +49,10 @@ interface HttpService {
 
     @POST("/article/query/{page}/json")
     @FormUrlEncoded
-    suspend fun queryArticles(@Path("page") page: Int,
-                         @Field("k") key: String): BaseResponse<ListWrapper<ArticleBean>>
+    suspend fun queryArticles(
+        @Path("page") page: Int,
+        @Field("k") key: String
+    ): BaseResponse<ListWrapper<ArticleBean>>
 
     /**
      * 广场列表数据
@@ -90,5 +88,25 @@ interface HttpService {
      * @param cid
      */
     @GET("/article/list/{page}/json")
-    suspend fun getKnowledgeList(@Path("page") page: Int, @Query("cid") cid: Int): BaseResponse<ListWrapper<ArticleBean>>
+    suspend fun getKnowledgeList(
+        @Path("page") page: Int,
+        @Query("cid") cid: Int
+    ): BaseResponse<ListWrapper<ArticleBean>>
+
+    /**
+     * 获取公众号列表
+     * https://wanandroid.com/wxarticle/chapters/json
+     */
+    @GET("/wxarticle/chapters/json")
+    suspend fun getWXChapters(): BaseResponse<MutableList<WeChatTabBean>>
+
+    /**
+     * 获取公众号列表
+     * https://wanandroid.com/wxarticle/list/408/1/json
+     */
+    @GET("/wxarticle/list/{id}/{page}/json")
+    suspend fun getWXChapterArticles(
+        @Path("page") page: Int,
+        @Path("id") id: Int
+    ): BaseResponse<ListWrapper<ArticleBean>>
 }

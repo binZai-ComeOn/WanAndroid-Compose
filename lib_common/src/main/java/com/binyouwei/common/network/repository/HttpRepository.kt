@@ -2,12 +2,8 @@ package com.binyouwei.common.network.repository
 
 import androidx.paging.PagingData
 import com.binyouwei.common.base.BaseResponse
-import com.binyouwei.common.bean.ArticleBean
+import com.binyouwei.common.bean.*
 import com.binyouwei.common.network.HttpResult
-import com.binyouwei.common.bean.HotKeyBean
-import com.binyouwei.common.bean.KnowledgeSystemBean
-import com.binyouwei.common.bean.ListWrapper
-import com.binyouwei.common.bean.RankingListBean
 import kotlinx.coroutines.flow.Flow
 
 
@@ -30,4 +26,8 @@ interface HttpRepository {
     fun getKnowledgeTree(): Flow<HttpResult<MutableList<KnowledgeSystemBean>>>
 
     fun getKnowledgeList(id: Int): Flow<PagingData<ArticleBean>>
+
+    suspend fun getWXChapters(): Flow<HttpResult<MutableList<WeChatTabBean>>>
+
+    fun getWXChapterArticles(id:Int): Flow<PagingData<ArticleBean>>
 }
