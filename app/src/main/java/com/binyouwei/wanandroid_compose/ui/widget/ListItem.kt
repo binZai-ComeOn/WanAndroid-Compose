@@ -53,7 +53,7 @@ var menuList = listOf(
         CollectPage::class.java
     ),
     MenuBean(
-        R.string.share,
+        R.string.my_share,
         R.drawable.ic_share_white_24dp, MySharePage::class.java
     ),
     MenuBean(R.string.theme, R.drawable.ic_night_24dp, null),
@@ -161,7 +161,6 @@ fun ArticleItem(article: ArticleBean, onClick: (WebData) -> Unit) {
                 )
             }
         }
-        Html.fromHtml(article.title)
         Text(
             text = article.title,
             fontSize = 14.sp,

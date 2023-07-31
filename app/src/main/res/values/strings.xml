@@ -16,6 +16,11 @@
     <string name="clear_up">清除</string>
     <string name="help">帮助</string>
     <string name="topping">置顶</string>
+    <string name="login">登录</string>
+    <string name="account">账号</string>
+    <string name="password">密码</string>
+    <string name="delete">删除</string>
+    <string name="next">下一步</string>
     <string name="xin">新</string>
     <string name="arrow">小箭头</string>
 
@@ -25,6 +30,7 @@
     <string name="points_ranking">积分排行榜</string>
     <string name="points_rule">积分规则</string>
     <string name="go_login">去登录</string>
+    <string name="go_register">去注册</string>
     <string name="integral">我的积分</string>
     <string name="points_details">积分明细</string>
     <string name="collect">我的收藏</string>
@@ -35,6 +41,8 @@
 
     <string name="is_logout">确定要退出登录吗？</string>
     <string name="please_input_keywords">请输入关键字</string>
+    <string name="please_input_account">请输入用户名</string>
+    <string name="please_input_password">请输入密码</string>
 
     <string name="share_article_title">文章标题</string>
     <string name="share_article_title_tip">100字以内</string>
@@ -57,4 +65,13 @@
     <string name="nav_grade">等级:</string>
     <string name="nav_rank">排名:</string>
     <string name="nav_line_2" translatable="false">--</string>
+    <string name="title_activity_login">LoginActivity</string>
+    <string name="prompt_email">Email</string>
+    <string name="prompt_password">Password</string>
+    <string name="action_sign_in">Sign in or register</string>
+    <string name="action_sign_in_short">Sign in</string>
+    <string name="welcome">"Welcome !"</string>
+    <string name="invalid_username">Not a valid username</string>
+    <string name="invalid_password">Password must be >5 characters</string>
+    <string name="login_failed">"Login failed"</string>
 </resources>

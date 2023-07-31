@@ -22,8 +22,10 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.constraintlayout.compose.ConstraintLayout
+import com.binyouwei.common.utils.ActivityMessenger
 import com.binyouwei.wanandroid_compose.R
-import com.binyouwei.wanandroid_compose.ui.sidebar.rank_list.RankingListPage
+import com.binyouwei.wanandroid_compose.ui.account.LoginActivity
+import com.binyouwei.wanandroid_compose.ui.sidebar.rank_list.RankingListActivity
 import com.blankj.utilcode.util.LogUtils
 
 /**
@@ -71,16 +73,14 @@ fun DrawerHeadComponent(activity: ComponentActivity) {
                     id = R.color.colorPrimary
                 )
             )
-            .padding(8.dp, 18.dp, 8.dp, 6.dp)
+            .padding(8.dp, 8.dp, 8.dp, 8.dp)
+            .clickable {
+                ActivityMessenger.startActivity<LoginActivity>(activity)
+            }
     ) {
         val (pointsRanking, avatar, name, row) = createRefs()
         IconButton(onClick = {
-            activity.startActivity(
-                Intent(
-                    activity,
-                    RankingListPage::class.java
-                )
-            )
+            ActivityMessenger.startActivity<RankingListActivity>(activity)
         }, modifier = Modifier
             .constrainAs(pointsRanking) {
                 top.linkTo(parent.top)

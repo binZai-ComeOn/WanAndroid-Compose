@@ -24,7 +24,7 @@ import dagger.hilt.android.AndroidEntryPoint
  * @desc
  **/
 @AndroidEntryPoint
-class RankingListPage : ComponentActivity() {
+class RankingListActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContent {

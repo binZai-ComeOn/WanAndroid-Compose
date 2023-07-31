@@ -30,6 +30,7 @@ import dagger.hilt.android.AndroidEntryPoint
 import com.binyouwei.wanandroid_compose.ui.WebActivity
 import com.blankj.utilcode.util.LogUtils
 
+@Suppress("DEPRECATION")
 @AndroidEntryPoint
 class KnowledgeSystemActivity : ComponentActivity() {
 

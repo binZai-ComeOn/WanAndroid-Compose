@@ -15,6 +15,10 @@
         android:theme="@style/Theme.WanAndroidCompose"
         tools:targetApi="31">
         <activity
+            android:name=".ui.account.LoginActivity"
+            android:exported="false"
+            android:label="@string/title_activity_login" />
+        <activity
             android:name=".ui.main.knowledge_system.KnowledgeSystemActivity"
             android:exported="false" />
         <activity
@@ -33,7 +37,7 @@
             android:name=".ui.sidebar.CollectPage"
             android:exported="true" />
         <activity
-            android:name=".ui.sidebar.rank_list.RankingListPage"
+            android:name=".ui.sidebar.rank_list.RankingListActivity"
             android:exported="true" />
         <activity
             android:name=".ui.sidebar.seting.SetingPage"

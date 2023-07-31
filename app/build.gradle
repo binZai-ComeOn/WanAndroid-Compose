@@ -41,6 +41,7 @@ android {
     }
     buildFeatures {
         compose true
+        viewBinding true
     }
     composeOptions {
         kotlinCompilerExtensionVersion project.kotlinCompilerExtensionVersion
@@ -76,6 +77,9 @@ dependencies {
     //hilt inject
     implementation project.dagger_hilt_android
     implementation 'androidx.appcompat:appcompat:1.4.1'
+    implementation 'androidx.annotation:annotation:1.3.0'
+    implementation 'androidx.constraintlayout:constraintlayout:2.1.3'
+    implementation 'androidx.lifecycle:lifecycle-livedata-ktx:2.4.1'
     kapt project.kapt_dagger_hilt_compiler
     implementation project.hilt_navigation_compose
     // implementation project.hilt_lifecycle_viewmodel
