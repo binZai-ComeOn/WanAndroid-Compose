@@ -26,6 +26,7 @@
 
     <string name="hot_search">热门搜索</string>
     <string name="search_history">搜索历史</string>
+    <string name="user_login">用户登录</string>
 
     <string name="points_ranking">积分排行榜</string>
     <string name="points_rule">积分规则</string>
@@ -40,6 +41,7 @@
     <string name="logout">退出登录</string>
 
     <string name="is_logout">确定要退出登录吗？</string>
+    <string name="login_tip">请使用WanAndroid账号登录！</string>
     <string name="please_input_keywords">请输入关键字</string>
     <string name="please_input_account">请输入用户名</string>
     <string name="please_input_password">请输入密码</string>

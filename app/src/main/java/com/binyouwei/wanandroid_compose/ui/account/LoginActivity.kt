@@ -4,17 +4,21 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import androidx.activity.compose.setContent
 import androidx.compose.foundation.background
+import androidx.compose.foundation.interaction.MutableInteractionSource
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.*
 import androidx.compose.material.MaterialTheme.colors
+import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.Add
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
+import androidx.compose.ui.focus.onFocusChanged
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.colorResource
 import androidx.compose.ui.res.painterResource
@@ -23,8 +27,11 @@ import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import com.binyouwei.common.utils.ActivityMessenger
 import com.binyouwei.wanandroid_compose.R
+import com.binyouwei.wanandroid_compose.ui.sidebar.share.ShareArticlePage
 import com.binyouwei.wanandroid_compose.ui.widget.InputText
+import com.binyouwei.wanandroid_compose.ui.widget.TopBar
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
@@ -38,13 +45,6 @@ class LoginActivity : AppCompatActivity() {
 
     @Composable
     private fun setContentLayout() {
-        login()
-    }
-
-    @Preview
-    @Composable
-    fun login() {
-
         val account = remember {
             mutableStateOf("")
         }
@@ -52,65 +52,41 @@ class LoginActivity : AppCompatActivity() {
         val password = remember {
             mutableStateOf("")
         }
-        Column(
-            modifier = Modifier.fillMaxWidth(),
-            horizontalAlignment = Alignment.CenterHorizontally,
-            verticalArrangement = Arrangement.Center
-        ) {
-            Row(
-                modifier = Modifier.fillMaxWidth(),
-                horizontalArrangement = Arrangement.Center,
-                verticalAlignment = Alignment.CenterVertically
+        val remember = remember { MutableInteractionSource() }
+        val remember2 = remember { MutableInteractionSource() }
+        Scaffold(topBar = {
+            TopBar(this, title = stringResource(id = R.string.login))
+        }) {
+            it.calculateBottomPadding()
+            Column(
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .padding(start = 24.dp, top = 40.dp, end = 24.dp)
             ) {
+                Text(text = stringResource(id = R.string.user_login), fontSize = 18.sp)
                 Text(
-                    text = stringResource(id = R.string.go_register),
-                    color = colorResource(id = R.color.Light_Blue),
-                    fontSize = 15.sp,
-                    modifier = Modifier.padding(8.dp, 0.dp)
+                    text = stringResource(id = R.string.login_tip),
+                    fontSize = 14.sp,
+                    modifier = Modifier.padding(top = 6.dp)
                 )
-                Icon(
-                    painter = painterResource(id = R.mipmap.ic_next),
-                    contentDescription = stringResource(
-                        id = R.string.next
-                    ), modifier = Modifier.size(15.dp),
-                    tint = colorResource(id = R.color.Light_Blue)
-                )
-            }
-            InputText(
-                text = account,
-                placeholder = stringResource(id = R.string.please_input_account),
-                leadingIcon = painterResource(id = R.mipmap.ic_account_normal),
-                modifier = Modifier
-                    .padding(top = 100.dp)
-                    .background(colorResource(id = R.color.White))
-            )
-            InputText(
-                text = password,
-                placeholder = stringResource(id = R.string.please_input_password),
-                leadingIcon = painterResource(id = R.mipmap.ic_password_normal),
-                keyboardType = KeyboardType.Password,
-                modifier = Modifier
-                    .padding(top = 10.dp)
-                    .background(color = Color.White)
-            )
-            Button(
-                onClick = { /*TODO*/ },
-                modifier = Modifier
-                    .padding(top = 30.dp)
-                    .width(200.dp)
-                    .height(44.dp)
-                    .clip(shape = CircleShape),
-                colors = ButtonDefaults.buttonColors(
-                    backgroundColor = colorResource(id = R.color.Light_Blue),
-                    contentColor = colorResource(
-                        id = R.color.White
-                    )
-                )
-            ) {
-                Text(
-                    text = stringResource(id = R.string.login),
+                InputText(
+                    text = account,
+                    placeholder = stringResource(id = R.string.please_input_account),
+                    leadingIcon = painterResource(id = R.mipmap.ic_account_normal),
                     modifier = Modifier
-                        .background(colorResource(id = R.color.Light_Blue))
+                        .padding(top = 30.dp)
+                        .background(colorResource(id = R.color.White)),
+                    interactionSource = remember2
+                )
+                InputText(
+                    text = password,
+                    placeholder = stringResource(id = R.string.please_input_password),
+                    leadingIcon = painterResource(id = R.mipmap.ic_password_normal),
+                    keyboardType = KeyboardType.Password,
+                    modifier = Modifier
+                        .padding(0.dp, 8.dp)
+                        .background(color = Color.White),
+                    interactionSource = remember
                 )
             }
         }
