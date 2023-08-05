@@ -6,4 +6,7 @@ object RouteName {
     const val WeChat = "WeChat"
     const val SYSTEM = "SYSTEM"
     const val PROJECTS = "PROJECTS"
+
+    const val LOGIN = "LOGIN"
+    const val REGISTER = "REGISTER"
 }

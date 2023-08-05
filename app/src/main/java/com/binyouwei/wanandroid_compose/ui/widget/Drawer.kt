@@ -24,7 +24,7 @@ import androidx.compose.ui.unit.sp
 import androidx.constraintlayout.compose.ConstraintLayout
 import com.binyouwei.common.utils.ActivityMessenger
 import com.binyouwei.wanandroid_compose.R
-import com.binyouwei.wanandroid_compose.ui.account.LoginActivity
+import com.binyouwei.wanandroid_compose.ui.account.AccountActivity
 import com.binyouwei.wanandroid_compose.ui.sidebar.rank_list.RankingListActivity
 import com.blankj.utilcode.util.LogUtils
 
@@ -75,7 +75,7 @@ fun DrawerHeadComponent(activity: ComponentActivity) {
             )
             .padding(8.dp, 8.dp, 8.dp, 8.dp)
             .clickable {
-                ActivityMessenger.startActivity<LoginActivity>(activity)
+                ActivityMessenger.startActivity<AccountActivity>(activity)
             }
     ) {
         val (pointsRanking, avatar, name, row) = createRefs()
