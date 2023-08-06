@@ -126,4 +126,32 @@ interface HttpService {
         @Path("page") page: Int,
         @Query("cid") cid: Int
     ): BaseResponse<ListWrapper<ArticleBean>>
+
+    /**
+     * 登录
+     * https://www.wanandroid.com/user/login
+     * @param username
+     * @param password
+     */
+    @POST("/user/login")
+    @FormUrlEncoded
+    suspend fun login(
+        @Field("username") username: String,
+        @Field("password") password: String
+    ): BaseResponse<LoginBean>
+
+    /**
+     * 注册
+     * https://www.wanandroid.com/user/register
+     * @param username
+     * @param password
+     * @param repassword
+     */
+    @POST("/user/register")
+    @FormUrlEncoded
+    suspend fun register(
+        @Field("username") username: String,
+        @Field("password") password: String,
+        @Field("repassword") repassword: String
+    ): BaseResponse<LoginBean>
 }

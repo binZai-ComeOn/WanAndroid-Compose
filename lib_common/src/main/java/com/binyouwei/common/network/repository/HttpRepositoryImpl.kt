@@ -51,4 +51,14 @@ class HttpRepositoryImpl constructor(private val apiService: HttpService) : Base
     override fun getProjectTabArticles(id: Int): Flow<PagingData<ArticleBean>> =
         pager { page -> apiService.getProjectTabArticles(page, id) }
 
+    override suspend fun login(username: String, password: String): Flow<HttpResult<LoginBean>> =
+        flowable { apiService.login(username, password) }
+
+    override suspend fun register(
+        username: String,
+        password: String,
+        repassword: String
+    ): Flow<HttpResult<LoginBean>> =
+        flowable { apiService.register(username, password, repassword) }
+
 }

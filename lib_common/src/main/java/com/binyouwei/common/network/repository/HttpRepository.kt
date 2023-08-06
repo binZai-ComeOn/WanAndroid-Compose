@@ -29,10 +29,18 @@ interface HttpRepository {
 
     suspend fun getWXChapters(): Flow<HttpResult<MutableList<TabBean>>>
 
-    fun getWXChapterArticles(id:Int): Flow<PagingData<ArticleBean>>
+    fun getWXChapterArticles(id: Int): Flow<PagingData<ArticleBean>>
 
 
     suspend fun getProjectTabs(): Flow<HttpResult<MutableList<TabBean>>>
 
-    fun getProjectTabArticles(id:Int): Flow<PagingData<ArticleBean>>
+    fun getProjectTabArticles(id: Int): Flow<PagingData<ArticleBean>>
+
+    suspend fun login(username: String, password: String): Flow<HttpResult<LoginBean>>
+
+    suspend fun register(
+        username: String,
+        password: String,
+        repassword: String
+    ): Flow<HttpResult<LoginBean>>
 }

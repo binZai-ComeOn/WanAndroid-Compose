@@ -4,18 +4,16 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.interaction.MutableInteractionSource
-import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.layout.fillMaxWidth
-import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.shape.RoundedCornerShape
-import androidx.compose.material.Button
-import androidx.compose.material.ButtonDefaults
-import androidx.compose.material.Scaffold
-import androidx.compose.material.Text
+import androidx.compose.material.*
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.*
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
+import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.colorResource
 import androidx.compose.ui.res.painterResource
@@ -30,6 +28,7 @@ import com.binyouwei.wanandroid_compose.R
 import com.binyouwei.wanandroid_compose.route.RouteName
 import com.binyouwei.wanandroid_compose.ui.account.AccountViewModel
 import com.binyouwei.wanandroid_compose.ui.widget.InputText
+import com.binyouwei.wanandroid_compose.ui.widget.snackBar
 
 /**
  * @author 宾有为
@@ -39,6 +38,7 @@ import com.binyouwei.wanandroid_compose.ui.widget.InputText
  **/
 @Composable
 fun LoginPage(
+    activity: AppCompatActivity,
     navCtrl: NavHostController,
     viewModel: AccountViewModel = hiltViewModel()
 ) {
@@ -49,7 +49,15 @@ fun LoginPage(
     val password = remember {
         mutableStateOf("")
     }
-    Scaffold() {
+    val loginResult by remember {
+        viewModel.login
+    }
+    val errorMessage by remember {
+        viewModel.errorMsg
+    }
+    val scaffoldState = rememberScaffoldState()
+    val coroutineScope = rememberCoroutineScope()
+    Scaffold(scaffoldState = scaffoldState) {
         it.calculateBottomPadding()
         Column(
             modifier = Modifier
@@ -62,9 +70,11 @@ fun LoginPage(
                 fontSize = 14.sp,
                 modifier = Modifier.padding(top = 6.dp)
             )
+            val pleaseInputAccount = stringResource(id = R.string.please_input_account)
+            val pleaseInputPassword = stringResource(id = R.string.please_input_password)
             InputText(
                 text = account,
-                placeholder = stringResource(id = R.string.please_input_account),
+                placeholder = pleaseInputAccount,
                 leadingIcon = painterResource(id = R.mipmap.ic_account_normal),
                 modifier = Modifier
                     .fillMaxWidth()
@@ -73,7 +83,7 @@ fun LoginPage(
             )
             InputText(
                 text = password,
-                placeholder = stringResource(id = R.string.please_input_password),
+                placeholder = pleaseInputPassword,
                 leadingIcon = painterResource(id = R.mipmap.ic_password_normal),
                 keyboardType = KeyboardType.Password,
                 modifier = Modifier
@@ -81,35 +91,62 @@ fun LoginPage(
                     .padding(0.dp, 8.dp)
                     .background(color = Color.White)
             )
-            Text(
-                text = stringResource(id = R.string.login),
-                modifier = Modifier
-                    .padding(0.dp, 24.dp)
+            Button(
+                onClick = {
+                    if (account.value.isEmpty()) {
+                        snackBar(
+                            scaffoldState.snackbarHostState,
+                            coroutineScope,
+                            pleaseInputAccount
+                        )
+                        return@Button
+                    } else if (password.value.isEmpty()) {
+                        snackBar(
+                            scaffoldState.snackbarHostState,
+                            coroutineScope,
+                            pleaseInputPassword
+                        )
+                        return@Button
+                    }
+                    viewModel.login(account.value, password.value)
+                }, modifier = Modifier
                     .fillMaxWidth()
-                    .background(
-                        color = colorResource(id = R.color.colorAccent),
-                        RoundedCornerShape(2.dp)
+                    .padding(top = 24.dp, bottom = 15.dp)
+                    .clip(RoundedCornerShape(2.dp)),
+                colors = ButtonDefaults.buttonColors(colorResource(id = R.color.colorAccent))
+            ) {
+                Text(
+                    text = stringResource(id = R.string.login),
+                    modifier = Modifier
+                        .padding(10.dp),
+                    color = colorResource(
+                        id = R.color.White
+                    ),
+                    fontSize = 16.sp,
+                    textAlign = TextAlign.Center
+                )
+            }
+            Row(modifier = Modifier.fillMaxWidth(), horizontalArrangement = Arrangement.End) {
+                TextButton(onClick = {
+                    navCtrl.navigate(RouteName.REGISTER)
+                }) {
+                    Text(
+                        text = stringResource(id = R.string.no_account),
+                        fontSize = 16.sp,
                     )
-                    .padding(10.dp)
-                    .clickable {
-
-                    },
-                color = colorResource(
-                    id = R.color.White
-                ),
-                fontSize = 16.sp,
-                textAlign = TextAlign.Center
+                }
+            }
+        }
+        if (loginResult) {
+            snackBar(
+                scaffoldState.snackbarHostState,
+                coroutineScope,
+                stringResource(id = R.string.login_success)
             )
-            Text(
-                text = stringResource(id = R.string.no_account),
-                fontSize = 16.sp,
-                modifier = Modifier
-                    .fillMaxWidth()
-                    .clickable {
-                        navCtrl.navigate(RouteName.REGISTER)
-                    },
-                textAlign = TextAlign.End,
-            )
+            activity.finish()
+        }
+        if (errorMessage?.isNotEmpty()!!) {
+            snackBar(scaffoldState.snackbarHostState, coroutineScope, errorMessage!!)
         }
     }
 }

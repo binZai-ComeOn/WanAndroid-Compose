@@ -53,7 +53,7 @@ class AccountActivity : AppCompatActivity() {
                 ) {
                     composable(route = RouteName.LOGIN) {
                         topBarTitle.value = login
-                        LoginPage(navCtrl)
+                        LoginPage(this@AccountActivity,navCtrl)
                     }
 
                     composable(route = RouteName.REGISTER) {

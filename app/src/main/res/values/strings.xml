@@ -41,6 +41,8 @@
     <string name="theme">夜间模式</string>
     <string name="seting">系统设置</string>
     <string name="logout">退出登录</string>
+    <string name="login_success">登录成功</string>
+    <string name="register_success">注册成功</string>
 
     <string name="is_logout">确定要退出登录吗？</string>
     <string name="no_account">没有账号？去注册</string>

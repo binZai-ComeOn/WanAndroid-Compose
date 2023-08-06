@@ -2,15 +2,20 @@ package com.binyouwei.wanandroid_compose.ui.account.register
 
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
-import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.layout.fillMaxWidth
-import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.interaction.MutableInteractionSource
+import androidx.compose.foundation.interaction.collectIsPressedAsState
+import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.shape.RoundedCornerShape
+import androidx.compose.material.Button
+import androidx.compose.material.ButtonDefaults
 import androidx.compose.material.Text
+import androidx.compose.material.TextButton
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
+import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.colorResource
 import androidx.compose.ui.res.painterResource
@@ -90,35 +95,33 @@ fun RegisterPage(
                 .padding(0.dp, 8.dp)
                 .background(color = Color.White)
         )
-        Text(
-            text = stringResource(id = R.string.register),
-            modifier = Modifier
-                .padding(0.dp, 24.dp)
+        Button(
+            onClick = { }, modifier = Modifier
                 .fillMaxWidth()
-                .background(
-                    color = colorResource(id = R.color.colorAccent),
-                    RoundedCornerShape(2.dp)
+                .padding(top = 24.dp, bottom = 15.dp)
+                .clip(RoundedCornerShape(2.dp)),
+            colors = ButtonDefaults.buttonColors(colorResource(id = R.color.colorAccent))
+        ) {
+            Text(
+                text = stringResource(id = R.string.register),
+                modifier = Modifier
+                    .padding(10.dp),
+                color = colorResource(
+                    id = R.color.White
+                ),
+                fontSize = 16.sp,
+                textAlign = TextAlign.Center
+            )
+        }
+        Row(modifier = Modifier.fillMaxWidth(), horizontalArrangement = Arrangement.End) {
+            TextButton(onClick = {
+                navCtrl.navigate(RouteName.LOGIN)
+            }) {
+                Text(
+                    text = stringResource(id = R.string.have_account),
+                    fontSize = 16.sp,
                 )
-                .padding(10.dp)
-                .clickable {
-
-                },
-            color = colorResource(
-                id = R.color.White
-            ),
-            fontSize = 16.sp,
-            textAlign = TextAlign.Center
-        )
-        Text(
-            text = stringResource(id = R.string.have_account),
-            fontSize = 16.sp,
-            modifier = Modifier
-                .fillMaxWidth()
-                .clickable {
-                    navCtrl.navigate(RouteName.LOGIN)
-                },
-            textAlign = TextAlign.End,
-            style = TextStyle()
-        )
+            }
+        }
     }
 }
