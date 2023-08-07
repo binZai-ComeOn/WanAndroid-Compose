@@ -53,6 +53,7 @@
     <string name="please_input_account">请输入用户名</string>
     <string name="please_input_password">请输入密码</string>
     <string name="enter_password_again">再次输入密码</string>
+    <string name="enter_password_try">两次密码输入不一致，请重试</string>
 
     <string name="share_article_title">文章标题</string>
     <string name="share_article_title_tip">100字以内</string>

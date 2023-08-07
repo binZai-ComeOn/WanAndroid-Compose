@@ -2,8 +2,6 @@ package com.binyouwei.wanandroid_compose.ui.account.login
 
 import androidx.appcompat.app.AppCompatActivity
 import androidx.compose.foundation.background
-import androidx.compose.foundation.clickable
-import androidx.compose.foundation.interaction.MutableInteractionSource
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.*
@@ -50,7 +48,7 @@ fun LoginPage(
         mutableStateOf("")
     }
     val loginResult by remember {
-        viewModel.login
+        viewModel.result
     }
     val errorMessage by remember {
         viewModel.errorMsg

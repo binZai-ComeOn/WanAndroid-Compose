@@ -19,15 +19,16 @@ import javax.inject.Inject
  **/
 @HiltViewModel
 class AccountViewModel @Inject constructor(val repository: HttpRepository) : BaseViewModel() {
-    val login = mutableStateOf(false)
+    val result = mutableStateOf(false)
     val errorMsg = mutableStateOf<String?>("")
 
     fun login(username: String, password: String) {
+        errorMsg.value = ""
         async {
             repository.login(username, password).collectLatest { response ->
                 when (response) {
                     is HttpResult.Success -> {
-                        login.value = true
+                        result.value = true
                         // login.value = response.result!!
                     }
 
@@ -44,6 +45,19 @@ class AccountViewModel @Inject constructor(val repository: HttpRepository) : Bas
         password: String,
         repassword: String
     ) {
+        errorMsg.value = ""
+        async {
+            repository.register(username, password, repassword).collectLatest { response ->
+                when (response) {
+                    is HttpResult.Success -> {
+                        result.value = true
+                    }
 
+                    is HttpResult.Error -> {
+                        errorMsg.value = response.exception.message
+                    }
+                }
+            }
+        }
     }
 }
