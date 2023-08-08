@@ -1,6 +1,7 @@
 package com.binyouwei.common.network
 
 import android.annotation.SuppressLint
+import com.binyouwei.common.network.interceptor.CookiesInterceptor
 import com.binyouwei.common.network.interceptor.LogInterceptor
 import com.jakewharton.retrofit2.adapter.kotlin.coroutines.CoroutineCallAdapterFactory
 import okhttp3.OkHttpClient
@@ -44,7 +45,7 @@ object ApiCall {
                 connectTimeout(DEFAULT_TIMEOUT.toLong(), TimeUnit.MILLISECONDS)
                 readTimeout(DEFAULT_TIMEOUT.toLong(), TimeUnit.MILLISECONDS)
                 writeTimeout(DEFAULT_TIMEOUT.toLong(), TimeUnit.MILLISECONDS)
-                // addInterceptor(SetCookieInterceptor())
+                addInterceptor(CookiesInterceptor())
                 // addInterceptor(CacheCookieInterceptor())
                 addInterceptor(LogInterceptor())
                 //不验证证书
@@ -58,7 +59,7 @@ object ApiCall {
         lateinit var ssfFactory: SSLSocketFactory
         try {
             val sslFactory = SSLContext.getInstance("TLS")
-            sslFactory.init(null,  arrayOf(TrustAllCerts()), SecureRandom())
+            sslFactory.init(null, arrayOf(TrustAllCerts()), SecureRandom())
             ssfFactory = sslFactory.socketFactory
         } catch (e: Exception) {
             print("SSL错误：${e.message}")
@@ -68,7 +69,7 @@ object ApiCall {
 
 }
 
-class TrustAllNameVerifier: HostnameVerifier {
+class TrustAllNameVerifier : HostnameVerifier {
     @SuppressLint("BadHostnameVerifier")
     override fun verify(hostname: String?, session: SSLSession?): Boolean = true
 }
@@ -77,10 +78,12 @@ class TrustAllNameVerifier: HostnameVerifier {
 class TrustAllCerts : X509TrustManager {
 
     @SuppressLint("TrustAllX509TrustManager")
-    override fun checkClientTrusted(chain: Array<out X509Certificate>?, authType: String?) {}
+    override fun checkClientTrusted(chain: Array<out X509Certificate>?, authType: String?) {
+    }
 
     @SuppressLint("TrustAllX509TrustManager")
-    override fun checkServerTrusted(chain: Array<out X509Certificate>?, authType: String?) {}
+    override fun checkServerTrusted(chain: Array<out X509Certificate>?, authType: String?) {
+    }
 
     override fun getAcceptedIssuers(): Array<X509Certificate> = arrayOf()
 }
