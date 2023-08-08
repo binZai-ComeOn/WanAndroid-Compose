@@ -6,6 +6,8 @@ import com.binyouwei.common.base.BaseViewModel
 import com.binyouwei.common.bean.LoginBean
 import com.binyouwei.common.network.HttpResult
 import com.binyouwei.common.network.repository.HttpRepository
+import com.binyouwei.common.utils.DataStoreUtils
+import com.binyouwei.wanandroid_compose.data.constant.AppConstant
 import com.blankj.utilcode.util.LogUtils
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.collectLatest
@@ -29,7 +31,14 @@ class AccountViewModel @Inject constructor(val repository: HttpRepository) : Bas
                 when (response) {
                     is HttpResult.Success -> {
                         result.value = true
-                        // login.value = response.result!!
+                        val value = response.result
+                        DataStoreUtils.putData(AppConstant.isLogin, true)
+                        DataStoreUtils.putData(AppConstant.UserId, value.id)
+                        DataStoreUtils.putData(AppConstant.UserType, value.type)
+                        DataStoreUtils.putData(AppConstant.UserNickname, value.nickname)
+                        DataStoreUtils.putData(AppConstant.UserPublicName, value.publicName)
+                        DataStoreUtils.putData(AppConstant.UserCoinCount, value.coinCount)
+                        // DataStoreUtils.putData(AppConstant.UserCollectIds, value.collectIds)
                     }
 
                     is HttpResult.Error -> {
@@ -43,7 +52,7 @@ class AccountViewModel @Inject constructor(val repository: HttpRepository) : Bas
     fun register(
         username: String,
         password: String,
-        repassword: String
+        repassword: String,
     ) {
         errorMsg.value = ""
         async {

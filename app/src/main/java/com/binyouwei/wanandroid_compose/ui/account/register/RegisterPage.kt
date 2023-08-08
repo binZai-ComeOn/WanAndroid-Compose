@@ -1,5 +1,6 @@
 package com.binyouwei.wanandroid_compose.ui.account.register
 
+import android.annotation.SuppressLint
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.shape.RoundedCornerShape
@@ -26,6 +27,8 @@ import com.binyouwei.wanandroid_compose.ui.account.AccountViewModel
 import com.binyouwei.wanandroid_compose.ui.widget.InputText
 import com.binyouwei.wanandroid_compose.ui.widget.snackBar
 import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.delay
+import kotlinx.coroutines.launch
 
 /**
  * @author 宾有为
@@ -40,6 +43,7 @@ private lateinit var pleaseInputPassword: String
 private lateinit var enterPasswordAgain: String
 private lateinit var enterPasswordTry: String
 
+@SuppressLint("CoroutineCreationDuringComposition")
 @Composable
 fun RegisterPage(
     navCtrl: NavHostController,
@@ -149,7 +153,10 @@ fun RegisterPage(
                 coroutineScope,
                 stringResource(id = R.string.register_success)
             )
-            navCtrl.navigate(RouteName.LOGIN)
+            coroutineScope.launch {
+                delay(2000)
+                navCtrl.navigate(RouteName.LOGIN)
+            }
         }
         if (errorMessage?.isNotEmpty()!!) {
             snackBar(scaffoldState.snackbarHostState, coroutineScope, errorMessage!!)

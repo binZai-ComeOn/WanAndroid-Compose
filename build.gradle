@@ -65,7 +65,13 @@ buildscript {
         // paging分页库
         paging_runtime = "androidx.paging:paging-runtime:3.0.0-beta02"
         paging_common = "androidx.paging:paging-common:3.0.0-beta02"
-        paging_compose = "androidx.paging:paging-compose:1.0.0-alpha11"
+        paging_compose = "androidx.paging:paging-compose:1.0.0-alpha14"
+        // room
+        room_version = "2.5.0"
+        room_runtime = "androidx.room:room-runtime:$room_version"
+        room_ktx = "androidx.room:room-ktx:$room_version"
+        room_compiler_kapt = "androidx.room:room-compiler:$room_version"
+        room_paging = "androidx.room:room-paging:$room_version"
     }
 
     dependencies {

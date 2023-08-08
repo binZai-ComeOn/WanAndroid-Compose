@@ -1,5 +1,6 @@
 package com.binyouwei.wanandroid_compose.ui.account.login
 
+import android.annotation.SuppressLint
 import androidx.appcompat.app.AppCompatActivity
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.*
@@ -27,6 +28,8 @@ import com.binyouwei.wanandroid_compose.route.RouteName
 import com.binyouwei.wanandroid_compose.ui.account.AccountViewModel
 import com.binyouwei.wanandroid_compose.ui.widget.InputText
 import com.binyouwei.wanandroid_compose.ui.widget.snackBar
+import kotlinx.coroutines.delay
+import kotlinx.coroutines.launch
 
 /**
  * @author 宾有为
@@ -34,6 +37,7 @@ import com.binyouwei.wanandroid_compose.ui.widget.snackBar
  * Social homepage: https://blog.csdn.net/baidu_41616022
  * @desc
  **/
+@SuppressLint("CoroutineCreationDuringComposition")
 @Composable
 fun LoginPage(
     activity: AppCompatActivity,
@@ -141,7 +145,10 @@ fun LoginPage(
                 coroutineScope,
                 stringResource(id = R.string.login_success)
             )
-            activity.finish()
+            coroutineScope.launch {
+                delay(2000)
+                activity.finish()
+            }
         }
         if (errorMessage?.isNotEmpty()!!) {
             snackBar(scaffoldState.snackbarHostState, coroutineScope, errorMessage!!)

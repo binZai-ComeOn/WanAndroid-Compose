@@ -111,4 +111,9 @@ dependencies {
     implementation project.paging_runtime
     testImplementation project.paging_common
     implementation project.paging_compose
+    // room
+    implementation project.room_runtime
+    implementation project.room_ktx
+    kapt project.room_compiler_kapt
+    implementation project.room_paging
 }
