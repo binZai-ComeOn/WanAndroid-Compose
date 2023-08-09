@@ -1,4 +1,4 @@
-package com.binyouwei.wanandroid_compose.ui.sidebar
+package com.binyouwei.wanandroid_compose.ui.sidebar.collect
 
 import android.os.Bundle
 import androidx.activity.ComponentActivity

@@ -34,7 +34,7 @@
             android:name=".ui.sidebar.share.MySharePage"
             android:exported="true" />
         <activity
-            android:name=".ui.sidebar.CollectPage"
+            android:name=".ui.sidebar.collect.CollectPage"
             android:exported="true" />
         <activity
             android:name=".ui.sidebar.rank_list.RankingListActivity"

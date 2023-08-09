@@ -1,4 +1,4 @@
-package com.binyouwei.wanandroid_compose.ui.widget
+package com.binyouwei.wanandroid_compose.ui.sidebar
 
 import android.content.Intent
 import androidx.activity.ComponentActivity
@@ -26,6 +26,9 @@ import com.binyouwei.common.utils.ActivityMessenger
 import com.binyouwei.wanandroid_compose.R
 import com.binyouwei.wanandroid_compose.ui.account.AccountActivity
 import com.binyouwei.wanandroid_compose.ui.sidebar.rank_list.RankingListActivity
+import com.binyouwei.wanandroid_compose.ui.widget.MenuListItem
+import com.binyouwei.wanandroid_compose.ui.widget.MyAlertDialog
+import com.binyouwei.wanandroid_compose.ui.widget.menuList
 import com.blankj.utilcode.util.LogUtils
 
 /**
@@ -35,7 +38,7 @@ import com.blankj.utilcode.util.LogUtils
  * @desc
  **/
 @Composable
-fun Drawer(
+fun Sidebar(
     activity: ComponentActivity,
     closeDrawer: () -> Unit,
 ) {

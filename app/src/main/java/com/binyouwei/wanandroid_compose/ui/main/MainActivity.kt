@@ -14,7 +14,7 @@ import com.binyouwei.wanandroid_compose.ui.main.wechat.WeChatPage
 import com.binyouwei.wanandroid_compose.route.RouteName
 import com.binyouwei.wanandroid_compose.ui.main.project.ProjectPage
 import com.binyouwei.wanandroid_compose.ui.widget.BottomNavigationBar
-import com.binyouwei.wanandroid_compose.ui.widget.Drawer
+import com.binyouwei.wanandroid_compose.ui.sidebar.Sidebar
 import com.binyouwei.wanandroid_compose.ui.widget.bnbsMain
 import com.google.accompanist.insets.navigationBarsPadding
 import com.google.accompanist.insets.statusBarsPadding
@@ -56,7 +56,7 @@ class MainActivity : ComponentActivity() {
                 BottomNavigationBar(navCtrl = navCtrl, bnbsMain)
             },
             drawerContent = {
-                Drawer(this@MainActivity) { coroutineScope.launch { drawerState.close() } }
+                Sidebar(this@MainActivity) { coroutineScope.launch { drawerState.close() } }
             },
             content = {
                 it.calculateBottomPadding()

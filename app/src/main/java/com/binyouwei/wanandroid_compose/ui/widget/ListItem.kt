@@ -1,6 +1,5 @@
 package com.binyouwei.wanandroid_compose.ui.widget
 
-import android.text.Html
 import androidx.compose.foundation.*
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
@@ -28,7 +27,6 @@ import androidx.compose.ui.unit.sp
 import androidx.constraintlayout.compose.ConstraintLayout
 import androidx.constraintlayout.compose.Dimension
 import coil.compose.AsyncImage
-import coil.compose.rememberImagePainter
 import com.binyouwei.common.bean.ArticleBean
 import com.binyouwei.common.bean.KnowledgeSystemBean
 import com.binyouwei.common.bean.RankingListBean
@@ -36,7 +34,7 @@ import com.binyouwei.common.bean.WebData
 import com.binyouwei.common.utils.TimeUtil
 import com.binyouwei.wanandroid_compose.R
 import com.binyouwei.wanandroid_compose.data.bean.MenuBean
-import com.binyouwei.wanandroid_compose.ui.sidebar.CollectPage
+import com.binyouwei.wanandroid_compose.ui.sidebar.collect.CollectPage
 import com.binyouwei.wanandroid_compose.ui.sidebar.integral.IntegralPage
 import com.binyouwei.wanandroid_compose.ui.sidebar.share.MySharePage
 import com.binyouwei.wanandroid_compose.ui.sidebar.seting.SetingPage
