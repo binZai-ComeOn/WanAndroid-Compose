@@ -24,6 +24,7 @@ import androidx.compose.ui.unit.sp
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavHostController
 import com.binyouwei.wanandroid_compose.R
+import com.binyouwei.wanandroid_compose.data.constant.isLogin
 import com.binyouwei.wanandroid_compose.route.RouteName
 import com.binyouwei.wanandroid_compose.ui.account.AccountViewModel
 import com.binyouwei.wanandroid_compose.ui.widget.InputText
@@ -145,6 +146,7 @@ fun LoginPage(
                 coroutineScope,
                 stringResource(id = R.string.login_success)
             )
+            isLogin.value = true
             coroutineScope.launch {
                 delay(2000)
                 activity.finish()

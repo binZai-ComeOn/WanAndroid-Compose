@@ -5,7 +5,10 @@ import androidx.compose.material.AlertDialog
 import androidx.compose.material.Text
 import androidx.compose.material.TextButton
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.getValue
 import androidx.compose.runtime.MutableState
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
 import androidx.compose.ui.res.stringResource
 import com.binyouwei.wanandroid_compose.R
 
@@ -17,21 +20,24 @@ import com.binyouwei.wanandroid_compose.R
  **/
 @Composable
 fun MyAlertDialog(
-    isShowDialog: MutableState<Boolean>,
     @StringRes title: Int,
     @StringRes text: Int,
+    cancel: () -> Unit = {},
     confirm: () -> Unit
 ) {
-    if (isShowDialog.value) {
+    val showDialog = remember {
+        mutableStateOf(true)
+    }
+    if (showDialog.value){
         AlertDialog(
-            onDismissRequest = { isShowDialog.value = false },
+            onDismissRequest = { },
             title = { Text(text = stringResource(id = title)) },
             text = { Text(text = stringResource(id = text)) },
             confirmButton = {
                 TextButton(
                     onClick = {
                         confirm()
-                        isShowDialog.value = false
+                        showDialog.value = false
                     }
                 ) {
                     Text("确认")
@@ -40,12 +46,12 @@ fun MyAlertDialog(
             dismissButton = {
                 TextButton(
                     onClick = {
-                        isShowDialog.value = false
+                        showDialog.value = false
                     }
                 ) {
                     Text("取消")
                 }
-            }
+            },
         )
     }
 }

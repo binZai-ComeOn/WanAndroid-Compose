@@ -7,6 +7,7 @@ import androidx.compose.material.*
 import androidx.compose.runtime.*
 import androidx.compose.ui.Modifier
 import androidx.navigation.compose.*
+import com.binyouwei.wanandroid_compose.R
 import com.binyouwei.wanandroid_compose.ui.main.home.HomePage
 import com.binyouwei.wanandroid_compose.ui.main.knowledge_system.KnowledgeSystemPage
 import com.binyouwei.wanandroid_compose.ui.main.square.SquarePage
@@ -15,6 +16,7 @@ import com.binyouwei.wanandroid_compose.route.RouteName
 import com.binyouwei.wanandroid_compose.ui.main.project.ProjectPage
 import com.binyouwei.wanandroid_compose.ui.widget.BottomNavigationBar
 import com.binyouwei.wanandroid_compose.ui.sidebar.Sidebar
+import com.binyouwei.wanandroid_compose.ui.widget.MyAlertDialog
 import com.binyouwei.wanandroid_compose.ui.widget.bnbsMain
 import com.google.accompanist.insets.navigationBarsPadding
 import com.google.accompanist.insets.statusBarsPadding

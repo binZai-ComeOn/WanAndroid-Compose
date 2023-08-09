@@ -32,13 +32,16 @@ class AccountViewModel @Inject constructor(val repository: HttpRepository) : Bas
                     is HttpResult.Success -> {
                         result.value = true
                         val value = response.result
-                        DataStoreUtils.putData(AppConstant.isLogin, true)
+                        LogUtils.e("jieguo:${value.nickname}")
                         DataStoreUtils.putData(AppConstant.UserId, value.id)
                         DataStoreUtils.putData(AppConstant.UserType, value.type)
                         DataStoreUtils.putData(AppConstant.UserNickname, value.nickname)
                         DataStoreUtils.putData(AppConstant.UserPublicName, value.publicName)
                         DataStoreUtils.putData(AppConstant.UserCoinCount, value.coinCount)
                         // DataStoreUtils.putData(AppConstant.UserCollectIds, value.collectIds)
+                        DataStoreUtils.getData(AppConstant.UserNickname,"").collectLatest {
+                            LogUtils.e("结果："+it)
+                        }
                     }
 
                     is HttpResult.Error -> {

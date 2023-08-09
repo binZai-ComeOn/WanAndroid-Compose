@@ -23,7 +23,10 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.constraintlayout.compose.ConstraintLayout
 import com.binyouwei.common.utils.ActivityMessenger
+import com.binyouwei.common.utils.DataStoreUtils
 import com.binyouwei.wanandroid_compose.R
+import com.binyouwei.wanandroid_compose.data.constant.AppConstant
+import com.binyouwei.wanandroid_compose.data.constant.isLogin
 import com.binyouwei.wanandroid_compose.ui.account.AccountActivity
 import com.binyouwei.wanandroid_compose.ui.sidebar.rank_list.RankingListActivity
 import com.binyouwei.wanandroid_compose.ui.widget.MenuListItem
@@ -42,26 +45,36 @@ fun Sidebar(
     activity: ComponentActivity,
     closeDrawer: () -> Unit,
 ) {
-    val dialogState = remember { mutableStateOf(false) }
+    val logOut = remember {
+        mutableStateOf(false)
+    }
     DrawerHeadComponent(activity)
     Column(modifier = Modifier.fillMaxSize()) {
         // 遍历生成菜单
-        menuList.forEach {
+        menuList.forEach continuing@{
+            if (it.menuName == R.string.logout){
+                if (!isLogin.value){
+                    return@continuing
+                }
+            }
             Column(Modifier.clickable(onClick = {
                 if (it.menuName == R.string.logout) {
                     // 点击退出登录
-                    dialogState.value = true
+                    logOut.value = true
                 } else {
                     activity.startActivity(Intent(activity, it.route))
+                    closeDrawer()
                 }
-                closeDrawer()
             }), content = {
                 MenuListItem(it)
             })
         }
-        MyAlertDialog(dialogState, title = R.string.logout, text = R.string.is_logout, confirm = {
-            LogUtils.e("点击了退出登录")
-        })
+        if (logOut.value){
+            MyAlertDialog( title = R.string.logout, text = R.string.is_logout, confirm = {
+                logOut.value = false
+                isLogin.value = false
+            })
+        }
     }
 }
 
@@ -109,8 +122,14 @@ fun DrawerHeadComponent(activity: ComponentActivity) {
                     bottom.linkTo(parent.bottom)
                 }
         )
+        var userName = ""
+        userName = if (isLogin.value) {
+            DataStoreUtils.readStringData(AppConstant.UserNickname, "")
+        } else {
+            stringResource(id = R.string.go_login)
+        }
         Text(
-            text = stringResource(id = R.string.go_login),
+            text = userName,
             fontSize = 16.sp,
             fontWeight = FontWeight.Bold,
             color = colorResource(id = R.color.White),
