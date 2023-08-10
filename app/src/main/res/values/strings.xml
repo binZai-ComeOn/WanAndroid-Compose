@@ -72,6 +72,8 @@
     <string name="share_article_delete">已删除分享的文章</string>
     <string name="audited">待审核</string>
     <string name="submit_ing">正在提交...</string>
+    <string name="delete_search_history">清空搜索历史</string>
+    <string name="is_delete_search_history">确定清空搜索历史？</string>
 
     <string name="nav_grade">等级:</string>
     <string name="nav_rank">排名:</string>

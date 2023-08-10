@@ -10,6 +10,10 @@ import com.binyouwei.common.bean.ArticleBean
 import com.binyouwei.common.bean.HotKeyBean
 import com.binyouwei.common.network.HttpResult
 import com.binyouwei.common.network.repository.HttpRepository
+import com.binyouwei.common.utils.TimeUtil
+import com.binyouwei.wanandroid_compose.data.db.AppDataBase
+import com.binyouwei.wanandroid_compose.data.db.table.SearchHistoryTable
+import com.blankj.utilcode.util.LogUtils
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.collectLatest
@@ -23,9 +27,11 @@ import javax.inject.Inject
 @HiltViewModel
 class SearchViewModel @Inject constructor(
     private val repository: HttpRepository,
+    private val db: AppDataBase,
 ) : BaseViewModel() {
     val hotKeyList = mutableStateOf(mutableListOf<HotKeyBean>())
     val searchResult = MutableLiveData<Flow<PagingData<ArticleBean>>?>(null)
+    val searchHistory = mutableStateOf(listOf<SearchHistoryTable>())
 
     fun getHotKeyList() {
         async {
@@ -40,6 +46,33 @@ class SearchViewModel @Inject constructor(
                     }
                 }
             }
+        }
+    }
+
+    fun getSearchHistory() {
+        async {
+            val data = db.searchHistoryDao().querySearchHistoryList()
+            searchHistory.value = data
+        }
+    }
+
+    fun deleteSearchHistory() {
+        async {
+            db.searchHistoryDao().deleteAllSearchHistory()
+            searchHistory.value = db.searchHistoryDao().querySearchHistoryList()
+        }
+    }
+
+    fun insertSearchHistory(name: String) {
+        async {
+            val data = db.searchHistoryDao().querySearchHistory(name)
+            val bean = SearchHistoryTable(name = name, time = TimeUtil.currentTimeMillis())
+            if (data.isNotEmpty()) {
+                data.forEach {
+                    db.searchHistoryDao().deleteSearchHistory(it)
+                }
+            }
+            db.searchHistoryDao().insertSearchHistory(bean)
         }
     }
 

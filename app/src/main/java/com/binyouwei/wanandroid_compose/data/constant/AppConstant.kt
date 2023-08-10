@@ -1,9 +1,11 @@
 package com.binyouwei.wanandroid_compose.data.constant
 
 /**
- * 为 DataStore 提供键值
+ * App 的常数
  */
 object AppConstant {
+
+    // ----------------------------- DataStore key ---------------------------------------
 
     const val ExtraKey = "ExtraKey"
 
@@ -13,4 +15,10 @@ object AppConstant {
     const val UserPublicName = "UserPublicName"
     const val UserType = "UserType"
     const val UserCollectIds = "UserCollectIds"
+
+    // ----------------------------- 数据库表名 ---------------------------------------
+
+    const val dbName = "db_wan_android"
+    const val dbVersion = 1
+    const val tableSearchHistory = "search_history"
 }
