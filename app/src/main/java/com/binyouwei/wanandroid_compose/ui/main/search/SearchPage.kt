@@ -1,13 +1,11 @@
 package com.binyouwei.wanandroid_compose.ui.main.search
 
-import android.content.Intent
 import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.PaddingValues
-import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
@@ -24,16 +22,12 @@ import com.binyouwei.wanandroid_compose.R
 import com.binyouwei.wanandroid_compose.ui.widget.TopSearchBar
 import com.google.accompanist.flowlayout.FlowRow
 import androidx.compose.runtime.*
-import androidx.compose.ui.Alignment
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.style.TextAlign
-import androidx.compose.ui.tooling.preview.Preview
 import androidx.constraintlayout.compose.ConstraintLayout
-import androidx.navigation.compose.rememberNavController
 import com.binyouwei.common.utils.ActivityMessenger
 import com.binyouwei.wanandroid_compose.data.constant.AppConstant
 import com.binyouwei.wanandroid_compose.ui.widget.MyAlertDialog
-import com.blankj.utilcode.util.LogUtils
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
@@ -51,9 +45,10 @@ class SearchPage : ComponentActivity() {
         viewModel.getSearchHistory()
         val text = remember { mutableStateOf("") }
         val scaffoldState = rememberScaffoldState()
-        val showDialog = remember {
+        var showDialog by remember {
             mutableStateOf(false)
         }
+        val onPopupDismissed = { showDialog = false }
         Scaffold(
             scaffoldState = scaffoldState,
             topBar = {
@@ -115,7 +110,7 @@ class SearchPage : ComponentActivity() {
                             textAlign = TextAlign.Center
                         )
                         IconButton(onClick = {
-                            showDialog.value = true
+                            showDialog = true
                         }, modifier = Modifier.constrainAs(icon) {
                             top.linkTo(parent.top)
                             end.linkTo(parent.end)
@@ -156,14 +151,14 @@ class SearchPage : ComponentActivity() {
 
             }
         }
-        if (showDialog.value) {
+        if (showDialog) {
             MyAlertDialog(
                 title = R.string.delete_search_history,
-                text = R.string.is_delete_search_history, cancel = {
-                    showDialog.value = false
-                }, confirm = {
+                text = R.string.is_delete_search_history,
+                onPopupDismissed = onPopupDismissed,
+                confirm = {
                     viewModel.deleteSearchHistory()
-                    showDialog.value = false
+                    showDialog = false
                 }
             )
         }

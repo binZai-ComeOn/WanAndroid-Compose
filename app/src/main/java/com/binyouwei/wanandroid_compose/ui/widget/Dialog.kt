@@ -4,11 +4,7 @@ import androidx.annotation.StringRes
 import androidx.compose.material.AlertDialog
 import androidx.compose.material.Text
 import androidx.compose.material.TextButton
-import androidx.compose.runtime.Composable
-import androidx.compose.runtime.getValue
-import androidx.compose.runtime.MutableState
-import androidx.compose.runtime.mutableStateOf
-import androidx.compose.runtime.remember
+import androidx.compose.runtime.*
 import androidx.compose.ui.res.stringResource
 import com.binyouwei.wanandroid_compose.R
 
@@ -22,36 +18,29 @@ import com.binyouwei.wanandroid_compose.R
 fun MyAlertDialog(
     @StringRes title: Int,
     @StringRes text: Int,
-    cancel: () -> Unit = {},
+    onPopupDismissed: () -> Unit,
     confirm: () -> Unit
 ) {
-    val showDialog = remember {
-        mutableStateOf(true)
-    }
-    if (showDialog.value){
-        AlertDialog(
-            onDismissRequest = { },
-            title = { Text(text = stringResource(id = title)) },
-            text = { Text(text = stringResource(id = text)) },
-            confirmButton = {
-                TextButton(
-                    onClick = {
-                        confirm()
-                        showDialog.value = false
-                    }
-                ) {
-                    Text("确认")
+    AlertDialog(
+        onDismissRequest = onPopupDismissed,
+        title = { Text(text = stringResource(id = title)) },
+        text = { Text(text = stringResource(id = text)) },
+        confirmButton = {
+            TextButton(
+                onClick = {
+                    confirm()
+                    onPopupDismissed
                 }
-            },
-            dismissButton = {
-                TextButton(
-                    onClick = {
-                        showDialog.value = false
-                    }
-                ) {
-                    Text("取消")
-                }
-            },
-        )
-    }
+            ) {
+                Text("确认")
+            }
+        },
+        dismissButton = {
+            TextButton(
+                onClick = onPopupDismissed
+            ) {
+                Text("取消")
+            }
+        },
+    )
 }

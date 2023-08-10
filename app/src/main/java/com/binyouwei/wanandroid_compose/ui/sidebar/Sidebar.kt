@@ -7,10 +7,9 @@ import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.shape.RoundedCornerShape
-import androidx.compose.material.Icon
-import androidx.compose.material.IconButton
-import androidx.compose.material.Text
+import androidx.compose.material.*
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.*
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Modifier
@@ -32,7 +31,6 @@ import com.binyouwei.wanandroid_compose.ui.sidebar.rank_list.RankingListActivity
 import com.binyouwei.wanandroid_compose.ui.widget.MenuListItem
 import com.binyouwei.wanandroid_compose.ui.widget.MyAlertDialog
 import com.binyouwei.wanandroid_compose.ui.widget.menuList
-import com.blankj.utilcode.util.LogUtils
 
 /**
  * @author 宾有为
@@ -45,22 +43,23 @@ fun Sidebar(
     activity: ComponentActivity,
     closeDrawer: () -> Unit,
 ) {
-    val logOut = remember {
+    var showDialog by remember {
         mutableStateOf(false)
     }
+    val onPopupDismissed = { showDialog = false }
     DrawerHeadComponent(activity)
     Column(modifier = Modifier.fillMaxSize()) {
         // 遍历生成菜单
         menuList.forEach continuing@{
-            if (it.menuName == R.string.logout){
-                if (!isLogin.value){
+            if (it.menuName == R.string.logout) {
+                if (!isLogin.value) {
                     return@continuing
                 }
             }
             Column(Modifier.clickable(onClick = {
                 if (it.menuName == R.string.logout) {
                     // 点击退出登录
-                    logOut.value = true
+                    showDialog = true
                 } else {
                     activity.startActivity(Intent(activity, it.route))
                     closeDrawer()
@@ -69,9 +68,9 @@ fun Sidebar(
                 MenuListItem(it)
             })
         }
-        if (logOut.value){
-            MyAlertDialog( title = R.string.logout, text = R.string.is_logout, confirm = {
-                logOut.value = false
+        if (showDialog) {
+            MyAlertDialog(title = R.string.logout, text = R.string.is_logout, onPopupDismissed = onPopupDismissed,confirm = {
+                showDialog = false
                 isLogin.value = false
             })
         }
@@ -122,8 +121,7 @@ fun DrawerHeadComponent(activity: ComponentActivity) {
                     bottom.linkTo(parent.bottom)
                 }
         )
-        var userName = ""
-        userName = if (isLogin.value) {
+        val userName = if (isLogin.value) {
             DataStoreUtils.readStringData(AppConstant.UserNickname, "")
         } else {
             stringResource(id = R.string.go_login)
