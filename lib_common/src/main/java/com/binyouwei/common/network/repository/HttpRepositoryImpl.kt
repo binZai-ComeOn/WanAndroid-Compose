@@ -61,4 +61,7 @@ class HttpRepositoryImpl constructor(private val apiService: HttpService) : Base
     ): Flow<HttpResult<LoginBean>> =
         flowable { apiService.register(username, password, repassword) }
 
+    override suspend fun getUserInfo(): Flow<HttpResult<UserInfoBean>> =
+        flowable { apiService.getUserInfo() }
+
 }

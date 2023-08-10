@@ -154,4 +154,11 @@ interface HttpService {
         @Field("password") password: String,
         @Field("repassword") repassword: String
     ): BaseResponse<LoginBean>
+
+    /**
+     * 获取个人积分，需要登录后访问
+     * https://www.wanandroid.com/lg/coin/userinfo/json
+     */
+    @GET("/lg/coin/userinfo/json")
+    suspend fun getUserInfo(): BaseResponse<UserInfoBean>
 }

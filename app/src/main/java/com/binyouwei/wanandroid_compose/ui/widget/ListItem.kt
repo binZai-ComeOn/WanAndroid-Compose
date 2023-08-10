@@ -43,7 +43,7 @@ import com.blankj.utilcode.util.LogUtils
 var menuList = listOf(
     MenuBean(
         R.string.integral,
-        R.drawable.ic_score_white_24dp, IntegralPage::class.java, "80"
+        R.drawable.ic_score_white_24dp, IntegralPage::class.java, "0"
     ),
     MenuBean(
         R.string.collect,

@@ -1,8 +1,9 @@
 package com.binyouwei.common.network
 
 import android.annotation.SuppressLint
-import com.binyouwei.common.network.interceptor.CookiesInterceptor
+import com.binyouwei.common.network.interceptor.HeaderInterceptor
 import com.binyouwei.common.network.interceptor.LogInterceptor
+import com.binyouwei.common.network.interceptor.PublicParameterInterceptor
 import com.jakewharton.retrofit2.adapter.kotlin.coroutines.CoroutineCallAdapterFactory
 import okhttp3.OkHttpClient
 import retrofit2.Retrofit
@@ -45,8 +46,8 @@ object ApiCall {
                 connectTimeout(DEFAULT_TIMEOUT.toLong(), TimeUnit.MILLISECONDS)
                 readTimeout(DEFAULT_TIMEOUT.toLong(), TimeUnit.MILLISECONDS)
                 writeTimeout(DEFAULT_TIMEOUT.toLong(), TimeUnit.MILLISECONDS)
-                addInterceptor(CookiesInterceptor())
-                // addInterceptor(CacheCookieInterceptor())
+                addInterceptor(PublicParameterInterceptor())
+                addInterceptor(HeaderInterceptor())
                 addInterceptor(LogInterceptor())
                 //不验证证书
                 // sslSocketFactory(createSSLSocketFactory())

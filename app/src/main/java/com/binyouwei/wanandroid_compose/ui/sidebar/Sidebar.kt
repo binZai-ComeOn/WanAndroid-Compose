@@ -9,7 +9,8 @@ import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.*
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.*
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.setValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Modifier
@@ -21,6 +22,7 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.constraintlayout.compose.ConstraintLayout
+import androidx.hilt.navigation.compose.hiltViewModel
 import com.binyouwei.common.utils.ActivityMessenger
 import com.binyouwei.common.utils.DataStoreUtils
 import com.binyouwei.wanandroid_compose.R
@@ -38,6 +40,11 @@ import com.binyouwei.wanandroid_compose.ui.widget.menuList
  * Social homepage: https://blog.csdn.net/baidu_41616022
  * @desc
  **/
+
+private var integral = mutableStateOf(0)
+private var level = mutableStateOf(0)
+private var rank = mutableStateOf(0)
+
 @Composable
 fun Sidebar(
     activity: ComponentActivity,
@@ -47,6 +54,18 @@ fun Sidebar(
         mutableStateOf(false)
     }
     val onPopupDismissed = { showDialog = false }
+    val viewModel: SidebarViewModel = hiltViewModel()
+    if (isLogin.value) {
+        viewModel.getUserInfo()
+    }
+    val userInfo = remember {
+        viewModel.userInfo
+    }
+    if (userInfo.value != null) {
+        menuList[0].rightText = userInfo.value!!.coinInfo.coinCount.toString()
+        rank.value = userInfo.value!!.coinInfo.rank.toInt()
+        level.value = userInfo.value!!.coinInfo.level
+    }
     DrawerHeadComponent(activity)
     Column(modifier = Modifier.fillMaxSize()) {
         // 遍历生成菜单
@@ -62,17 +81,21 @@ fun Sidebar(
                     showDialog = true
                 } else {
                     activity.startActivity(Intent(activity, it.route))
-                    closeDrawer()
                 }
+                closeDrawer()
             }), content = {
                 MenuListItem(it)
             })
         }
         if (showDialog) {
-            MyAlertDialog(title = R.string.logout, text = R.string.is_logout, onPopupDismissed = onPopupDismissed,confirm = {
-                showDialog = false
-                isLogin.value = false
-            })
+            MyAlertDialog(
+                title = R.string.logout,
+                text = R.string.is_logout,
+                onPopupDismissed = onPopupDismissed,
+                confirm = {
+                    showDialog = false
+                    isLogin.value = false
+                })
         }
     }
 }
@@ -121,13 +144,12 @@ fun DrawerHeadComponent(activity: ComponentActivity) {
                     bottom.linkTo(parent.bottom)
                 }
         )
-        val userName = if (isLogin.value) {
-            DataStoreUtils.readStringData(AppConstant.UserNickname, "")
-        } else {
-            stringResource(id = R.string.go_login)
-        }
         Text(
-            text = userName,
+            text = if (isLogin.value) {
+                DataStoreUtils.readStringData(AppConstant.UserNickname, "")
+            } else {
+                stringResource(id = R.string.go_login)
+            },
             fontSize = 16.sp,
             fontWeight = FontWeight.Bold,
             color = colorResource(id = R.color.White),
@@ -149,7 +171,11 @@ fun DrawerHeadComponent(activity: ComponentActivity) {
                 )
             )
             Text(
-                text = stringResource(id = R.string.nav_line_2),
+                text = if (isLogin.value) {
+                    level.value.toString()
+                } else {
+                    stringResource(id = R.string.nav_line_2)
+                },
                 fontSize = 12.sp,
                 color = colorResource(
                     id = R.color.Grey100
@@ -164,7 +190,11 @@ fun DrawerHeadComponent(activity: ComponentActivity) {
                 modifier = Modifier.padding(8.dp, 0.dp, 0.dp, 0.dp)
             )
             Text(
-                text = stringResource(id = R.string.nav_line_2),
+                text = if (isLogin.value) {
+                    level.value.toString()
+                } else {
+                    stringResource(id = R.string.nav_line_2)
+                },
                 fontSize = 12.sp,
                 color = colorResource(
                     id = R.color.Grey100

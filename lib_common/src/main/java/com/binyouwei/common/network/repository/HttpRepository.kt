@@ -43,4 +43,6 @@ interface HttpRepository {
         password: String,
         repassword: String
     ): Flow<HttpResult<LoginBean>>
+
+    suspend fun getUserInfo(): Flow<HttpResult<UserInfoBean>>
 }
