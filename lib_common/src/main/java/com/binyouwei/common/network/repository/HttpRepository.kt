@@ -45,4 +45,6 @@ interface HttpRepository {
     ): Flow<HttpResult<LoginBean>>
 
     suspend fun getUserInfo(): Flow<HttpResult<UserInfoBean>>
+
+    fun getCollectList(): Flow<PagingData<ArticleBean>>
 }

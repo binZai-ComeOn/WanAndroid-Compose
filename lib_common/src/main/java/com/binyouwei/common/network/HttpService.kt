@@ -157,8 +157,15 @@ interface HttpService {
 
     /**
      * 获取个人积分，需要登录后访问
-     * https://www.wanandroid.com/lg/coin/userinfo/json
+     * https://www.wanandroid.com/user/lg/userinfo/json
      */
-    @GET("/lg/coin/userinfo/json")
+    @GET("/user/lg/userinfo/json")
     suspend fun getUserInfo(): BaseResponse<UserInfoBean>
+
+    /**
+     * 收藏文章列表
+     * https://www.wanandroid.com/lg/collect/list/0/json
+     */
+    @GET("/lg/collect/list/{page}/json")
+    suspend fun getCollectList(@Path("page") page : Int): BaseResponse<ListWrapper<ArticleBean>>
 }

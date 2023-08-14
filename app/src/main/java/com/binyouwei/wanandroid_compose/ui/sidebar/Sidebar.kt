@@ -29,10 +29,12 @@ import com.binyouwei.wanandroid_compose.R
 import com.binyouwei.wanandroid_compose.data.constant.AppConstant
 import com.binyouwei.wanandroid_compose.data.constant.isLogin
 import com.binyouwei.wanandroid_compose.ui.account.AccountActivity
+import com.binyouwei.wanandroid_compose.ui.sidebar.collect.CollectPage
 import com.binyouwei.wanandroid_compose.ui.sidebar.rank_list.RankingListActivity
 import com.binyouwei.wanandroid_compose.ui.widget.MenuListItem
 import com.binyouwei.wanandroid_compose.ui.widget.MyAlertDialog
 import com.binyouwei.wanandroid_compose.ui.widget.menuList
+import com.blankj.utilcode.util.LogUtils
 
 /**
  * @author 宾有为
@@ -58,13 +60,14 @@ fun Sidebar(
     if (isLogin.value) {
         viewModel.getUserInfo()
     }
-    val userInfo = remember {
-        viewModel.userInfo
+    val userInfoResult by remember {
+        viewModel.userInfoResult
     }
-    if (userInfo.value != null) {
-        menuList[0].rightText = userInfo.value!!.coinInfo.coinCount.toString()
-        rank.value = userInfo.value!!.coinInfo.rank.toInt()
-        level.value = userInfo.value!!.coinInfo.level
+    if (userInfoResult) {
+        val value = viewModel.userInfo.value!!
+        menuList[0].rightText = value.coinInfo.coinCount.toString()
+        rank.value = value.coinInfo.rank.toInt()
+        level.value = value.coinInfo.level
     }
     DrawerHeadComponent(activity)
     Column(modifier = Modifier.fillMaxSize()) {
@@ -80,7 +83,17 @@ fun Sidebar(
                     // 点击退出登录
                     showDialog = true
                 } else {
-                    activity.startActivity(Intent(activity, it.route))
+                    val intent = Intent(activity, it.route)
+                    if (isLogin.value) {
+                        if (it.route == CollectPage::class.java) {
+                            val userInfo = viewModel.userInfo.value
+                            intent.putIntegerArrayListExtra(
+                                AppConstant.ExtraKey,
+                                userInfo?.userInfo?.collectIds
+                            )
+                        }
+                    }
+                    activity.startActivity(intent)
                 }
                 closeDrawer()
             }), content = {
@@ -191,7 +204,7 @@ fun DrawerHeadComponent(activity: ComponentActivity) {
             )
             Text(
                 text = if (isLogin.value) {
-                    level.value.toString()
+                    rank.value.toString()
                 } else {
                     stringResource(id = R.string.nav_line_2)
                 },

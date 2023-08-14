@@ -1,11 +1,7 @@
 package com.binyouwei.common.network.interceptor
 
+import com.binyouwei.common.constant.*
 import com.binyouwei.common.manager.CookiesManager
-import com.binyouwei.common.constant.ARTICLE_WEBSITE
-import com.binyouwei.common.constant.COIN_WEBSITE
-import com.binyouwei.common.constant.COLLECTION_WEBSITE
-import com.binyouwei.common.constant.KEY_COOKIE
-import com.binyouwei.common.constant.NOT_COLLECTION_WEBSITE
 import com.blankj.utilcode.util.LogUtils
 import okhttp3.Interceptor
 import okhttp3.Response
@@ -24,10 +20,7 @@ class HeaderInterceptor : Interceptor {
         val url = request.url().toString()
 
         //给有需要的接口添加Cookies
-        if (!host.isNullOrEmpty()  && (url.contains(COLLECTION_WEBSITE)
-                        || url.contains(NOT_COLLECTION_WEBSITE)
-                        || url.contains(ARTICLE_WEBSITE)
-                        || url.contains(COIN_WEBSITE))) {
+        if (!host.isNullOrEmpty() && (url.contains(USER_INFO))) {
             val cookies = CookiesManager.getCookies()
             LogUtils.e("HeaderInterceptor:cookies:$cookies")
             if (!cookies.isNullOrEmpty()) {

@@ -64,4 +64,7 @@ class HttpRepositoryImpl constructor(private val apiService: HttpService) : Base
     override suspend fun getUserInfo(): Flow<HttpResult<UserInfoBean>> =
         flowable { apiService.getUserInfo() }
 
+    override fun getCollectList(): Flow<PagingData<ArticleBean>> =
+        pager { page -> apiService.getCollectList(page) }
+
 }

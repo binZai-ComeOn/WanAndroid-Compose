@@ -75,8 +75,8 @@
     <string name="delete_search_history">清空搜索历史</string>
     <string name="is_delete_search_history">确定清空搜索历史？</string>
 
-    <string name="nav_grade">等级:</string>
-    <string name="nav_rank">排名:</string>
+    <string name="nav_grade">等级：</string>
+    <string name="nav_rank">排名：</string>
     <string name="nav_line_2" translatable="false">--</string>
     <string name="title_activity_login">LoginActivity</string>
     <string name="prompt_email">Email</string>

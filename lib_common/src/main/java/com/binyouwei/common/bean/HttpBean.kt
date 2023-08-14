@@ -137,7 +137,13 @@ data class LoginBean(
 @Parcelize
 data class UserInfoBean(
     val coinInfo: CoinInfo,
-    val userInfo: UserInfo
+    val userInfo: UserInfo,
+    val collectArticleInfo: CollectArticleInfo
+): Parcelable
+
+@Parcelize
+data class CollectArticleInfo(
+    val count: Int
 ): Parcelable
 
 
@@ -154,9 +160,9 @@ data class CoinInfo(
 @Parcelize
 data class UserInfo(
     val admin: Boolean,
-    val chapterTops: List<Int>,
+    val chapterTops: ArrayList<Int>,
     val coinCount: Int,
-    val collectIds: List<Int>,
+    val collectIds: ArrayList<Int>,
     val email: String,
     val icon: String,
     val id: Int,
