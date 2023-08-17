@@ -31,7 +31,7 @@ data class ArticleBean(
     val author: String,
     val canEdit: Boolean,
     val chapterId: Int,
-    val chapterName: String,
+    var chapterName: String? = null,
     val collect: Boolean,
     val courseId: Int,
     val desc: String,
@@ -53,8 +53,8 @@ data class ArticleBean(
     val shareDate: Long,
     val shareUser: String,
     val superChapterId: Int,
-    val superChapterName: String,
-    val tags: MutableList<Tag>,
+    var superChapterName: String? = null,
+    var tags: MutableList<Tag>? = null,
     val title: String,
     val type: Int,
     val userId: Int,
@@ -73,7 +73,7 @@ data class Tag(
 data class WebData(
     var title: String,
     var url: String
-): Parcelable
+) : Parcelable
 
 @Parcelize
 data class RankingListBean(
@@ -97,7 +97,7 @@ data class KnowledgeSystemBean(
     var visible: Int = -1,
     var icon: String? = null,
     var link: String? = null
-): Parcelable
+) : Parcelable
 
 @Parcelize
 data class TabBean(
@@ -114,7 +114,7 @@ data class TabBean(
     val type: Int,
     val userControlSetTop: Boolean,
     val visible: Int
-): Parcelable
+) : Parcelable
 
 @Parcelize
 data class LoginBean(
@@ -131,7 +131,7 @@ data class LoginBean(
     val token: String,
     val type: Int,
     val username: String
-): Parcelable
+) : Parcelable
 
 
 @Parcelize
@@ -139,12 +139,12 @@ data class UserInfoBean(
     val coinInfo: CoinInfo,
     val userInfo: UserInfo,
     val collectArticleInfo: CollectArticleInfo
-): Parcelable
+) : Parcelable
 
 @Parcelize
 data class CollectArticleInfo(
     val count: Int
-): Parcelable
+) : Parcelable
 
 
 @Parcelize
@@ -155,7 +155,7 @@ data class CoinInfo(
     val rank: String,
     val userId: Int,
     val username: String
-): Parcelable
+) : Parcelable
 
 @Parcelize
 data class UserInfo(
@@ -172,4 +172,4 @@ data class UserInfo(
     val token: String,
     val type: Int,
     val username: String
-): Parcelable
+) : Parcelable

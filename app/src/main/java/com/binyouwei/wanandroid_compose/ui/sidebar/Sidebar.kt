@@ -68,6 +68,9 @@ fun Sidebar(
         menuList[0].rightText = value.coinInfo.coinCount.toString()
         rank.value = value.coinInfo.rank.toInt()
         level.value = value.coinInfo.level
+
+        LogUtils.e("TESTTTTTTTTTT:"+rank.value)
+        LogUtils.e("TESTTTTTTTTTT:"+level.value)
     }
     DrawerHeadComponent(activity)
     Column(modifier = Modifier.fillMaxSize()) {

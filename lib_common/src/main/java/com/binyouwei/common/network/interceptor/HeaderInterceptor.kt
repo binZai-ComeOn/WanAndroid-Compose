@@ -20,7 +20,7 @@ class HeaderInterceptor : Interceptor {
         val url = request.url().toString()
 
         //给有需要的接口添加Cookies
-        if (!host.isNullOrEmpty() && (url.contains(USER_INFO))) {
+        if (!host.isNullOrEmpty() && (url.contains(USER_INFO) || url.contains(COLLECT_LIST))) {
             val cookies = CookiesManager.getCookies()
             LogUtils.e("HeaderInterceptor:cookies:$cookies")
             if (!cookies.isNullOrEmpty()) {

@@ -27,6 +27,7 @@ import com.binyouwei.wanandroid_compose.ui.WebActivity
 import com.binyouwei.wanandroid_compose.ui.sidebar.SidebarViewModel
 import com.binyouwei.wanandroid_compose.ui.widget.ArticleItem
 import com.binyouwei.wanandroid_compose.ui.widget.TopBar
+import dagger.hilt.android.AndroidEntryPoint
 
 /**
  * @author 宾有为
@@ -34,6 +35,7 @@ import com.binyouwei.wanandroid_compose.ui.widget.TopBar
  * Social homepage: https://blog.csdn.net/baidu_41616022
  * @desc
  **/
+@AndroidEntryPoint
 class CollectPage : ComponentActivity() {
     //lateinit var collectIds : ArrayList<Int>
 

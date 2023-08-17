@@ -133,9 +133,9 @@ fun ArticleItem(article: ArticleBean, onClick: (WebData) -> Unit) {
                     color = colorResource(id = R.color.Red)
                 )
             }
-            if (article.tags.size > 0) {
+            if (!article.tags.isNullOrEmpty()) {
                 Text(
-                    text = article.tags[0].name, modifier = Modifier
+                    text = article.tags!![0].name, modifier = Modifier
                         .padding(end = 10.dp)
                         .border(
                             border = BorderStroke(0.5.dp, colorResource(id = R.color.colorAccent)),
@@ -168,25 +168,25 @@ fun ArticleItem(article: ArticleBean, onClick: (WebData) -> Unit) {
             color = colorResource(id = R.color.item_title),
         )
         var tagValue = ""
-        if (article.tags.isNotEmpty()) {
-            article.tags.forEachIndexed { index, tag ->
+        if (!article.tags.isNullOrEmpty()) {
+            article.tags?.forEachIndexed { index, tag ->
                 tagValue += tag.name
-                if (article.tags.size != (index + 1)) {
+                if (article.tags!!.size != (index + 1)) {
                     tagValue += " / "
                 }
             }
         } else {
             tagValue = when {
-                article.superChapterName.isNotEmpty() and article.chapterName.isNotEmpty() -> {
+                !article.superChapterName.isNullOrEmpty() and !article.chapterName.isNullOrEmpty() -> {
                     "${article.superChapterName} / ${article.chapterName}"
                 }
 
-                article.superChapterName.isNotEmpty() -> {
-                    article.superChapterName
+                !article.superChapterName.isNullOrEmpty() -> {
+                    article.superChapterName!!
                 }
 
-                article.chapterName.isNotEmpty() -> {
-                    article.chapterName
+                !article.chapterName.isNullOrEmpty() -> {
+                    article.chapterName!!
                 }
 
                 else -> ""
@@ -347,7 +347,8 @@ fun ProjectItem(bean: ArticleBean, onClick: (WebData) -> Unit) {
                 end.linkTo(parent.end)
                 width = Dimension.fillToConstraints
             })
-        Text(text = bean.desc,
+        Text(
+            text = bean.desc,
             fontSize = 10.sp,
             color = colorResource(id = R.color.item_desc),
             modifier = Modifier.constrainAs(tv_desc) {

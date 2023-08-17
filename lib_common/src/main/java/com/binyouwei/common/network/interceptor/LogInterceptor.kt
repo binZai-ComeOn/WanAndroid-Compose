@@ -49,7 +49,7 @@ class LogInterceptor @Inject constructor() : Interceptor {
         }.getOrNull()
 
         strb.appendLine(
-            "<<-<<-<<-<<-<<-<<-<<-<<-<<-<<-<<-<<-<<-<<-<<-<<-<<-<<-<<-<<-<<-<<-<<-<<-<<-<<-<<-<<-<<" +
+            "请求结果<<-<<-<<-<<-<<-<<-<<-<<-<<-<<-<<-<<-<<-<<-<<-<<-<<-<<-<<-<<-<<-<<-<<-<<-<<-<<-<<-<<-<<" +
                     "-<<-<<-<<-<<-<<-<<-<<-<<-<<-<<-<<-<<-<<-<<-<<-"
         )
         LogUtils.e(strb.toString())
@@ -59,7 +59,7 @@ class LogInterceptor @Inject constructor() : Interceptor {
         val strb = StringBuilder()
         strb.appendLine("\r\n")
         strb.appendLine(
-            "->->->->->->->->->->->->->->->->->->->->->->->->->->->->->->->->->"
+            "开始请求->->->->->->->->->->->->->->->->->->->->->->->->->->->->->->->->->"
         )
         logHeaders(strb, request, connection)
         strb.appendLine("RequestBody:${request.body().toString()}")
