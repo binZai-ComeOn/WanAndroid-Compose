@@ -8,11 +8,7 @@ import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.*
-import androidx.compose.runtime.Composable
-import androidx.compose.runtime.getValue
-import androidx.compose.runtime.setValue
-import androidx.compose.runtime.mutableStateOf
-import androidx.compose.runtime.remember
+import androidx.compose.runtime.*
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.res.colorResource
@@ -34,6 +30,7 @@ import com.binyouwei.wanandroid_compose.ui.sidebar.rank_list.RankingListActivity
 import com.binyouwei.wanandroid_compose.ui.widget.MenuListItem
 import com.binyouwei.wanandroid_compose.ui.widget.MyAlertDialog
 import com.binyouwei.wanandroid_compose.ui.widget.menuList
+import com.binyouwei.wanandroid_compose.ui.widget.snackBar
 import com.blankj.utilcode.util.LogUtils
 
 /**
@@ -50,6 +47,7 @@ private var rank = mutableStateOf(0)
 @Composable
 fun Sidebar(
     activity: ComponentActivity,
+    snackbarHostState: SnackbarHostState,
     closeDrawer: () -> Unit,
 ) {
     var showDialog by remember {
@@ -63,15 +61,14 @@ fun Sidebar(
     val userInfoResult by remember {
         viewModel.userInfoResult
     }
+    val scope = rememberCoroutineScope()
     if (userInfoResult) {
         val value = viewModel.userInfo.value!!
         menuList[0].rightText = value.coinInfo.coinCount.toString()
         rank.value = value.coinInfo.rank.toInt()
         level.value = value.coinInfo.level
-
-        LogUtils.e("TESTTTTTTTTTT:"+rank.value)
-        LogUtils.e("TESTTTTTTTTTT:"+level.value)
     }
+    val stringResource = stringResource(id = R.string.please_log_in_and_try_again)
     DrawerHeadComponent(activity)
     Column(modifier = Modifier.fillMaxSize()) {
         // 遍历生成菜单
@@ -85,19 +82,21 @@ fun Sidebar(
                 if (it.menuName == R.string.logout) {
                     // 点击退出登录
                     showDialog = true
-                } else {
-                    val intent = Intent(activity, it.route)
-                    if (isLogin.value) {
-                        if (it.route == CollectPage::class.java) {
-                            val userInfo = viewModel.userInfo.value
-                            intent.putIntegerArrayListExtra(
-                                AppConstant.ExtraKey,
-                                userInfo?.userInfo?.collectIds
-                            )
-                        }
+                } /*else if (isLogin.value && (it.menuName == R.string.my_share || it.menuName == R.string.collect || it.menuName == R.string.integral)) {
+                    snackBar(snackbarHostState, scope, stringResource)
+                    return@clickable
+                }*/
+                val intent = Intent(activity, it.route)
+                if (isLogin.value) {
+                    if (it.route == CollectPage::class.java) {
+                        val userInfo = viewModel.userInfo.value
+                        intent.putIntegerArrayListExtra(
+                            AppConstant.ExtraKey,
+                            userInfo?.userInfo?.collectIds
+                        )
                     }
-                    activity.startActivity(intent)
                 }
+                activity.startActivity(intent)
                 closeDrawer()
             }), content = {
                 MenuListItem(it)

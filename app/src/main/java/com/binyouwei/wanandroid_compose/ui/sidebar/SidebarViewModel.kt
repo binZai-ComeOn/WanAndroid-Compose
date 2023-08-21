@@ -8,6 +8,7 @@ import androidx.paging.cachedIn
 import com.binyouwei.common.base.BaseViewModel
 import com.binyouwei.common.bean.ArticleBean
 import com.binyouwei.common.bean.RankingListBean
+import com.binyouwei.common.bean.ScoreBean
 import com.binyouwei.common.bean.UserInfoBean
 import com.binyouwei.common.network.HttpResult
 import com.binyouwei.common.network.repository.HttpRepository
@@ -28,6 +29,7 @@ class SidebarViewModel @Inject constructor(
 ) : BaseViewModel() {
     val rankingList = MutableLiveData<Flow<PagingData<RankingListBean>>?>(null)
     val collectArticles = MutableLiveData<Flow<PagingData<ArticleBean>>?>(null)
+    val integrals = MutableLiveData<Flow<PagingData<ScoreBean>>?>(null)
 
     val userInfoResult = mutableStateOf(false)
     val userInfo = MutableLiveData<UserInfoBean>(null)
@@ -38,6 +40,10 @@ class SidebarViewModel @Inject constructor(
 
     fun getRankingList() {
         rankingList.value = repository.getRankingList().cachedIn(viewModelScope)
+    }
+
+    fun getUserScoreList() {
+        integrals.value = repository.getUserScoreList().cachedIn(viewModelScope)
     }
 
     fun getUserInfo() {

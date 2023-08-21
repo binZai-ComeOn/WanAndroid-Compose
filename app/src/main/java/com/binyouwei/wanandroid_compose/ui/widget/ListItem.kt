@@ -22,15 +22,13 @@ import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.text.style.TextOverflow
+import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.constraintlayout.compose.ConstraintLayout
 import androidx.constraintlayout.compose.Dimension
 import coil.compose.AsyncImage
-import com.binyouwei.common.bean.ArticleBean
-import com.binyouwei.common.bean.KnowledgeSystemBean
-import com.binyouwei.common.bean.RankingListBean
-import com.binyouwei.common.bean.WebData
+import com.binyouwei.common.bean.*
 import com.binyouwei.common.utils.TimeUtil
 import com.binyouwei.wanandroid_compose.R
 import com.binyouwei.wanandroid_compose.data.bean.MenuBean
@@ -38,7 +36,6 @@ import com.binyouwei.wanandroid_compose.ui.sidebar.collect.CollectPage
 import com.binyouwei.wanandroid_compose.ui.sidebar.integral.IntegralPage
 import com.binyouwei.wanandroid_compose.ui.sidebar.share.MySharePage
 import com.binyouwei.wanandroid_compose.ui.sidebar.seting.SetingPage
-import com.blankj.utilcode.util.LogUtils
 
 var menuList = listOf(
     MenuBean(
@@ -387,5 +384,34 @@ fun ProjectItem(bean: ArticleBean, onClick: (WebData) -> Unit) {
                     top.linkTo(parent.bottom, margin = 10.dp)
                 }
         )
+    }
+}
+
+@Composable
+fun UserScoreItem(item: ScoreBean) {
+    ConstraintLayout(
+        modifier = Modifier
+            .fillMaxWidth()
+            .padding(16.dp)
+    ) {
+        val (tv_reason, tv_desc, tv_score) = createRefs()
+        Text(
+            text = item.reason, modifier = Modifier.constrainAs(tv_reason) {
+                top.linkTo(parent.top)
+                start.linkTo(parent.start)
+            },
+            fontSize = 16.sp, color = colorResource(id = R.color.item_title)
+        )
+        Text(text = item.desc, modifier = Modifier
+            .constrainAs(tv_desc) {
+                top.linkTo(tv_reason.bottom)
+                start.linkTo(parent.start)
+            }
+            .padding(top = 4.dp), color = colorResource(id = R.color.item_date))
+        Text(text = "+${item.coinCount}", modifier = Modifier.constrainAs(tv_score) {
+            end.linkTo(parent.end)
+            top.linkTo(parent.top)
+            bottom.linkTo(parent.bottom)
+        }, color = colorResource(id = R.color.colorAccent))
     }
 }

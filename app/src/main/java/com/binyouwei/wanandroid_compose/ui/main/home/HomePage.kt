@@ -33,7 +33,7 @@ fun HomePage(
         getTopArticles()
         getHomeData()
     }
-    if (CookiesManager.getCookies().isNullOrEmpty()) {
+    if (!CookiesManager.getCookies().isNullOrEmpty()) {
         isLogin.value = true
     }
     val pagingItems = viewModel.articles.value?.collectAsLazyPagingItems()

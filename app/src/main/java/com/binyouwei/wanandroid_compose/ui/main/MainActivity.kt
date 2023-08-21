@@ -58,7 +58,7 @@ class MainActivity : ComponentActivity() {
                 BottomNavigationBar(navCtrl = navCtrl, bnbsMain)
             },
             drawerContent = {
-                Sidebar(this@MainActivity) { coroutineScope.launch { drawerState.close() } }
+                Sidebar(this@MainActivity,scaffoldState.snackbarHostState) { coroutineScope.launch { drawerState.close() } }
             },
             content = {
                 it.calculateBottomPadding()

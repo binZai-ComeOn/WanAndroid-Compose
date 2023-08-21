@@ -17,6 +17,8 @@ interface HttpRepository {
 
     fun getRankingList(): Flow<PagingData<RankingListBean>>
 
+    fun getUserScoreList(): Flow<PagingData<ScoreBean>>
+
     fun queryArticles(keywords: String): Flow<PagingData<ArticleBean>>
 
     fun getSquareList(): Flow<PagingData<ArticleBean>>

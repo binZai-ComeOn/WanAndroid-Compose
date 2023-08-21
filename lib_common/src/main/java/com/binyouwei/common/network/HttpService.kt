@@ -47,6 +47,14 @@ interface HttpService {
     @GET("/coin/rank/{page}/json")
     suspend fun getRankingList(@Path("page") page: Int): BaseResponse<ListWrapper<RankingListBean>>
 
+    /**
+     * 获取个人积分列表，需要登录后访问
+     * https://www.wanandroid.com//lg/coin/list/1/json
+     * @param page 页码 从1开始
+     */
+    @GET("/lg/coin/list/{page}/json")
+    suspend fun getUserScoreList(@Path("page") page: Int): BaseResponse<ListWrapper<ScoreBean>>
+
     @POST("/article/query/{page}/json")
     @FormUrlEncoded
     suspend fun queryArticles(
