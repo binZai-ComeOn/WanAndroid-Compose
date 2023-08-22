@@ -19,6 +19,7 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.constraintlayout.compose.ConstraintLayout
 import androidx.hilt.navigation.compose.hiltViewModel
+import com.binyouwei.common.manager.CookiesManager
 import com.binyouwei.common.utils.ActivityMessenger
 import com.binyouwei.common.utils.DataStoreUtils
 import com.binyouwei.wanandroid_compose.R
@@ -26,6 +27,7 @@ import com.binyouwei.wanandroid_compose.data.constant.AppConstant
 import com.binyouwei.wanandroid_compose.data.constant.isLogin
 import com.binyouwei.wanandroid_compose.ui.account.AccountActivity
 import com.binyouwei.wanandroid_compose.ui.sidebar.collect.CollectPage
+import com.binyouwei.wanandroid_compose.ui.sidebar.integral.IntegralPage
 import com.binyouwei.wanandroid_compose.ui.sidebar.rank_list.RankingListActivity
 import com.binyouwei.wanandroid_compose.ui.widget.MenuListItem
 import com.binyouwei.wanandroid_compose.ui.widget.MyAlertDialog
@@ -40,7 +42,7 @@ import com.blankj.utilcode.util.LogUtils
  * @desc
  **/
 
-private var integral = mutableStateOf(0)
+private var integral = mutableStateOf("0")
 private var level = mutableStateOf(0)
 private var rank = mutableStateOf(0)
 
@@ -64,10 +66,11 @@ fun Sidebar(
     val scope = rememberCoroutineScope()
     if (userInfoResult) {
         val value = viewModel.userInfo.value!!
-        menuList[0].rightText = value.coinInfo.coinCount.toString()
+        integral.value = value.coinInfo.coinCount.toString()
         rank.value = value.coinInfo.rank.toInt()
         level.value = value.coinInfo.level
     }
+    menuList[0].rightText = if (isLogin.value) integral.value else "0"
     val stringResource = stringResource(id = R.string.please_log_in_and_try_again)
     DrawerHeadComponent(activity)
     Column(modifier = Modifier.fillMaxSize()) {
@@ -82,17 +85,24 @@ fun Sidebar(
                 if (it.menuName == R.string.logout) {
                     // 点击退出登录
                     showDialog = true
-                } /*else if (isLogin.value && (it.menuName == R.string.my_share || it.menuName == R.string.collect || it.menuName == R.string.integral)) {
-                    snackBar(snackbarHostState, scope, stringResource)
                     return@clickable
-                }*/
+                } else if (!isLogin.value && (it.menuName == R.string.my_share || it.menuName == R.string.collect || it.menuName == R.string.integral)) {
+                    snackBar(snackbarHostState, scope, stringResource)
+                    closeDrawer()
+                    return@clickable
+                }
                 val intent = Intent(activity, it.route)
                 if (isLogin.value) {
+                    val userInfo = viewModel.userInfo.value
                     if (it.route == CollectPage::class.java) {
-                        val userInfo = viewModel.userInfo.value
                         intent.putIntegerArrayListExtra(
                             AppConstant.ExtraKey,
                             userInfo?.userInfo?.collectIds
+                        )
+                    } else if (it.route == IntegralPage::class.java) {
+                        intent.putExtra(
+                            AppConstant.ExtraKey,
+                            userInfo?.userInfo?.coinCount.toString()
                         )
                     }
                 }
@@ -110,6 +120,7 @@ fun Sidebar(
                 confirm = {
                     showDialog = false
                     isLogin.value = false
+                    CookiesManager.clearCookies()
                 })
         }
     }

@@ -392,26 +392,37 @@ fun UserScoreItem(item: ScoreBean) {
     ConstraintLayout(
         modifier = Modifier
             .fillMaxWidth()
-            .padding(16.dp)
+            .padding(top = 10.dp)
     ) {
-        val (tv_reason, tv_desc, tv_score) = createRefs()
+        val (tv_reason, tv_desc, tv_score, divider) = createRefs()
         Text(
             text = item.reason, modifier = Modifier.constrainAs(tv_reason) {
                 top.linkTo(parent.top)
-                start.linkTo(parent.start)
+                start.linkTo(parent.start, margin = 16.dp)
             },
             fontSize = 16.sp, color = colorResource(id = R.color.item_title)
         )
         Text(text = item.desc, modifier = Modifier
             .constrainAs(tv_desc) {
                 top.linkTo(tv_reason.bottom)
-                start.linkTo(parent.start)
+                start.linkTo(parent.start, margin = 16.dp)
             }
             .padding(top = 4.dp), color = colorResource(id = R.color.item_date))
         Text(text = "+${item.coinCount}", modifier = Modifier.constrainAs(tv_score) {
-            end.linkTo(parent.end)
+            end.linkTo(parent.end, margin = 16.dp)
             top.linkTo(parent.top)
             bottom.linkTo(parent.bottom)
         }, color = colorResource(id = R.color.colorAccent))
+        Box(
+            modifier = Modifier
+                .fillMaxWidth()
+                .height(0.5.dp)
+                .background(color = colorResource(id = R.color.list_divider))
+                .constrainAs(divider) {
+                    start.linkTo(parent.start)
+                    end.linkTo(parent.end)
+                    top.linkTo(tv_score.bottom, margin = 16.dp)
+                }
+        )
     }
 }
