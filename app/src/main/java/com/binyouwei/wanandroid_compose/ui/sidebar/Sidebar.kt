@@ -144,7 +144,9 @@ fun DrawerHeadComponent(activity: ComponentActivity) {
     ) {
         val (pointsRanking, avatar, name, row) = createRefs()
         IconButton(onClick = {
-            ActivityMessenger.startActivity<RankingListActivity>(activity)
+            if (!isLogin.value) {
+                ActivityMessenger.startActivity<RankingListActivity>(activity)
+            }
         }, modifier = Modifier
             .constrainAs(pointsRanking) {
                 top.linkTo(parent.top)
