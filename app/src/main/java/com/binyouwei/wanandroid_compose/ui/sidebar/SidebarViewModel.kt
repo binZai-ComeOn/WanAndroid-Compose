@@ -6,10 +6,7 @@ import androidx.lifecycle.viewModelScope
 import androidx.paging.PagingData
 import androidx.paging.cachedIn
 import com.binyouwei.common.base.BaseViewModel
-import com.binyouwei.common.bean.ArticleBean
-import com.binyouwei.common.bean.RankingListBean
-import com.binyouwei.common.bean.ScoreBean
-import com.binyouwei.common.bean.UserInfoBean
+import com.binyouwei.common.bean.*
 import com.binyouwei.common.network.HttpResult
 import com.binyouwei.common.network.repository.HttpRepository
 import com.blankj.utilcode.util.LogUtils
@@ -30,6 +27,7 @@ class SidebarViewModel @Inject constructor(
     val rankingList = MutableLiveData<Flow<PagingData<RankingListBean>>?>(null)
     val collectArticles = MutableLiveData<Flow<PagingData<ArticleBean>>?>(null)
     val integrals = MutableLiveData<Flow<PagingData<ScoreBean>>?>(null)
+    val shares = MutableLiveData<Flow<PagingData<ShareArticleBean>>?>(null)
 
     val userInfoResult = mutableStateOf(false)
     val userInfo = MutableLiveData<UserInfoBean>(null)
@@ -44,6 +42,10 @@ class SidebarViewModel @Inject constructor(
 
     fun getUserScoreList() {
         integrals.value = repository.getUserScoreList().cachedIn(viewModelScope)
+    }
+
+    fun getShareList() {
+        shares.value = repository.getShareList().cachedIn(viewModelScope)
     }
 
     fun getUserInfo() {

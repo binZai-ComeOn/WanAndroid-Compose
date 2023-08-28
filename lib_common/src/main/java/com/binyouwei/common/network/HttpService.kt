@@ -176,4 +176,12 @@ interface HttpService {
      */
     @GET("/lg/collect/list/{page}/json")
     suspend fun getCollectList(@Path("page") page : Int): BaseResponse<ListWrapper<ArticleBean>>
+
+    /**
+     * 自己的分享的文章列表
+     * https://wanandroid.com/user/lg/private_articles/1/json
+     * @param page 页码 从1开始
+     */
+    @GET("/user/lg/private_articles/{page}/json")
+    suspend fun getShareList(@Path("page") page: Int): BaseResponse<ListWrapper<ShareArticleBean>>
 }

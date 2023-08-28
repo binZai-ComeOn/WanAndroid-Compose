@@ -30,7 +30,10 @@ class HeaderInterceptor : Interceptor {
             }
         }
         // 给有需要的接口添加Cookies
-        if (url.contains(USER_INFO) || url.contains(COLLECT_LIST) || url.contains(USER_SCORE)) {
+        if (url.contains(USER_INFO) || url.contains(COLLECT_LIST) || url.contains(USER_SCORE) || url.contains(
+                USER_SHARE
+            )
+        ) {
             val cookies = CookiesManager.getCookies()
             LogUtils.e("HeaderInterceptor:cookies:$cookies")
             if (!cookies.isNullOrEmpty()) {

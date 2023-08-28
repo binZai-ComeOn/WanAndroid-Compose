@@ -69,4 +69,7 @@ class HttpRepositoryImpl constructor(private val apiService: HttpService) : Base
     override fun getCollectList(): Flow<PagingData<ArticleBean>> =
         pager { page -> apiService.getCollectList(page) }
 
+    override fun getShareList(): Flow<PagingData<ShareArticleBean>> =
+        pager { page -> apiService.getShareList(page) }
+
 }

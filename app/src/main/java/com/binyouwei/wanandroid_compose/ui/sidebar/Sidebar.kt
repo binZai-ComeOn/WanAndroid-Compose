@@ -139,14 +139,14 @@ fun DrawerHeadComponent(activity: ComponentActivity) {
             )
             .padding(8.dp, 8.dp, 8.dp, 8.dp)
             .clickable {
-                ActivityMessenger.startActivity<AccountActivity>(activity)
+                if (!isLogin.value) {
+                    ActivityMessenger.startActivity<AccountActivity>(activity)
+                }
             }
     ) {
         val (pointsRanking, avatar, name, row) = createRefs()
         IconButton(onClick = {
-            if (!isLogin.value) {
-                ActivityMessenger.startActivity<RankingListActivity>(activity)
-            }
+            ActivityMessenger.startActivity<RankingListActivity>(activity)
         }, modifier = Modifier
             .constrainAs(pointsRanking) {
                 top.linkTo(parent.top)
