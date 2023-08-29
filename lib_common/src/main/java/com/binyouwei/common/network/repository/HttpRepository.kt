@@ -50,5 +50,5 @@ interface HttpRepository {
 
     fun getCollectList(): Flow<PagingData<ArticleBean>>
 
-    fun getShareList(): Flow<PagingData<ShareArticleBean>>
+    suspend fun getShareList(page : Int): Flow<HttpResult<ShareWrapper<ArticleBean>>>
 }

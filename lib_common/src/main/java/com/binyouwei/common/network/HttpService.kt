@@ -183,5 +183,5 @@ interface HttpService {
      * @param page 页码 从1开始
      */
     @GET("/user/lg/private_articles/{page}/json")
-    suspend fun getShareList(@Path("page") page: Int): BaseResponse<ListWrapper<ShareArticleBean>>
+    suspend fun getShareList(@Path("page") page: Int): BaseResponse<ShareWrapper<ArticleBean>>
 }

@@ -10,7 +10,12 @@ data class ListWrapper<T>(
     var pageCount: Int,
     var size: Int,
     var total: Int,
-    var datas: ArrayList<T>
+    var datas: List<T>
+)
+
+data class ShareWrapper<T>(
+    val coinInfo: CoinInfo,
+    val shareArticles: ListWrapper<T>
 )
 
 @Parcelize
@@ -186,7 +191,7 @@ data class UserInfo(
 ) : Parcelable
 
 @Parcelize
-data class ShareArticleBean(
+data class ShareArticleBean<out T>(
     val coinInfo: CoinInfo,
     val shareArticles: ShareArticles
 ) : Parcelable
@@ -194,7 +199,7 @@ data class ShareArticleBean(
 @Parcelize
 data class ShareArticles(
     val curPage: Int,
-    val datas: List<ArticleBean>,
+    val datas: MutableList<ArticleBean>,
     val offset: Int,
     val over: Boolean,
     val pageCount: Int,

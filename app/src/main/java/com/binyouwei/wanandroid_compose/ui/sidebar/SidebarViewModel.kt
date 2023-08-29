@@ -27,10 +27,11 @@ class SidebarViewModel @Inject constructor(
     val rankingList = MutableLiveData<Flow<PagingData<RankingListBean>>?>(null)
     val collectArticles = MutableLiveData<Flow<PagingData<ArticleBean>>?>(null)
     val integrals = MutableLiveData<Flow<PagingData<ScoreBean>>?>(null)
-    val shares = MutableLiveData<Flow<PagingData<ShareArticleBean>>?>(null)
+    val shares = MutableLiveData<ShareWrapper<ArticleBean>>(null)
 
     val userInfoResult = mutableStateOf(false)
     val userInfo = MutableLiveData<UserInfoBean>(null)
+    val getShareArticleResult = mutableStateOf(false)
 
     fun getCollectArticles() {
         collectArticles.value = repository.getCollectList().cachedIn(viewModelScope)
@@ -45,7 +46,19 @@ class SidebarViewModel @Inject constructor(
     }
 
     fun getShareList() {
-        shares.value = repository.getShareList().cachedIn(viewModelScope)
+        async {
+            repository.getShareList(1).collectLatest { response ->
+                when (response) {
+                    is HttpResult.Success -> {
+                        getShareArticleResult.value = true
+                        shares.value = response.result!!
+                    }
+                    else -> {
+                        getShareArticleResult.value = false
+                    }
+                }
+            }
+        }
     }
 
     fun getUserInfo() {

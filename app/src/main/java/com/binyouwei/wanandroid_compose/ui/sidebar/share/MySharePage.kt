@@ -12,6 +12,8 @@ import androidx.compose.material.Scaffold
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Add
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.*
+import androidx.compose.runtime.remember
 import androidx.compose.ui.res.stringResource
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.paging.compose.collectAsLazyPagingItems
@@ -47,7 +49,10 @@ class MySharePage : ComponentActivity() {
     private fun setContentLayout() {
         val viewModel: SidebarViewModel = hiltViewModel()
         viewModel.getShareList()
-        val shares = viewModel.shares.value?.collectAsLazyPagingItems()
+        var requestResult by remember {
+            viewModel.getShareArticleResult
+        }
+        // val shares = viewModel.shares.value?.collectAsLazyPagingItems()
         Scaffold(topBar = {
             TopBar(this, title = stringResource(id = R.string.share)) {
                 IconButton(onClick = { ActivityMessenger.startActivity<ShareArticlePage>(this@MySharePage) }) {
@@ -61,13 +66,15 @@ class MySharePage : ComponentActivity() {
             it.calculateBottomPadding()
             Column() {
                 LazyColumn(content = {
-                    if (shares != null) {
-                        itemsIndexed(shares) { _, item ->
-                            LogUtils.e("TESTTTT${item?.shareArticles?.total}")
-                            /*ArticleItem(item.shareArticles) { webData ->
-                                ActivityMessenger.startActivity<WebActivity>(this@SearchResultPage,
-                                    AppConstant.ExtraKey to webData)
-                            }*/
+                    if (requestResult) {
+                        val value = viewModel.shares.value
+                        itemsIndexed(value?.shareArticles?.datas!!) { _, item ->
+                            ArticleItem(item) { webData ->
+                                ActivityMessenger.startActivity<WebActivity>(
+                                    this@MySharePage,
+                                    AppConstant.ExtraKey to webData
+                                )
+                            }
                         }
                     }
                 })

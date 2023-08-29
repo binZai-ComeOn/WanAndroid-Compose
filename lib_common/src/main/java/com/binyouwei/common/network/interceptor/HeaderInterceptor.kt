@@ -20,8 +20,9 @@ class HeaderInterceptor : Interceptor {
         val request = chain.request()
         val response = chain.proceed(request)
         val newBuilder = request.newBuilder()
-        newBuilder.addHeader("Content-type", "application/json; charset=utf-8")
         val url = request.url().toString()
+        newBuilder.addHeader("Content-type", "application/json; charset=utf-8")
+        newBuilder.addHeader("RequestUrl", url)
         // 登录、注册的时候提取cookie
         val responseCookies = response.headers(SET_COOKIE_KEY)
         if (url.contains(loginUrl) || url.contains(registerUrl)) {
