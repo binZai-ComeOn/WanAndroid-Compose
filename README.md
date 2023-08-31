@@ -70,9 +70,10 @@ Navtigation导航page及跳转新的界面
  - 登录、注册界面点击输入框，hilt缩小并显示在输入框的上方
  - 侧边栏使用列表使用ConstraintLayout重构
 
-# 出现过的BUG
+# 待优化
  - 从其它页面切换到首页页面，数据会重新渲染两次
  - 搜索测试两个字，会出现带html的标题，无法将这些html标题解析
  - 阅读部分文章时，会出现网页加载失败的问题
  - InputText暂时无法在首次输入文本时出现清除的小图标
  - 使用Android Studio自带的Android模拟器使用DataStore无法获取数据
+ - 我的分享数据获取应使用paging3获取分页数据

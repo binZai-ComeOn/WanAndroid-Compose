@@ -184,4 +184,13 @@ interface HttpService {
      */
     @GET("/user/lg/private_articles/{page}/json")
     suspend fun getShareList(@Path("page") page: Int): BaseResponse<ShareWrapper<ArticleBean>>
+
+    /**
+     * 分享文章
+     * https://www.wanandroid.com/lg/user_article/add/json
+     * @param title
+     * @param link
+     */
+    @POST("/lg/user_article/add/json")
+    suspend fun shareArticle(@Field("title") title: Int,@Field("link") link : String): BaseResponse<ShareWrapper<ArticleBean>>
 }

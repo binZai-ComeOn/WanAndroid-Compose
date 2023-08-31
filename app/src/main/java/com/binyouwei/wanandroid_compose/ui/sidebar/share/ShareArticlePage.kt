@@ -6,13 +6,9 @@ import androidx.activity.compose.setContent
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
-import androidx.compose.material.IconButton
-import androidx.compose.material.Scaffold
-import androidx.compose.material.SnackbarHostState
-import androidx.compose.material.Text
-import androidx.compose.material.TextField
-import androidx.compose.material.rememberScaffoldState
+import androidx.compose.material.*
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.*
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.rememberCoroutineScope
@@ -51,10 +47,10 @@ class ShareArticlePage : ComponentActivity() {
         val viewModel: SidebarViewModel = hiltViewModel()
         val scaffoldState = rememberScaffoldState()
         val coroutineScope = rememberCoroutineScope()
-        val title = remember {
+        var title by remember {
             mutableStateOf("")
         }
-        val content = remember {
+        var content by remember {
             mutableStateOf("")
         }
         Scaffold(
@@ -64,11 +60,11 @@ class ShareArticlePage : ComponentActivity() {
                 val linkTip = stringResource(id = R.string.share_article_link_tip_null)
                 TopBar(this, title = stringResource(id = R.string.my_share)) {
                     IconButton(onClick = {
-                        if (title.value.isEmpty()){
-                            snackBar(scaffoldState.snackbarHostState,coroutineScope,titleTip)
+                        if (title.isEmpty()) {
+                            snackBar(scaffoldState.snackbarHostState, coroutineScope, titleTip)
                             return@IconButton
-                        } else if (content.value.isEmpty()) {
-                            snackBar(scaffoldState.snackbarHostState,coroutineScope,linkTip)
+                        } else if (content.isEmpty()) {
+                            snackBar(scaffoldState.snackbarHostState, coroutineScope, linkTip)
                             return@IconButton
                         }
                         viewModel.shareArticle()
@@ -90,16 +86,18 @@ class ShareArticlePage : ComponentActivity() {
                         id = R.color.common_color
                     ), modifier = Modifier.padding(bottom = 10.dp)
                 )
-                TextField(
-                    value = "",
+                OutlinedTextField(
+                    value = title,
                     modifier = Modifier.fillMaxWidth(),
-                    label = {
-                        // Text(if (true) "长度不能少于8位" else "请输入密码")
-                    },
-                    placeholder = { Text(text = stringResource(id = R.string.share_article_title_tip)) },
-                    onValueChange = {
-
-                    })
+                    label = { Text(text = stringResource(id = R.string.share_article_title_tip)) },
+                    onValueChange = { text ->
+                        title = text
+                    }, colors = TextFieldDefaults.outlinedTextFieldColors(
+                        focusedBorderColor = colorResource(
+                            id = R.color.colorPrimary
+                        )
+                    )
+                )
                 Text(
                     text = stringResource(id = R.string.share_article_link),
                     fontSize = 14.sp,
@@ -107,13 +105,19 @@ class ShareArticlePage : ComponentActivity() {
                         id = R.color.common_color
                     ), modifier = Modifier.padding(bottom = 10.dp, top = 10.dp)
                 )
-                TextField(
-                    value = "",
+                OutlinedTextField(
+                    value = content,
                     modifier = Modifier.fillMaxWidth(),
-                    placeholder = { Text(text = stringResource(id = R.string.share_article_link_tip)) },
-                    onValueChange = {
-
-                    })
+                    label = { Text(text = stringResource(id = R.string.share_article_link_tip)) },
+                    onValueChange = { text ->
+                        content = text
+                    },
+                    colors = TextFieldDefaults.outlinedTextFieldColors(
+                        focusedBorderColor = colorResource(
+                            id = R.color.colorPrimary
+                        )
+                    )
+                )
                 Text(
                     text = stringResource(id = R.string.share_article_tip), color = colorResource(
                         id = R.color.item_desc

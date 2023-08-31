@@ -77,9 +77,6 @@ class SidebarViewModel @Inject constructor(
         }
     }
 
-    /**
-     * 需要实现登录功能才可以做
-     */
     fun shareArticle() {
         async {
             repository.shareArticle()
