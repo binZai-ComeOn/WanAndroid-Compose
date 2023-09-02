@@ -133,7 +133,7 @@ fun TopSearchBar(
                 // 将搜索事件自定义
                 keyboardActions = KeyboardActions(
                     onSearch = {
-                        onClickSearch(text.value)
+                        onClickSearch(text.value.trim())
                     }),
                 // 设置文本末尾的可选图标
                 trailingIcon = {
@@ -165,7 +165,7 @@ fun TopSearchBar(
         actions = {
             val tooltip = stringResource(id = R.string.please_input_keywords)
             IconButton(onClick = {
-                if (text.value == "") {
+                if (text.value.isEmpty()) {
                     snackBar(
                         snackbarHostState = scaffoldState.snackbarHostState,
                         coroutineScope = coroutineScope,
@@ -173,7 +173,7 @@ fun TopSearchBar(
                     )
                     return@IconButton
                 }
-                onClickSearch(text.value)
+                onClickSearch(text.value.trim())
             }) {
                 Icon(
                     painter = painterResource(id = R.drawable.ic_search_white_24dp),

@@ -3,7 +3,6 @@ package com.binyouwei.common.network.repository
 import androidx.paging.PagingData
 import com.binyouwei.common.base.BaseRepository
 import com.binyouwei.common.network.HttpService
-import com.binyouwei.common.base.BaseResponse
 import com.binyouwei.common.bean.*
 import com.binyouwei.common.network.HttpResult
 import kotlinx.coroutines.flow.Flow
@@ -27,9 +26,8 @@ class HttpRepositoryImpl constructor(private val apiService: HttpService) : Base
         pager { page -> apiService.queryArticles(page, keywords) }
 
     override fun getSquareList() = pager { page -> apiService.getSquareList(page) }
-    override fun shareArticle(): Flow<PagingData<ArticleBean>> {
-        TODO("Not yet implemented")
-    }
+    override fun shareArticle(title: String, link: String): Flow<HttpResult<String>> =
+        flowable { apiService.shareArticle(title,link) }
 
     override fun getKnowledgeTree(): Flow<HttpResult<MutableList<KnowledgeSystemBean>>> =
         flowable { apiService.getKnowledgeTree() }
@@ -69,5 +67,6 @@ class HttpRepositoryImpl constructor(private val apiService: HttpService) : Base
     override fun getCollectList(): Flow<PagingData<ArticleBean>> =
         pager { page -> apiService.getCollectList(page) }
 
-    override suspend fun getShareList(page : Int) : Flow<HttpResult<ShareWrapper<ArticleBean>>> = flowable {  apiService.getShareList(page) }
+    override suspend fun getShareList(page: Int): Flow<HttpResult<ShareWrapper<ArticleBean>>> =
+        flowable { apiService.getShareList(page) }
 }

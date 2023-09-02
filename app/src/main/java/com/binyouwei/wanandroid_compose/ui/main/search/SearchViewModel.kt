@@ -65,6 +65,7 @@ class SearchViewModel @Inject constructor(
 
     fun insertSearchHistory(name: String) {
         async {
+            if (name.isNullOrEmpty()) return@async
             val data = db.searchHistoryDao().querySearchHistory(name)
             val bean = SearchHistoryTable(name = name, time = TimeUtil.currentTimeMillis())
             if (data.isNotEmpty()) {

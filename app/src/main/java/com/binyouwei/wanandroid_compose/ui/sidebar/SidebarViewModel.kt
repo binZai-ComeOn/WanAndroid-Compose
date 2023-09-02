@@ -32,6 +32,7 @@ class SidebarViewModel @Inject constructor(
     val userInfoResult = mutableStateOf(false)
     val userInfo = MutableLiveData<UserInfoBean>(null)
     val getShareArticleResult = mutableStateOf(false)
+    val shareArticleResult = mutableStateOf(false)
 
     fun getCollectArticles() {
         collectArticles.value = repository.getCollectList().cachedIn(viewModelScope)
@@ -77,9 +78,19 @@ class SidebarViewModel @Inject constructor(
         }
     }
 
-    fun shareArticle() {
+    fun shareArticle(title: String, link: String) {
+        shareArticleResult.value = true
         async {
-            repository.shareArticle()
+            /*repository.shareArticle(title, link).collectLatest {response ->
+                when (response) {
+                    is HttpResult.Success -> {
+                        shareArticleResult.value = true
+                    }
+                    else -> {
+                        shareArticleResult.value = false
+                    }
+                }
+            }*/
         }
     }
 }

@@ -192,5 +192,5 @@ interface HttpService {
      * @param link
      */
     @POST("/lg/user_article/add/json")
-    suspend fun shareArticle(@Field("title") title: Int,@Field("link") link : String): BaseResponse<ShareWrapper<ArticleBean>>
+    suspend fun shareArticle(@Field("title") title: String,@Field("link") link : String): BaseResponse<String>
 }

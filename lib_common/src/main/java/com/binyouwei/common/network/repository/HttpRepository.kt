@@ -1,7 +1,6 @@
 package com.binyouwei.common.network.repository
 
 import androidx.paging.PagingData
-import com.binyouwei.common.base.BaseResponse
 import com.binyouwei.common.bean.*
 import com.binyouwei.common.network.HttpResult
 import kotlinx.coroutines.flow.Flow
@@ -23,7 +22,7 @@ interface HttpRepository {
 
     fun getSquareList(): Flow<PagingData<ArticleBean>>
 
-    fun shareArticle(): Flow<PagingData<ArticleBean>>
+    fun shareArticle(title: String, link: String): Flow<HttpResult<String>>
 
     fun getKnowledgeTree(): Flow<HttpResult<MutableList<KnowledgeSystemBean>>>
 

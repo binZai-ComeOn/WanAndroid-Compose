@@ -25,6 +25,8 @@ import com.binyouwei.wanandroid_compose.ui.widget.TopBar
 import com.binyouwei.wanandroid_compose.ui.widget.snackBar
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.delay
+import kotlinx.coroutines.launch
 
 /**
  * @author 宾有为
@@ -50,24 +52,41 @@ class ShareArticlePage : ComponentActivity() {
         var title by remember {
             mutableStateOf("")
         }
-        var content by remember {
+        var link by remember {
             mutableStateOf("")
+        }
+        val shareArticleResult by remember {
+            viewModel.shareArticleResult
         }
         Scaffold(
             scaffoldState = scaffoldState,
             topBar = {
                 val titleTip = stringResource(id = R.string.share_article_title_tip_null)
                 val linkTip = stringResource(id = R.string.share_article_link_tip_null)
+                val shareSuccess = stringResource(R.string.success_share)
+                val shareFail = stringResource(R.string.fail_share)
                 TopBar(this, title = stringResource(id = R.string.my_share)) {
                     IconButton(onClick = {
                         if (title.isEmpty()) {
                             snackBar(scaffoldState.snackbarHostState, coroutineScope, titleTip)
                             return@IconButton
-                        } else if (content.isEmpty()) {
+                        } else if (link.isEmpty()) {
                             snackBar(scaffoldState.snackbarHostState, coroutineScope, linkTip)
                             return@IconButton
                         }
-                        viewModel.shareArticle()
+                        viewModel.shareArticle(title, link)
+                        if (shareArticleResult) {
+                            snackBar(
+                                scaffoldState.snackbarHostState, coroutineScope,
+                                shareSuccess
+                            )
+                            coroutineScope.launch {
+                                delay(2000)
+                                finish()
+                            }
+                        } else {
+                            snackBar(scaffoldState.snackbarHostState, coroutineScope, shareFail)
+                        }
                     }) {
                         Text(text = stringResource(id = R.string.share))
                     }
@@ -106,11 +125,11 @@ class ShareArticlePage : ComponentActivity() {
                     ), modifier = Modifier.padding(bottom = 10.dp, top = 10.dp)
                 )
                 OutlinedTextField(
-                    value = content,
+                    value = link,
                     modifier = Modifier.fillMaxWidth(),
                     label = { Text(text = stringResource(id = R.string.share_article_link_tip)) },
                     onValueChange = { text ->
-                        content = text
+                        link = text
                     },
                     colors = TextFieldDefaults.outlinedTextFieldColors(
                         focusedBorderColor = colorResource(
