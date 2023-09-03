@@ -93,6 +93,35 @@ fun MenuListItem(data: MenuBean) {
 }
 
 @Composable
+fun SettingItem(item : List<SettingBean>) {
+    ConstraintLayout(
+        modifier = Modifier
+            .fillMaxWidth()
+            .padding(15.dp, 6.dp, 6.dp, 6.dp)
+    ) {
+        val (title, subtitle) = createRefs()
+        Text(
+            text = stringResource(id = R.string.my_share), modifier = Modifier
+                .constrainAs(title) {
+                    start.linkTo(parent.start)
+                    top.linkTo(parent.top)
+                },
+            color = colorResource(R.color.item_title),
+            fontSize = 12.sp
+        )
+        Text(
+            text = stringResource(id = R.string.my_share), modifier = Modifier
+                .constrainAs(subtitle) {
+                    start.linkTo(parent.start)
+                    top.linkTo(title.bottom)
+                },
+            fontSize = 10.sp,
+            color = colorResource(R.color.item_desc)
+        )
+    }
+}
+
+@Composable
 fun ArticleItem(article: ArticleBean, onClick: (WebData) -> Unit) {
     Column(
         modifier = Modifier
