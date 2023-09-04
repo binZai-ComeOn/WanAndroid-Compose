@@ -20,12 +20,14 @@ import com.binyouwei.common.bean.WebData
 import com.binyouwei.wanandroid_compose.data.constant.AppConstant
 import com.binyouwei.wanandroid_compose.ui.widget.TopBar
 import androidx.compose.runtime.*
+import dagger.hilt.android.AndroidEntryPoint
 
 /**
  * @author binjx
  * @date 2023/7/27 14:15
  * @purpose：
  **/
+@AndroidEntryPoint
 class WebActivity : ComponentActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {

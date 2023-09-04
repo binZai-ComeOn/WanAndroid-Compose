@@ -208,5 +208,5 @@ data class ShareArticles(
 ) : Parcelable
 
 @Parcelize
-data class SettingBean(val title: String, val desc: String) : Parcelable
+data class SettingBean(val title: String, var desc: String) : Parcelable
 

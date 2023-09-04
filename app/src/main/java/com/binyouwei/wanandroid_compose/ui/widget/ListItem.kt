@@ -29,13 +29,14 @@ import androidx.constraintlayout.compose.ConstraintLayout
 import androidx.constraintlayout.compose.Dimension
 import coil.compose.AsyncImage
 import com.binyouwei.common.bean.*
+import com.binyouwei.common.utils.CacheDataUtil
 import com.binyouwei.common.utils.TimeUtil
 import com.binyouwei.wanandroid_compose.R
 import com.binyouwei.wanandroid_compose.data.bean.MenuBean
 import com.binyouwei.wanandroid_compose.ui.sidebar.collect.CollectPage
 import com.binyouwei.wanandroid_compose.ui.sidebar.integral.IntegralPage
 import com.binyouwei.wanandroid_compose.ui.sidebar.share.MySharePage
-import com.binyouwei.wanandroid_compose.ui.sidebar.seting.SetingPage
+import com.binyouwei.wanandroid_compose.ui.sidebar.seting.SettingActivity
 
 var menuList = listOf(
     MenuBean(
@@ -54,7 +55,7 @@ var menuList = listOf(
     MenuBean(R.string.theme, R.drawable.ic_night_24dp, null),
     MenuBean(
         R.string.seting,
-        R.drawable.ic_setting_24dp, SetingPage::class.java
+        R.drawable.ic_setting_24dp, SettingActivity::class.java
     ),
     MenuBean(
         R.string.logout,
@@ -93,31 +94,31 @@ fun MenuListItem(data: MenuBean) {
 }
 
 @Composable
-fun SettingItem(item : List<SettingBean>) {
-    ConstraintLayout(
+fun SettingItem(item:SettingBean, onClick: (String) -> Unit = {}) {
+    Column(
         modifier = Modifier
+            .background(color = colorResource(id = R.color.White))
             .fillMaxWidth()
-            .padding(15.dp, 6.dp, 6.dp, 6.dp)
+            .clickable {
+                onClick(item.title)
+            }
     ) {
-        val (title, subtitle) = createRefs()
         Text(
-            text = stringResource(id = R.string.my_share), modifier = Modifier
-                .constrainAs(title) {
-                    start.linkTo(parent.start)
-                    top.linkTo(parent.top)
-                },
+            text = item.title, modifier = Modifier.padding(start = 15.dp, end = 15.dp, top = 10.dp),
             color = colorResource(R.color.item_title),
-            fontSize = 12.sp
+            fontSize = 16.sp
         )
         Text(
-            text = stringResource(id = R.string.my_share), modifier = Modifier
-                .constrainAs(subtitle) {
-                    start.linkTo(parent.start)
-                    top.linkTo(title.bottom)
-                },
-            fontSize = 10.sp,
-            color = colorResource(R.color.item_desc)
+            text = item.desc,
+            fontSize = 12.sp,
+            color = colorResource(R.color.item_desc),
+            modifier = Modifier.padding(start = 15.dp, bottom = 10.dp)
         )
+        Box(
+            modifier = Modifier
+                .fillMaxWidth()
+                .height(0.5.dp)
+                .background(color = colorResource(id = R.color.list_divider)))
     }
 }
 

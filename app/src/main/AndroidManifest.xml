@@ -40,7 +40,7 @@
             android:name=".ui.sidebar.rank_list.RankingListActivity"
             android:exported="true" />
         <activity
-            android:name=".ui.sidebar.seting.SetingPage"
+            android:name=".ui.sidebar.seting.SettingActivity"
             android:exported="true" />
         <activity
             android:name=".ui.sidebar.integral.IntegralPage"
