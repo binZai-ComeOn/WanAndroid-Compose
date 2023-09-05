@@ -193,4 +193,11 @@ interface HttpService {
      */
     @POST("/lg/user_article/add/json")
     suspend fun shareArticle(@Field("title") title: String,@Field("link") link : String): BaseResponse<String>
+
+    /**
+     * 首页banner
+     * https://www.wanandroid.com/banner/json
+     */
+    @GET("/banner/json")
+    suspend fun getBanners(): BaseResponse<MutableList<BannerBean>>
 }

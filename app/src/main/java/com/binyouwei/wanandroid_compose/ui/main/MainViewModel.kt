@@ -7,6 +7,7 @@ import androidx.paging.PagingData
 import androidx.paging.cachedIn
 import com.binyouwei.common.base.BaseViewModel
 import com.binyouwei.common.bean.ArticleBean
+import com.binyouwei.common.bean.BannerBean
 import com.binyouwei.common.bean.KnowledgeSystemBean
 import com.binyouwei.common.bean.TabBean
 import com.binyouwei.common.network.HttpResult
@@ -25,6 +26,7 @@ import javax.inject.Inject
 @HiltViewModel
 class MainViewModel @Inject constructor(val repository: HttpRepository) : BaseViewModel() {
     val squares = MutableLiveData<Flow<PagingData<ArticleBean>>>(null)
+    val banners = mutableStateListOf<BannerBean>()
     val topArticles = mutableStateListOf<ArticleBean>()
     val articles = MutableLiveData<Flow<PagingData<ArticleBean>>?>(null)
     val knowledgeSystems = mutableStateListOf<KnowledgeSystemBean>()
@@ -33,6 +35,22 @@ class MainViewModel @Inject constructor(val repository: HttpRepository) : BaseVi
     val wxChapterArticles = MutableLiveData<Flow<PagingData<ArticleBean>>?>(null)
     val projectTabs = MutableLiveData<MutableList<TabBean>>()
     val projectTabArticles = MutableLiveData<Flow<PagingData<ArticleBean>>?>(null)
+
+    fun getBanners() {
+        async {
+            repository.getBanners().collectLatest { response ->
+                when (response) {
+                    is HttpResult.Success -> {
+                        banners.clear()
+                        banners.addAll(response.result)
+                    }
+                    is HttpResult.Error -> {
+                        LogUtils.e("获取banner异常："+response.exception)
+                    }
+                }
+            }
+        }
+    }
 
     fun getSquareList() {
         squares.value = repository.getSquareList().cachedIn(viewModelScope)

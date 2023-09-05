@@ -8,6 +8,8 @@ import kotlinx.coroutines.flow.Flow
 
 interface HttpRepository {
 
+    suspend fun getBanners(): Flow<HttpResult<MutableList<BannerBean>>>
+
     suspend fun getHotkeys(): Flow<HttpResult<MutableList<HotKeyBean>>>
 
     suspend fun getTopArticles(): Flow<HttpResult<MutableList<ArticleBean>>>

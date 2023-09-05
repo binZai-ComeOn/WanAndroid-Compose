@@ -9,6 +9,7 @@ import kotlinx.coroutines.flow.Flow
 
 class HttpRepositoryImpl constructor(private val apiService: HttpService) : BaseRepository(),
     HttpRepository {
+    override suspend fun getBanners(): Flow<HttpResult<MutableList<BannerBean>>> = flowable { apiService.getBanners() }
 
     override suspend fun getHotkeys(): Flow<HttpResult<MutableList<HotKeyBean>>> =
         flowable { apiService.getHotkeys() }

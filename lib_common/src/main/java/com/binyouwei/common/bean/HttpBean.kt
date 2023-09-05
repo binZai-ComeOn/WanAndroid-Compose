@@ -210,3 +210,14 @@ data class ShareArticles(
 @Parcelize
 data class SettingBean(val title: String, var desc: String) : Parcelable
 
+@Parcelize
+data class BannerBean(
+    val desc: String,
+    val id: Int,
+    val imagePath: String,
+    val isVisible: Int,
+    val order: Int,
+    val title: String,
+    val type: Int,
+    val url: String
+) : Parcelable

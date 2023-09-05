@@ -30,6 +30,7 @@ fun HomePage(
     val coroutineScope = rememberCoroutineScope()
     val drawerState = scaffoldState.drawerState
     viewModel.run {
+        getBanners()
         getTopArticles()
         getHomeData()
     }
