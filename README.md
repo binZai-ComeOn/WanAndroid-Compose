@@ -11,17 +11,17 @@ ModalDrawer 可使用 NavigationDrawer 替代，后者可用于适配响应式�
  - HorizontalPager：用于实现轮播图等功能。
 
 # 依赖
- - [Core](https://developer.android.google.cn/jetpack/androidx/releases/core?hl=zh-cn)：针对最新的平台功能和 API 调整应用，同时还支持旧设备.
- - [Compose UI](https://developer.android.google.cn/jetpack/androidx/releases/compose-ui?hl=zh-cn)：与设备互动所需的 Compose UI 的基本组件，包括布局、绘图和输入.
- - [Lifecycle](https://developer.android.google.cn/jetpack/androidx/releases/lifecycle?hl=zh-cn)：生命周期感知型组件可执行操作来响应另一个组件（如 activity 和 fragment）的生命周期状态的变化.
- - [Activity](https://developer.android.google.cn/jetpack/androidx/releases/activity?hl=zh-cn)：访问基于 Activity 构建的可组合 API.
- - [Compose Material](https://developer.android.google.cn/jetpack/androidx/releases/compose-material?hl=zh-cn)：使用现成可用的 Material Design 组件构建 Jetpack Compose UI.
- - [Navigation](https://developer.android.google.cn/jetpack/androidx/releases/navigation?hl=zh-cn)：用于在 Android 应用中的“目的地”之间导航，该框架提供一致的 API，无论目的地是作为 Fragment、Activity 还是其他组件实现.
- - [Accompanist](https://github.com/google/accompanist)：通过开发人员通常需要但尚未提供的功能来补充Jetpack Compose.
+ - [Logger](https://github.com/orhanobut/logger)：简单、漂亮且功能强大的 Android 记录器.
+ - [Retrofit](https://github.com/square/retrofit)：适用于 Android 和 JVM 的类型安全 HTTP 客户端.
  - [Coroutines](https://github.com/Kotlin/kotlinx.coroutines)：对具有多平台支持的 Kotlin 协程的库支持.
  - [Gson](https://github.com/google/gson)：一个 Java 序列化/反序列化库，用于将 Java 对象转换为 JSON 并返回.
- - [Retrofit](https://github.com/square/retrofit)：适用于 Android 和 JVM 的类型安全 HTTP 客户端.
- - [Logger](https://github.com/orhanobut/logger)：简单、漂亮且功能强大的 Android 记录器.
+ - [Accompanist](https://github.com/google/accompanist)：通过开发人员通常需要但尚未提供的功能来补充Jetpack Compose.
+ - [Activity](https://developer.android.google.cn/jetpack/androidx/releases/activity?hl=zh-cn)：访问基于 Activity 构建的可组合 API.
+ - [Core](https://developer.android.google.cn/jetpack/androidx/releases/core?hl=zh-cn)：针对最新的平台功能和 API 调整应用，同时还支持旧设备.
+ - [Compose UI](https://developer.android.google.cn/jetpack/androidx/releases/compose-ui?hl=zh-cn)：与设备互动所需的 Compose UI 的基本组件，包括布局、绘图和输入.
+ - [Compose Material](https://developer.android.google.cn/jetpack/androidx/releases/compose-material?hl=zh-cn)：使用现成可用的 Material Design 组件构建 Jetpack Compose UI.
+ - [Lifecycle](https://developer.android.google.cn/jetpack/androidx/releases/lifecycle?hl=zh-cn)：生命周期感知型组件可执行操作来响应另一个组件（如 activity 和 fragment）的生命周期状态的变化.
+ - [Navigation](https://developer.android.google.cn/jetpack/androidx/releases/navigation?hl=zh-cn)：用于在 Android 应用中的“目的地”之间导航，该框架提供一致的 API，无论目的地是作为 Fragment、Activity 还是其他组件实现.
 
 # 参考网址
  - [Material Design](https://m3.material.io/)：Material 3是谷歌开源设计系统的最新版本，这里有着Material 3组件的相关使用教程。 
@@ -41,14 +41,14 @@ Navtigation导航page及跳转新的界面
     - 体系列表与导航栏列表 √
  - 广场
     - 广场列表 √
-    - 添加文章
+    - 添加分享文章 
  - 项目
     - 项目列表 √
  - 设置
     - 登录 √
     - 注册 √
     - 我的收藏 √
-    - 系统设置
+    - 系统设置 √
     - 我的积分 √
     - 积分规则 √
     - 积分排行 √
@@ -68,13 +68,10 @@ Navtigation导航page及跳转新的界面
    - 历史的标签触发长按事件，右上角显示删除该标签的按钮
    - 上拉隐藏顶部标题栏与底部导航栏，下拉显示顶部标题栏和底部导航栏
 
-# UI调整计划
- - 侧边栏使用列表使用ConstraintLayout重构
-
 # 待优化
- - 从其它页面切换到首页页面，数据会重新渲染两次
- - 搜索测试两个字，会出现带html的标题，无法将这些html标题解析
  - 阅读部分文章时，会出现网页加载失败的问题
- - InputText暂时无法在首次输入文本时出现清除的小图标
- - 使用Android Studio自带的Android模拟器使用DataStore无法获取数据
  - 我的分享数据获取应使用paging3获取分页数据
+ - 从其它页面切换到首页页面，数据会重新渲染两次
+ - InputText暂时无法在首次输入文本时出现清除的小图标
+ - 搜索测试两个字，会出现带html的标题，无法将这些html标题解析
+ - 使用Android Studio自带的Android模拟器使用DataStore无法获取数据

@@ -67,34 +67,45 @@ var menuList = listOf(
 @Composable
 fun MenuListItem(data: MenuBean) {
     Surface(modifier = Modifier.fillMaxWidth()) {
-        Row(
-            verticalAlignment = Alignment.CenterVertically,
+        ConstraintLayout(
             modifier = Modifier.height(40.dp)
         ) {
+            val (icon, title, rightText) = createRefs()
             Icon(
                 modifier = Modifier
                     .size(18.dp)
-                    .weight(1f),
+                    .constrainAs(icon) {
+                        start.linkTo(parent.start, margin = 20.dp)
+                        top.linkTo(parent.top)
+                        bottom.linkTo(parent.bottom)
+                    },
                 painter = painterResource(data.iconId),
                 contentDescription = stringResource(id = data.menuName)
             )
             Text(
                 text = stringResource(id = data.menuName),
-                modifier = Modifier
-                    .weight(5f)
+                modifier = Modifier.constrainAs(title){
+                    start.linkTo(icon.end, margin = 20.dp)
+                    top.linkTo(parent.top)
+                    bottom.linkTo(parent.bottom)
+                }
             )
             Text(
                 text = data.rightText,
-                modifier = Modifier
-                    .weight(1f),
+                modifier = Modifier.constrainAs(rightText){
+                    end.linkTo(parent.end, margin = 20.dp)
+                    top.linkTo(parent.top)
+                    bottom.linkTo(parent.bottom)
+                },
                 color = colorResource(R.color.Grey600)
             )
         }
     }
 }
 
+
 @Composable
-fun SettingItem(item:SettingBean, onClick: (String) -> Unit = {}) {
+fun SettingItem(item: SettingBean, onClick: (String) -> Unit = {}) {
     Column(
         modifier = Modifier
             .background(color = colorResource(id = R.color.White))
@@ -118,7 +129,8 @@ fun SettingItem(item:SettingBean, onClick: (String) -> Unit = {}) {
             modifier = Modifier
                 .fillMaxWidth()
                 .height(0.5.dp)
-                .background(color = colorResource(id = R.color.list_divider)))
+                .background(color = colorResource(id = R.color.list_divider))
+        )
     }
 }
 
