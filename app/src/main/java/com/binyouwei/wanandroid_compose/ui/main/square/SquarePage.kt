@@ -17,10 +17,12 @@ import androidx.paging.compose.itemsIndexed
 import com.binyouwei.common.utils.ActivityMessenger
 import com.binyouwei.wanandroid_compose.R
 import com.binyouwei.wanandroid_compose.data.constant.AppConstant
+import com.binyouwei.wanandroid_compose.data.constant.isLogin
 import com.binyouwei.wanandroid_compose.ui.WebActivity
 import com.binyouwei.wanandroid_compose.ui.main.MainViewModel
 import com.binyouwei.wanandroid_compose.ui.sidebar.share.ShareArticlePage
 import com.binyouwei.wanandroid_compose.ui.widget.ArticleItem
+import com.binyouwei.wanandroid_compose.ui.widget.snackBar
 import kotlinx.coroutines.launch
 
 @Composable
@@ -50,7 +52,14 @@ fun SquarePage(
                 },
                 title = { Text(text = stringResource(id = R.string.square)) },
                 actions = {
-                    IconButton(onClick = { ActivityMessenger.startActivity<ShareArticlePage>(activity) }) {
+                    val again = stringResource(id = R.string.please_log_in_and_try_again)
+                    IconButton(onClick = {
+                        if (isLogin.value) {
+                            ActivityMessenger.startActivity<ShareArticlePage>(activity)
+                        } else {
+                            snackBar(scaffoldState.snackbarHostState,coroutineScope, again)
+                        }
+                    }) {
                         Icon(
                             imageVector = Icons.Filled.Add,
                             contentDescription = stringResource(R.string.add)
