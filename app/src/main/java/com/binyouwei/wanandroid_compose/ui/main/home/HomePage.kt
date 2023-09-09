@@ -10,6 +10,7 @@ import androidx.compose.ui.res.stringResource
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.paging.compose.collectAsLazyPagingItems
 import androidx.paging.compose.itemsIndexed
+import com.binyouwei.common.bean.WebData
 import com.binyouwei.common.manager.CookiesManager
 import com.binyouwei.common.utils.ActivityMessenger
 import com.binyouwei.wanandroid_compose.R
@@ -19,6 +20,7 @@ import com.binyouwei.wanandroid_compose.ui.WebActivity
 import com.binyouwei.wanandroid_compose.ui.main.MainViewModel
 import com.binyouwei.wanandroid_compose.ui.main.search.SearchPage
 import com.binyouwei.wanandroid_compose.ui.widget.ArticleItem
+import com.binyouwei.wanandroid_compose.ui.widget.Banner
 import com.binyouwei.wanandroid_compose.ui.widget.TopSearchMenuBar
 
 @Composable
@@ -37,6 +39,9 @@ fun HomePage(
     if (!CookiesManager.getCookies().isNullOrEmpty()) {
         isLogin.value = true
     }
+    val banners = remember {
+        viewModel.banners
+    }
     val pagingItems = viewModel.articles.value?.collectAsLazyPagingItems()
     val topArticles = remember {
         viewModel.topArticles
@@ -52,6 +57,17 @@ fun HomePage(
         it.calculateBottomPadding()
         Column() {
             LazyColumn() {
+                if (banners.isNotEmpty()){
+                    item {
+                        Banner(banners){banner ->
+                            ActivityMessenger.startActivity<WebActivity>(
+                                activity, AppConstant.ExtraKey to WebData(
+                                    banner.title, banner.url
+                                )
+                            )
+                        }
+                    }
+                }
                 if (topArticles.isNotEmpty()) {
                     itemsIndexed(topArticles) { _, item ->
                         item.top = "1"
