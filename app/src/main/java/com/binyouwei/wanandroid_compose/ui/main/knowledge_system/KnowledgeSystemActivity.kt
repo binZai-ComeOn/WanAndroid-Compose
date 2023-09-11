@@ -73,7 +73,6 @@ class KnowledgeSystemActivity : ComponentActivity() {
                 LazyColumn() {
                     if (knowledges != null) {
                         itemsIndexed(knowledges) { _, bean ->
-                            LogUtils.e(bean?.title)
                             ArticleItem(bean!!) { webData ->
                                 ActivityMessenger.startActivity<WebActivity>(
                                     this@KnowledgeSystemActivity,

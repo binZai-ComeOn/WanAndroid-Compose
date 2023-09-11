@@ -18,6 +18,7 @@ import com.binyouwei.wanandroid_compose.ui.widget.BottomNavigationBar
 import com.binyouwei.wanandroid_compose.ui.sidebar.Sidebar
 import com.binyouwei.wanandroid_compose.ui.widget.MyAlertDialog
 import com.binyouwei.wanandroid_compose.ui.widget.bnbsMain
+import com.blankj.utilcode.util.LogUtils
 import com.google.accompanist.insets.navigationBarsPadding
 import com.google.accompanist.insets.statusBarsPadding
 import dagger.hilt.android.AndroidEntryPoint
@@ -58,7 +59,10 @@ class MainActivity : ComponentActivity() {
                 BottomNavigationBar(navCtrl = navCtrl, bnbsMain)
             },
             drawerContent = {
-                Sidebar(this@MainActivity,scaffoldState.snackbarHostState) { coroutineScope.launch { drawerState.close() } }
+                Sidebar(
+                    this@MainActivity,
+                    scaffoldState.snackbarHostState
+                ) { coroutineScope.launch { drawerState.close() } }
             },
             content = {
                 it.calculateBottomPadding()
@@ -78,17 +82,17 @@ class MainActivity : ComponentActivity() {
 
                     // 体系
                     composable(route = RouteName.SYSTEM) {
-                        KnowledgeSystemPage(this@MainActivity,scaffoldState)
+                        KnowledgeSystemPage(this@MainActivity, scaffoldState)
                     }
 
                     // 公众号
                     composable(route = RouteName.WeChat) {
-                        WeChatPage(this@MainActivity,scaffoldState)
+                        WeChatPage(this@MainActivity, scaffoldState)
                     }
 
                     // 项目
                     composable(route = RouteName.PROJECTS) {
-                        ProjectPage(this@MainActivity,scaffoldState)
+                        ProjectPage(this@MainActivity, scaffoldState)
                     }
                 }
             },

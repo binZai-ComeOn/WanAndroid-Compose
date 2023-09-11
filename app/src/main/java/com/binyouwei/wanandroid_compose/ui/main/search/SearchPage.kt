@@ -28,6 +28,7 @@ import androidx.constraintlayout.compose.ConstraintLayout
 import com.binyouwei.common.utils.ActivityMessenger
 import com.binyouwei.wanandroid_compose.data.constant.AppConstant
 import com.binyouwei.wanandroid_compose.ui.widget.MyAlertDialog
+import com.blankj.utilcode.util.LogUtils
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
@@ -41,6 +42,7 @@ class SearchPage : ComponentActivity() {
     fun setContentLayout(viewModel: SearchViewModel = hiltViewModel()) {
         val hotkeys by remember { viewModel.hotKeyList }
         val searchHistorys by remember { viewModel.searchHistory }
+        LogUtils.e("SearchPageSearchPage")
         viewModel.getHotKeyList()
         viewModel.getSearchHistory()
         val text = remember { mutableStateOf("") }
@@ -69,7 +71,7 @@ class SearchPage : ComponentActivity() {
                 if (hotkeys.isNotEmpty()) {
                     Text(
                         text = stringResource(id = R.string.hot_search),
-                        color = colorResource(id = R.color.theme_pink_color_primary),
+                        color = colorResource(id = R.color.Black),
                         modifier = Modifier.padding(top = 16.dp, bottom = 10.dp)
                     )
                     FlowRow() {
@@ -88,7 +90,7 @@ class SearchPage : ComponentActivity() {
                                     text = it.name, modifier = Modifier
                                         .background(colorResource(id = R.color.theme_pink_color_primary))
                                         .padding(10.dp),
-                                    color = colorResource(id = R.color.White)
+                                    color = colorResource(id = R.color.Black)
                                 )
                             }
                         }
@@ -99,7 +101,7 @@ class SearchPage : ComponentActivity() {
                         val (text, icon) = createRefs()
                         Text(
                             text = stringResource(id = R.string.search_history),
-                            color = colorResource(id = R.color.theme_pink_color_primary),
+                            color = colorResource(id = R.color.Black),
                             modifier = Modifier
                                 .constrainAs(text) {
                                     top.linkTo(parent.top)
@@ -142,7 +144,7 @@ class SearchPage : ComponentActivity() {
                                     text = searchHistory.name, modifier = Modifier
                                         .background(colorResource(id = R.color.theme_pink_color_primary))
                                         .padding(10.dp),
-                                    color = colorResource(id = R.color.White)
+                                    color = colorResource(id = R.color.Black)
                                 )
                             }
                         }

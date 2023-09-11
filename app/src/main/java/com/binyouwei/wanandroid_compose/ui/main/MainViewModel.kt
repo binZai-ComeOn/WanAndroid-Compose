@@ -24,7 +24,7 @@ import javax.inject.Inject
  * @purpose：
  **/
 @HiltViewModel
-class MainViewModel @Inject constructor(val repository: HttpRepository) : BaseViewModel() {
+class MainViewModel @Inject constructor(private val repository: HttpRepository) : BaseViewModel() {
     val squares = MutableLiveData<Flow<PagingData<ArticleBean>>>(null)
     val banners = mutableStateListOf<BannerBean>()
     val topArticles = mutableStateListOf<ArticleBean>()
@@ -39,6 +39,7 @@ class MainViewModel @Inject constructor(val repository: HttpRepository) : BaseVi
     fun getBanners() {
         async {
             repository.getBanners().collectLatest { response ->
+                LogUtils.e("获取banner：")
                 when (response) {
                     is HttpResult.Success -> {
                         banners.clear()

@@ -4,7 +4,7 @@
     <!-- Base application theme. -->
     <style name="BaseAppTheme" parent="@style/Theme.AppCompat.DayNight">
         <item name="colorPrimary">@color/colorPrimary</item>
-        <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
+        <item name="colorPrimaryDark">@color/theme_pink_color_primary</item>
         <item name="colorAccent">@color/colorAccent</item>
         <item name="textColorPrimary">@color/textColorPrimary</item>
         <item name="viewBackground">@color/viewBackground</item>

@@ -180,7 +180,6 @@ fun DrawerHeadComponent(activity: ComponentActivity) {
             },
             fontSize = 16.sp,
             fontWeight = FontWeight.Bold,
-            color = colorResource(id = R.color.White),
             modifier = Modifier.constrainAs(name) {
                 top.linkTo(avatar.bottom, margin = 12.dp)
                 start.linkTo(parent.start)
@@ -193,10 +192,7 @@ fun DrawerHeadComponent(activity: ComponentActivity) {
         }) {
             Text(
                 text = stringResource(id = R.string.nav_grade),
-                fontSize = 12.sp,
-                color = colorResource(
-                    id = R.color.Grey100
-                )
+                fontSize = 12.sp
             )
             Text(
                 text = if (isLogin.value) {
@@ -204,17 +200,11 @@ fun DrawerHeadComponent(activity: ComponentActivity) {
                 } else {
                     stringResource(id = R.string.nav_line_2)
                 },
-                fontSize = 12.sp,
-                color = colorResource(
-                    id = R.color.Grey100
-                )
+                fontSize = 12.sp
             )
             Text(
                 text = stringResource(id = R.string.nav_rank),
                 fontSize = 12.sp,
-                color = colorResource(
-                    id = R.color.Grey100
-                ),
                 modifier = Modifier.padding(8.dp, 0.dp, 0.dp, 0.dp)
             )
             Text(
@@ -223,10 +213,7 @@ fun DrawerHeadComponent(activity: ComponentActivity) {
                 } else {
                     stringResource(id = R.string.nav_line_2)
                 },
-                fontSize = 12.sp,
-                color = colorResource(
-                    id = R.color.Grey100
-                )
+                fontSize = 12.sp
             )
         }
     }

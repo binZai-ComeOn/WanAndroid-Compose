@@ -36,7 +36,6 @@ class HeaderInterceptor : Interceptor {
             ) || url.contains(USER_SHARE_ARTICLE)
         ) {
             val cookies = CookiesManager.getCookies()
-            LogUtils.e("HeaderInterceptor:cookies:$cookies")
             if (!cookies.isNullOrEmpty()) {
                 newBuilder.addHeader(KEY_COOKIE, cookies)
             }

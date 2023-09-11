@@ -38,7 +38,6 @@ import kotlinx.coroutines.launch
  * Social homepage: https://blog.csdn.net/baidu_41616022
  * @desc
  **/
-@SuppressLint("CoroutineCreationDuringComposition")
 @Composable
 fun LoginPage(
     activity: AppCompatActivity,
@@ -147,7 +146,7 @@ fun LoginPage(
                 stringResource(id = R.string.login_success)
             )
             isLogin.value = true
-            coroutineScope.launch {
+            LaunchedEffect(isLogin.value) {
                 delay(2000)
                 activity.finish()
             }
