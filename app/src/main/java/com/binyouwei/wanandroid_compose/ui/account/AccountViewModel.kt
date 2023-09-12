@@ -1,14 +1,11 @@
 package com.binyouwei.wanandroid_compose.ui.account
 
 import androidx.compose.runtime.mutableStateOf
-import androidx.lifecycle.MutableLiveData
 import com.binyouwei.common.base.BaseViewModel
-import com.binyouwei.common.bean.LoginBean
 import com.binyouwei.common.network.HttpResult
 import com.binyouwei.common.network.repository.HttpRepository
 import com.binyouwei.common.utils.DataStoreUtils
 import com.binyouwei.wanandroid_compose.data.constant.AppConstant
-import com.blankj.utilcode.util.LogUtils
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.collectLatest
 import javax.inject.Inject

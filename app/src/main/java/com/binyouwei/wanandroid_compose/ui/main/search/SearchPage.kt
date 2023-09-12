@@ -28,7 +28,8 @@ import androidx.constraintlayout.compose.ConstraintLayout
 import com.binyouwei.common.utils.ActivityMessenger
 import com.binyouwei.wanandroid_compose.data.constant.AppConstant
 import com.binyouwei.wanandroid_compose.ui.widget.MyAlertDialog
-import com.blankj.utilcode.util.LogUtils
+import com.binyouwei.wanandroid_compose.ui.widget.MyHotKeyFlowRow
+import com.binyouwei.wanandroid_compose.ui.widget.MyMySearchHistoryFlowRow
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
@@ -42,7 +43,6 @@ class SearchPage : ComponentActivity() {
     fun setContentLayout(viewModel: SearchViewModel = hiltViewModel()) {
         val hotkeys by remember { viewModel.hotKeyList }
         val searchHistorys by remember { viewModel.searchHistory }
-        LogUtils.e("SearchPageSearchPage")
         viewModel.getHotKeyList()
         viewModel.getSearchHistory()
         val text = remember { mutableStateOf("") }
@@ -74,27 +74,12 @@ class SearchPage : ComponentActivity() {
                         color = colorResource(id = R.color.Black),
                         modifier = Modifier.padding(top = 16.dp, bottom = 10.dp)
                     )
-                    FlowRow() {
-                        hotkeys.forEach {
-                            TextButton(
-                                onClick = {
-                                    ActivityMessenger.startActivity<SearchResultPage>(
-                                        this@SearchPage,
-                                        AppConstant.ExtraKey to it.name
-                                    )
-                                },
-                                contentPadding = PaddingValues(5.dp, 0.dp),
-                                shape = RoundedCornerShape(0.dp)
-                            ) {
-                                Text(
-                                    text = it.name, modifier = Modifier
-                                        .background(colorResource(id = R.color.theme_pink_color_primary))
-                                        .padding(10.dp),
-                                    color = colorResource(id = R.color.Black)
-                                )
-                            }
-                        }
-                    }
+                    MyHotKeyFlowRow(list = hotkeys, onClick = { name ->
+                        ActivityMessenger.startActivity<SearchResultPage>(
+                            this@SearchPage,
+                            AppConstant.ExtraKey to name
+                        )
+                    })
                 }
                 if (searchHistorys.isNotEmpty()) {
                     ConstraintLayout(modifier = Modifier.fillMaxWidth()) {
@@ -128,27 +113,12 @@ class SearchPage : ComponentActivity() {
                             )
                         }
                     }
-                    FlowRow() {
-                        searchHistorys.forEach { searchHistory ->
-                            TextButton(
-                                onClick = {
-                                    ActivityMessenger.startActivity<SearchResultPage>(
-                                        this@SearchPage,
-                                        AppConstant.ExtraKey to searchHistory.name
-                                    )
-                                },
-                                contentPadding = PaddingValues(5.dp, 0.dp),
-                                shape = RoundedCornerShape(0.dp)
-                            ) {
-                                Text(
-                                    text = searchHistory.name, modifier = Modifier
-                                        .background(colorResource(id = R.color.theme_pink_color_primary))
-                                        .padding(10.dp),
-                                    color = colorResource(id = R.color.Black)
-                                )
-                            }
-                        }
-                    }
+                    MyMySearchHistoryFlowRow(list = searchHistorys, onClick = { name ->
+                        ActivityMessenger.startActivity<SearchResultPage>(
+                            this@SearchPage,
+                            AppConstant.ExtraKey to name
+                        )
+                    })
                 }
 
             }

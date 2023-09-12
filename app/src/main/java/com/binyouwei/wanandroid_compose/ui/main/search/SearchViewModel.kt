@@ -13,7 +13,6 @@ import com.binyouwei.common.network.repository.HttpRepository
 import com.binyouwei.common.utils.TimeUtil
 import com.binyouwei.wanandroid_compose.data.db.AppDataBase
 import com.binyouwei.wanandroid_compose.data.db.table.SearchHistoryTable
-import com.blankj.utilcode.util.LogUtils
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.collectLatest
@@ -31,7 +30,7 @@ class SearchViewModel @Inject constructor(
 ) : BaseViewModel() {
     val hotKeyList = mutableStateOf(mutableListOf<HotKeyBean>())
     val searchResult = MutableLiveData<Flow<PagingData<ArticleBean>>?>(null)
-    val searchHistory = mutableStateOf(listOf<SearchHistoryTable>())
+    val searchHistory = mutableStateOf(mutableListOf<SearchHistoryTable>())
 
     fun getHotKeyList() {
         async {

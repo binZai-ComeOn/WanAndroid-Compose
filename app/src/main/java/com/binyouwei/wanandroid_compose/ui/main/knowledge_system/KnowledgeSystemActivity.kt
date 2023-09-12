@@ -28,7 +28,6 @@ import com.binyouwei.wanandroid_compose.ui.widget.ArticleItem
 import com.binyouwei.wanandroid_compose.ui.widget.TopBar
 import dagger.hilt.android.AndroidEntryPoint
 import com.binyouwei.wanandroid_compose.ui.WebActivity
-import com.blankj.utilcode.util.LogUtils
 
 @Suppress("DEPRECATION")
 @AndroidEntryPoint

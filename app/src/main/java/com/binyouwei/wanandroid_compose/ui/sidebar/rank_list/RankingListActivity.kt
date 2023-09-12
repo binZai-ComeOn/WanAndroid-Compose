@@ -43,8 +43,7 @@ class RankingListActivity : ComponentActivity() {
             LazyColumn {
                 if (rankingList != null) {
                     itemsIndexed(rankingList) { _, item ->
-                        LogUtils.e("当前列："+ item!!.username)
-                        IntegralRankingItem(item)
+                        IntegralRankingItem(item!!)
                     }
                 }
             }

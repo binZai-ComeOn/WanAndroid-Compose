@@ -51,7 +51,6 @@ class SearchResultPage : ComponentActivity() {
                 LazyColumn() {
                     if (searchResult != null) {
                         itemsIndexed(searchResult) { _, item ->
-                            LogUtils.e(item?.title)
                             ArticleItem(item!!) { webData ->
                                 ActivityMessenger.startActivity<WebActivity>(this@SearchResultPage,AppConstant.ExtraKey to webData)
                             }

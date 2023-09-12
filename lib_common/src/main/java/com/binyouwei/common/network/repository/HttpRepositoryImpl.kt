@@ -33,6 +33,9 @@ class HttpRepositoryImpl constructor(private val apiService: HttpService) : Base
     override fun getKnowledgeTree(): Flow<HttpResult<MutableList<KnowledgeSystemBean>>> =
         flowable { apiService.getKnowledgeTree() }
 
+    override fun getNavJson(): Flow<HttpResult<MutableList<NavigationBean>>> =
+        flowable { apiService.getNavJson() }
+
     override fun getKnowledgeList(id: Int): Flow<PagingData<ArticleBean>> =
         pager { page -> apiService.getKnowledgeList(page, id) }
 

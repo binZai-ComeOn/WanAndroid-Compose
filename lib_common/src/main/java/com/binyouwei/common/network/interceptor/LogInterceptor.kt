@@ -2,7 +2,6 @@ package com.binyouwei.common.network.interceptor
 
 import android.os.Build
 import androidx.annotation.RequiresApi
-import com.binyouwei.common.manager.CookiesManager
 import com.blankj.utilcode.util.LogUtils
 import okhttp3.*
 import java.io.IOException

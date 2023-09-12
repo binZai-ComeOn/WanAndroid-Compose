@@ -23,10 +23,10 @@ interface SearchHistoryDao {
     suspend fun updateSearchHistory(userInfo: SearchHistoryTable)
 
     @Query("SELECT * FROM search_history order by id desc limit 10")
-    suspend fun querySearchHistoryList(): List<SearchHistoryTable>
+    suspend fun querySearchHistoryList(): MutableList<SearchHistoryTable>
 
     @Query("SELECT * FROM search_history where name = :name")
-    suspend fun querySearchHistory(name : String): List<SearchHistoryTable>
+    suspend fun querySearchHistory(name : String): MutableList<SearchHistoryTable>
 
     @Delete(entity = SearchHistoryTable::class)
     suspend fun deleteSearchHistory(vararg userInfo: SearchHistoryTable): Int

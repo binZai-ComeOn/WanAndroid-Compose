@@ -221,3 +221,10 @@ data class BannerBean(
     val type: Int,
     val url: String
 ) : Parcelable
+
+@Parcelize
+data class NavigationBean(
+    val articles: MutableList<ArticleBean>,
+    val cid: Int,
+    val name: String
+) : Parcelable

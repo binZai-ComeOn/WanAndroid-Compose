@@ -9,6 +9,7 @@ import com.binyouwei.common.base.BaseViewModel
 import com.binyouwei.common.bean.ArticleBean
 import com.binyouwei.common.bean.BannerBean
 import com.binyouwei.common.bean.KnowledgeSystemBean
+import com.binyouwei.common.bean.NavigationBean
 import com.binyouwei.common.bean.TabBean
 import com.binyouwei.common.network.HttpResult
 import com.binyouwei.common.network.repository.HttpRepository
@@ -30,6 +31,7 @@ class MainViewModel @Inject constructor(private val repository: HttpRepository) 
     val topArticles = mutableStateListOf<ArticleBean>()
     val articles = MutableLiveData<Flow<PagingData<ArticleBean>>?>(null)
     val knowledgeSystems = mutableStateListOf<KnowledgeSystemBean>()
+    val navigationMenu = mutableStateListOf<NavigationBean>()
     val knowledges = MutableLiveData<Flow<PagingData<ArticleBean>>>(null)
     val wxChapterTabs = MutableLiveData<MutableList<TabBean>>()
     val wxChapterArticles = MutableLiveData<Flow<PagingData<ArticleBean>>?>(null)
@@ -39,7 +41,6 @@ class MainViewModel @Inject constructor(private val repository: HttpRepository) 
     fun getBanners() {
         async {
             repository.getBanners().collectLatest { response ->
-                LogUtils.e("获取banner：")
                 when (response) {
                     is HttpResult.Success -> {
                         banners.clear()
@@ -88,6 +89,23 @@ class MainViewModel @Inject constructor(private val repository: HttpRepository) 
                     is HttpResult.Success -> {
                         knowledgeSystems.clear()
                         knowledgeSystems.addAll(response.result)
+                    }
+
+                    is HttpResult.Error -> {
+                        LogUtils.e("网络请求异常： ${response.exception.message}")
+                    }
+                }
+            }
+        }
+    }
+
+    fun getNavJson() {
+        async {
+            repository.getNavJson().collectLatest { response ->
+                when (response) {
+                    is HttpResult.Success -> {
+                        navigationMenu.clear()
+                        navigationMenu.addAll(response.result)
                     }
 
                     is HttpResult.Error -> {

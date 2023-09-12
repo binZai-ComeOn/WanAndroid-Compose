@@ -43,7 +43,6 @@ object CookiesManager {
                 ?.forEach {
                     it.filterNot { set.contains(it) }.forEach { set.add(it) }
                 }
-        LogUtils.e("cookiesList:$cookies")
         val ite = set.iterator()
         while (ite.hasNext()) {
             val cookie = ite.next()

@@ -24,7 +24,6 @@ import com.binyouwei.wanandroid_compose.ui.main.MainViewModel
 import com.binyouwei.wanandroid_compose.ui.main.search.SearchPage
 import com.binyouwei.wanandroid_compose.ui.widget.ProjectItem
 import com.binyouwei.wanandroid_compose.ui.widget.TopSearchMenuBar
-import com.blankj.utilcode.util.LogUtils
 
 @Composable
 fun ProjectPage(

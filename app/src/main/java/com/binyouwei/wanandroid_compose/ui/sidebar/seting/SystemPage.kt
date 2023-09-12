@@ -23,7 +23,6 @@ import com.binyouwei.wanandroid_compose.ui.widget.MyAlertDialog
 import com.binyouwei.wanandroid_compose.ui.widget.SettingItem
 import com.binyouwei.wanandroid_compose.ui.widget.TopBar
 import com.binyouwei.wanandroid_compose.ui.widget.snackBar
-import com.blankj.utilcode.util.LogUtils
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint

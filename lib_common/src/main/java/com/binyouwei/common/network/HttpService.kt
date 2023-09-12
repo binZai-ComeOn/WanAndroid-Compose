@@ -90,6 +90,13 @@ interface HttpService {
     suspend fun getKnowledgeTree(): BaseResponse<MutableList<KnowledgeSystemBean>>
 
     /**
+     * 获取导航数据
+     * https://www.wanandroid.com/navi/json
+     */
+    @GET("/navi/json")
+    suspend fun getNavJson(): BaseResponse<MutableList<NavigationBean>>
+
+    /**
      * 知识体系下的文章
      * https://www.wanandroid.com/article/list/0/json?cid=168
      * @param page

@@ -28,6 +28,8 @@ interface HttpRepository {
 
     fun getKnowledgeTree(): Flow<HttpResult<MutableList<KnowledgeSystemBean>>>
 
+    fun getNavJson(): Flow<HttpResult<MutableList<NavigationBean>>>
+
     fun getKnowledgeList(id: Int): Flow<PagingData<ArticleBean>>
 
     suspend fun getWXChapters(): Flow<HttpResult<MutableList<TabBean>>>

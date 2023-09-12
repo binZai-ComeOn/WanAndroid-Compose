@@ -41,14 +41,17 @@ class WebActivity : ComponentActivity() {
         val webData : WebData = if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) {
             intent.getParcelableExtra(AppConstant.ExtraKey, WebData::class.java)!!
         } else {
-            intent.getParcelableExtra<WebData>(AppConstant.ExtraKey)!!
+            intent.getParcelableExtra(AppConstant.ExtraKey)!!
         }
-        var progress = remember { mutableStateOf(0) }
+        val progress = remember { mutableStateOf(0) }
+        val weTitle = remember {
+            mutableStateOf("加载中...")
+        }
         Scaffold(modifier = Modifier
             .fillMaxWidth()
             .fillMaxHeight(),
             topBar = {
-                TopBar(activity = this, title = webData.title, progress = progress)
+                TopBar(activity = this, title = weTitle.value, progress = progress)
             }) {
             it.calculateTopPadding()
             AndroidView(modifier = Modifier.fillMaxWidth(), factory = { context ->
@@ -64,6 +67,11 @@ class WebActivity : ComponentActivity() {
                     override fun onProgressChanged(view: WebView?, newProgress: Int) {
                         super.onProgressChanged(view, newProgress)
                         progress.value = newProgress
+                    }
+
+                    override fun onReceivedTitle(view: WebView?, title: String?) {
+                        super.onReceivedTitle(view, title)
+                        weTitle.value = title!!
                     }
                 }
                 webView.loadUrl(webData.url)

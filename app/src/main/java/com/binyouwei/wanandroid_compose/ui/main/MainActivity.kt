@@ -48,7 +48,7 @@ class MainActivity : ComponentActivity() {
         val scaffoldState = rememberScaffoldState()
         val coroutineScope = rememberCoroutineScope()
         val drawerState = scaffoldState.drawerState
-
+        LogUtils.e("1111111111111111111111111")
         Scaffold(
             scaffoldState = scaffoldState,
             modifier = Modifier
@@ -66,17 +66,21 @@ class MainActivity : ComponentActivity() {
             },
             content = {
                 it.calculateBottomPadding()
+                LogUtils.e("1111111111111111111111112")
                 NavHost(
                     navController = navCtrl,
                     startDestination = RouteName.HOME
                 ) {
+                    LogUtils.e("1111111111111111111111113")
                     // 首页
                     composable(route = RouteName.HOME) {
+                        LogUtils.e("1111111111111111111111114")
                         HomePage(this@MainActivity, scaffoldState)
                     }
 
                     // 广场
                     composable(route = RouteName.SQUARE) {
+                        LogUtils.e("1111111111111111111111115")
                         SquarePage(this@MainActivity,scaffoldState)
                     }
 

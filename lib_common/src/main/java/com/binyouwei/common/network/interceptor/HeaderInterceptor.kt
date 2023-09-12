@@ -1,9 +1,7 @@
 package com.binyouwei.common.network.interceptor
 
 import com.binyouwei.common.constant.*
-import com.binyouwei.common.extend.saveAs
 import com.binyouwei.common.manager.CookiesManager
-import com.blankj.utilcode.util.LogUtils
 import okhttp3.Interceptor
 import okhttp3.Response
 
