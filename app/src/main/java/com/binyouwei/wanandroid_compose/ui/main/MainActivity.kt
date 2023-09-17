@@ -48,7 +48,6 @@ class MainActivity : ComponentActivity() {
         val scaffoldState = rememberScaffoldState()
         val coroutineScope = rememberCoroutineScope()
         val drawerState = scaffoldState.drawerState
-        LogUtils.e("1111111111111111111111111")
         Scaffold(
             scaffoldState = scaffoldState,
             modifier = Modifier
