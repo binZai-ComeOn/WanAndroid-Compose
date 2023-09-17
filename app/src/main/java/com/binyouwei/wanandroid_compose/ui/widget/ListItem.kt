@@ -52,7 +52,7 @@ var menuList = listOf(
         R.string.my_share,
         R.drawable.ic_share_white_24dp, MySharePage::class.java
     ),
-    MenuBean(R.string.theme, R.drawable.ic_night_24dp, null),
+    // MenuBean(R.string.theme, R.drawable.ic_night_24dp, null),
     MenuBean(
         R.string.seting,
         R.drawable.ic_setting_24dp, SettingActivity::class.java
