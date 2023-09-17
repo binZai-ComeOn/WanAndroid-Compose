@@ -1,16 +1,10 @@
 # WanAndroid-Compose
+> 该项目使用 Jetpack Compose 开发并通过 WanAndroid 开放 API 实现。
 
-# 代码解释
- - by remember
-    
-# 组件替代方案
-ModalDrawer 可使用 NavigationDrawer 替代，后者可用于适配响应式设备
+# 效果
+<img src="https://github.com/binZai-ComeOn/WanAndroid-Compose/blob/master/img/%E9%A6%96%E9%A1%B5.png" width="180" height="360"> <img src="https://github.com/binZai-ComeOn/WanAndroid-Compose/blob/master/img/%E4%B8%AA%E4%BA%BA.png" width="180" height="360"> <img src="https://github.com/binZai-ComeOn/WanAndroid-Compose/blob/master/img/%E4%BD%93%E7%B3%BB-%E5%AF%BC%E8%88%AA.png" width="180" height="360"> <img src="https://github.com/binZai-ComeOn/WanAndroid-Compose/blob/master/img/%E4%BD%93%E7%B3%BB.png" width="180" height="360"> <img src="https://github.com/binZai-ComeOn/WanAndroid-Compose/blob/master/img/%E5%B9%BF%E5%9C%BA.png" width="180" height="360"> <img src="https://github.com/binZai-ComeOn/WanAndroid-Compose/blob/master/img/%E6%90%9C%E7%B4%A2.png" width="180" height="360"> <img src="https://github.com/binZai-ComeOn/WanAndroid-Compose/blob/master/img/%E9%A1%B9%E7%9B%AE.png" width="180" height="360">
 
-# 组件使用情况
- - ModalDrawer：用于实现侧边栏等功能。
- - HorizontalPager：用于实现轮播图等功能。
-
-# 依赖
+# 使用依赖依赖
  - [Logger](https://github.com/orhanobut/logger)：简单、漂亮且功能强大的 Android 记录器.
  - [Retrofit](https://github.com/square/retrofit)：适用于 Android 和 JVM 的类型安全 HTTP 客户端.
  - [Coroutines](https://github.com/Kotlin/kotlinx.coroutines)：对具有多平台支持的 Kotlin 协程的库支持.
@@ -20,16 +14,18 @@ ModalDrawer 可使用 NavigationDrawer 替代，后者可用于适配响应式�
  - [Core](https://developer.android.google.cn/jetpack/androidx/releases/core?hl=zh-cn)：针对最新的平台功能和 API 调整应用，同时还支持旧设备.
  - [Compose UI](https://developer.android.google.cn/jetpack/androidx/releases/compose-ui?hl=zh-cn)：与设备互动所需的 Compose UI 的基本组件，包括布局、绘图和输入.
  - [Compose Material](https://developer.android.google.cn/jetpack/androidx/releases/compose-material?hl=zh-cn)：使用现成可用的 Material Design 组件构建 Jetpack Compose UI.
+ - [ConstraintLayout](https://developer.android.google.cn/jetpack/compose/layouts/constraintlayout?hl=zh-cn)：ConstraintLayout 是一种布局，让您可以相对于屏幕上的其他可组合项来放置可组合项.
  - [Lifecycle](https://developer.android.google.cn/jetpack/androidx/releases/lifecycle?hl=zh-cn)：生命周期感知型组件可执行操作来响应另一个组件（如 activity 和 fragment）的生命周期状态的变化.
  - [Navigation](https://developer.android.google.cn/jetpack/androidx/releases/navigation?hl=zh-cn)：用于在 Android 应用中的“目的地”之间导航，该框架提供一致的 API，无论目的地是作为 Fragment、Activity 还是其他组件实现.
+ - [Coil](https://coil-kt.github.io/coil/README-zh/)：Coil 是一个 Android 图片加载库，通过 Kotlin 协程的方式加载图片.
+ - [Paging](https://developer.android.google.cn/jetpack/androidx/releases/paging?hl=zh_cn#groovy)：数据自动分页加载.
+ - [Room](https://developer.android.google.cn/jetpack/androidx/releases/room?hl=zh_cn)：Room 持久性库在 SQLite 的基础上提供了一个抽象层，让用户能够在充分利用 SQLite 的强大功能的同时，获享更强健的数据库访问机制.
+ - [DataStore](https://developer.android.google.cn/jetpack/androidx/releases/datastore?hl=zh_cn)：其以异步、一致的事务方式存储数据，克服了 SharedPreferences 的一些缺点.
 
 # 参考网址
  - [Material Design](https://m3.material.io/)：Material 3是谷歌开源设计系统的最新版本，这里有着Material 3组件的相关使用教程。 
 
-# 需要编写的博客
-Navtigation导航page及跳转新的界面
-
-# 后期需求
+# 功能列表
  - 首页
     - 轮播图 √
     - 文章列表 √
