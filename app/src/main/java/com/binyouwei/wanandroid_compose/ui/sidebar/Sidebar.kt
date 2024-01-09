@@ -43,7 +43,7 @@ import com.binyouwei.wanandroid_compose.ui.widget.snackBar
 
 private var integral = mutableStateOf("0")
 private var level = mutableStateOf(0)
-private var rank = mutableStateOf(0)
+private var rank = mutableStateOf("0")
 
 @Composable
 fun Sidebar(
@@ -66,7 +66,7 @@ fun Sidebar(
     if (userInfoResult) {
         val value = viewModel.userInfo.value!!
         integral.value = value.coinInfo.coinCount.toString()
-        rank.value = value.coinInfo.rank.toInt()
+        rank.value = value.coinInfo.rank
         level.value = value.coinInfo.level
     }
     menuList[0].rightText = if (isLogin.value) integral.value else "0"
@@ -208,7 +208,7 @@ fun DrawerHeadComponent(activity: ComponentActivity) {
             )
             Text(
                 text = if (isLogin.value) {
-                    rank.value.toString()
+                    rank.value
                 } else {
                     stringResource(id = R.string.nav_line_2)
                 },
