@@ -185,8 +185,9 @@ fun ArticleItem(article: ArticleBean, onClick: (WebData) -> Unit) {
                     color = colorResource(id = R.color.colorAccent)
                 )
             }
+            val user = if (!article.author.isNullOrEmpty()) article.author else { if (!article.shareUser.isNullOrEmpty()) article.shareUser else "" }
             Text(
-                text = article.author.ifEmpty { article.shareUser },
+                text = user!!,
                 fontSize = 12.sp,
                 color = colorResource(id = R.color.item_author)
             )
@@ -399,8 +400,9 @@ fun ProjectItem(bean: ArticleBean, onClick: (WebData) -> Unit) {
                 height = Dimension.fillToConstraints
             }, overflow = TextOverflow.Ellipsis
         )
+        val user = if (!bean.author.isNullOrEmpty()) bean.author else bean.shareUser
         Text(
-            text = bean.author,
+            text = user!!,
             fontSize = 12.sp,
             color = colorResource(id = R.color.item_author),
             modifier = Modifier.constrainAs(tv_author) {

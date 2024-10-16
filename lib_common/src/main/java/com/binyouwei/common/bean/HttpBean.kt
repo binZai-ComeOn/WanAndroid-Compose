@@ -32,7 +32,7 @@ data class ArticleBean(
     val adminAdd: Boolean,
     val apkLink: String,
     val audit: Int,
-    val author: String,
+    val author: String ?= null,
     val canEdit: Boolean,
     val chapterId: Int,
     var chapterName: String? = null,
