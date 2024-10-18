@@ -158,12 +158,14 @@ fun KnowledgeSystemPage(
                                 }
                             })
                     }
-                    NavHost(
-                        navController = navController,
-                        startDestination = navigationMenu[0].name
-                    ) {
-                        navigationMenu.forEach { item ->
-                            composable(route = item.name) { Text(text = item.name) }
+                    if (navigationMenu.size > 0) {
+                        NavHost(
+                            navController = navController,
+                            startDestination = navigationMenu[0].name
+                        ) {
+                            navigationMenu.forEach { item ->
+                                composable(route = item.name) { Text(text = item.name) }
+                            }
                         }
                     }
                 }
